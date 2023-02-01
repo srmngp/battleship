@@ -1,22 +1,27 @@
 import React, { useState } from 'react'
-import { GAME_PHASE } from '../logic/gamePhases'
 import { Player } from './Player'
+import { SetupShips } from './SetupShips'
 
 export const Game = () => {
 
-  const [currentAction, setCurrentAction] = useState(GAME_PHASE.SETUP_BOATS)
+  const [players, setPlayers] = useState([{ name: 'Player 1', shipsReady: false }, { name: 'Player 2', shipsReady: false }])
+
+  const [currentAction, setCurrentAction] = useState(<SetupShips players={players} />)
+
+  const ready = (name) => {
+    console.log(`Player ${name} is ready`)
+  }
 
   return (
     <>
-
       <h3>Game status</h3>
-      <p>{currentAction}</p>
+      {currentAction}
 
       <div className='game'>
-        <Player playerName='Player 1' />
-        <Player playerName='Player 2' />
+        {players.map((player, index) => (
+          <Player key={index} name={player.name} playerReady={ready} />
+        ))}
       </div>
-
     </>
   )
 

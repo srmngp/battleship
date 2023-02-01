@@ -1,16 +1,8 @@
-import { useState } from 'react'
-
-export const Cell = () => {
-
-  const [content, setContent] = useState()
-
-  const handleClick = () => {
-    setContent('🛥')
-  }
+export const Cell = ({ children, updateBoard }) => {
 
   return (
-    <div onClick={handleClick} className='square'>
-      {content}
+    <div onClick={updateBoard} className='square'>
+      {children}
     </div>
   )
 

@@ -1,12 +1,16 @@
 import React from 'react'
 import { Board } from './Board'
 
-export const Player = ({ playerName }) => {
+export const Player = ({ name, playerReady }) => {
+
+  const readyFunction = () => {
+    playerReady(name)
+  }
 
   return (
     <div className='player'>
-      <h2>{playerName}</h2>
-      <Board />
+      <h2>{name}</h2>
+      <Board readyFunction={readyFunction} />
     </div>
   )
 
