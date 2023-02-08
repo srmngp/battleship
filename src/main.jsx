@@ -4,6 +4,7 @@ import App from './App'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Lobby } from './pages/Lobby'
+import { Game } from './components/Game'
 
 const router = createBrowserRouter([
   {
@@ -11,8 +12,12 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: 'lobby',
+        path: '/',
         element: <Lobby />
+      },
+      {
+        path: '/game/:id',
+        element: <Game />
       }
     ]
   }
