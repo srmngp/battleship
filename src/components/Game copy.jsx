@@ -11,7 +11,7 @@ export const Game = () => {
 
   useEffect(() => {
     getGame(id)
-      .then((game) => setGame(game))
+      .then(game => setGame(game))
 
   }, [])
 

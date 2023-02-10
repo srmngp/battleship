@@ -1,20 +1,24 @@
-import { readGame, saveGame } from './repository/gameRepository'
-import { createPlayer as savePlayer } from './repository/playerRepository'
+import { readGame, saveNewGame } from './repository/gameRepository'
+import { createPlayer } from './repository/playerRepository'
 
-export const createGame = async (playerName) => { // TODO se pueden quitar awaits usando promises?
+export const createGame = async (playerName) => { // TODO estos return??
 
-  const player = await savePlayer(playerName)
+  const game = saveNewGame()
+    .then(game => {
+      createPlayer(playerName, game.id)
+      return game
+    })
 
-  return saveGame(player.id)
+  return game
 
 }
 
-export const getGame = async (gameId) => {
+export const getGame = async (gameId) => { // TODO el segundo return?
 
   const docSnap = await readGame(gameId)
 
   if (docSnap.exists()) {
-    console.log(`Game ${gameId} found`, docSnap.id, docSnap.data())
+    console.log(`Game ${gameId} found`, docSnap.data())
     return docSnap
   }
 

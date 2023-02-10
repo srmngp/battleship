@@ -1,10 +1,23 @@
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, doc, getDocs } from 'firebase/firestore'
+import { Player, playerConverter } from '../models/player.class'
 import { db } from './firebaseDb'
 
-export const createPlayer = async (name) => {
+export const createPlayer = async (playerName, gameId) => {
 
-  const docRef = await addDoc(collection(db, 'Players'), { name })
+  const gamesCollection = collection(db, 'Games')
+  const game = doc(gamesCollection, gameId)
+  const playersCollection = collection(game, 'Players').withConverter(playerConverter)
 
-  return { id: docRef.id, name }
+  addDoc(playersCollection, new Player('', playerName))
+
+}
+
+export const readPlayers = async (gameId) => {
+
+  const gamesCollection = collection(db, 'Games')
+  const game = doc(gamesCollection, gameId)
+  const playersCollection = collection(game, 'Players')
+
+  return getDocs(playersCollection)
 
 }

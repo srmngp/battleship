@@ -104,3 +104,45 @@ button:focus-visible {
   font-size: 18px;
 }
 
+.playerList {
+  display: grid;
+  text-align: center;
+}
+
+.otherPlayers {
+  display: flex;
+  align-items:center;
+  margin: 0 auto;
+}
+
+.otherPlayers .text {
+  margin-left: 5px;
+}
+
+.GameSetup .loader {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 16px 0 #fff, -16px 0 #fff;
+  position: relative;
+  animation: flash 1s ease-out infinite alternate;
+  margin-right: 18px;
+  margin-left: 16px;
+}
+
+@keyframes flash {
+  0% {
+    background-color: #FFF2;
+    box-shadow: 16px 0 #FFF2, -16px 0 #FFF;
+  }
+  50% {
+    background-color: #FFF;
+    box-shadow: 16px 0 #FFF2, -16px 0 #FFF2;
+  }
+  100% {
+    background-color: #FFF2;
+    box-shadow: 16px 0 #FFF, -16px 0 #FFF2;
+  }
+}
+      

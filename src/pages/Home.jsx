@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createGame } from '../logic/gameService'
 
-export const Lobby = () => {
+export const Home = () => {
 
   const [playerName, setUsername] = useState('')
 
@@ -11,19 +11,10 @@ export const Lobby = () => {
   const submit = async (e) => {
     e.preventDefault()
 
-    const game = await createGame(playerName)
-    console.log(game.id)
-    console.log(game.players)
-    navigateToGame(game)
-  }
+    createGame(playerName)
+      .then(game => navigation(`/game/${game.id}`))
+      .catch(reason => console.log(reason))
 
-  const navigateToGame = (game) => {
-    navigation({
-      pathname: `/game/${game.id}`,
-      state: {
-        player: game.players
-      }
-    })
   }
 
   return (

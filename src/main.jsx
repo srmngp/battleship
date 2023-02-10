@@ -3,17 +3,19 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Lobby } from './pages/Lobby'
-import { Game } from './components/Game'
+import { Home } from './pages/Home'
+import { Game } from './pages/Game'
+import ErrorPage from './pages/Error'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/',
-        element: <Lobby />
+        element: <Home />
       },
       {
         path: '/game/:id',
