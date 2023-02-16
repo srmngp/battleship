@@ -10,8 +10,7 @@ export const Home = () => {
   const navigation = useNavigate()
 
   useEffect(() => {
-    readPlayerNameFromLocalStorage() // TODO evitar que tire error Uncaught (in promise)
-      .then(name => setPlayerName(name))
+    setPlayerName(readPlayerNameFromLocalStorage())
   })
 
   const submit = async (e) => {

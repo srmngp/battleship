@@ -29,7 +29,9 @@ export const Game = () => {
 
   return (
     <>
-      {game ? <GameSetup game={game} playersCollection={players} /> : <GameNotFound />}
+      {game
+        ? <GameSetup game={game} playersCollection={players} />
+        : <GameNotFound />}
     </>
   )
 
