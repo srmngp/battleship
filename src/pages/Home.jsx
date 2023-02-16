@@ -1,20 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createGame } from '../logic/gameService'
+import { readPlayerNameFromLocalStorage } from '../logic/localStorageManager'
 
 export const Home = () => {
 
-  const [playerName, setUsername] = useState('')
+  const [playerName, setPlayerName] = useState('')
 
   const navigation = useNavigate()
+
+  useEffect(() => {
+    readPlayerNameFromLocalStorage() // TODO evitar que tire error Uncaught (in promise)
+      .then(name => setPlayerName(name))
+  })
 
   const submit = async (e) => {
     e.preventDefault()
 
     createGame(playerName)
       .then(game => navigation(`/game/${game.id}`))
-      .catch(reason => console.log(reason))
-
   }
 
   return (
@@ -24,7 +28,7 @@ export const Home = () => {
         <input
           type='text' placeholder='Payer name'
           value={playerName}
-          onChange={(e) => setUsername(e.currentTarget.value)}
+          onChange={(e) => setPlayerName(e.currentTarget.value)}
         />
 
         <button type='submit'>

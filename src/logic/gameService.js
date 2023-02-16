@@ -1,11 +1,11 @@
+import { createPlayer } from './playerService'
 import { readGame, saveNewGame } from './repository/gameRepository'
-import { createPlayer } from './repository/playerRepository'
 
-export const createGame = async (playerName) => { // TODO estos return??
+export const createGame = async (player) => { // TODO estos return??
 
   const game = saveNewGame()
     .then(game => {
-      createPlayer(playerName, game.id)
+      createPlayer(player, game.id)
       return game
     })
 
@@ -13,8 +13,7 @@ export const createGame = async (playerName) => { // TODO estos return??
 
 }
 
-export const getGame = async (gameId) => { // TODO el segundo return?
-
+export const getGame = async (gameId) => {
   const docSnap = await readGame(gameId)
 
   if (docSnap.exists()) {

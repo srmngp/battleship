@@ -11,7 +11,7 @@ export const Game = () => {
   const [game, setGame] = useState(null)
   const [players, setPlayers] = useState(null)
 
-  useEffect(() => {
+  const loadGame = () => {
     getGame(id)
       .then(game => {
         getPlayers(id)
@@ -20,6 +20,10 @@ export const Game = () => {
             setPlayers(playersCollection)
           })
       })
+  }
+
+  useEffect(() => {
+    loadGame()
 
   }, [])
 
