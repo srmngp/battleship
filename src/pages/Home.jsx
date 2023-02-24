@@ -11,7 +11,7 @@ export const Home = () => {
 
   useEffect(() => {
     setPlayerName(readPlayerNameFromLocalStorage())
-  })
+  }, [])
 
   const submit = async (e) => {
     e.preventDefault()
@@ -22,6 +22,7 @@ export const Home = () => {
 
   return (
     <div className='lobby'>
+
       <form onSubmit={submit}>
 
         <input
@@ -32,10 +33,6 @@ export const Home = () => {
 
         <button type='submit'>
           Create game
-        </button>
-
-        <button>
-          Join game
         </button>
 
       </form>

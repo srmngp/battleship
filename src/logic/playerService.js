@@ -1,6 +1,5 @@
 import { savePlayerNameInLocalStorage } from './localStorageManager'
-import { Player } from './models/player.class'
-import { getPlayersCollection, savePlayer } from './repository/playerRepository'
+import { getPlayersOnSnapshot, savePlayer } from './repository/playerRepository'
 
 export const createPlayer = async (playerName, gameId) => {
 
@@ -8,11 +7,9 @@ export const createPlayer = async (playerName, gameId) => {
     .then(savePlayerNameInLocalStorage(playerName))
 }
 
-export const getPlayers = async (gameId) => {
+export const getPlayersRealtime = (gameId, setPlayers) => {
 
-  const docSnap = await getPlayersCollection(gameId)
+  const unsubscribe = getPlayersOnSnapshot(gameId, setPlayers)
 
-  return docSnap.docs
-    .map(doc => new Player(doc.id, doc.data().name))// TODO pq no funciona el converter?
-
+  return unsubscribe // cuando unsuscribe?
 }

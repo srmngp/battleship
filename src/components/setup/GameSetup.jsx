@@ -5,12 +5,13 @@ import { PlayerList } from './PlayerList'
 export const GameSetup = ({ game, playersCollection }) => {
 
   const copyGameUrl = () => {
-    navigator.clipboard.writeText(window.location.href)
+    const joinGameUrl = window.location.origin + '/join/' + game.id
+
+    navigator.clipboard.writeText(joinGameUrl)
   }
 
   return (
     <div className='GameSetup'>
-
       <div className='playerList'>
         <h3>Players</h3>
         <PlayerList players={playersCollection} />

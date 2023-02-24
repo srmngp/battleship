@@ -1,7 +1,7 @@
 import { createPlayer } from './playerService'
 import { readGame, saveNewGame } from './repository/gameRepository'
 
-export const createGame = async (player) => { // TODO estos return??
+export const createGame = (player) => { // TODO estos return??
 
   const game = saveNewGame()
     .then(game => {
@@ -22,4 +22,11 @@ export const getGame = async (gameId) => {
   }
 
   console.log(`Game ${gameId} not found`)
+}
+
+export const addPlayerToGame = async (playerName, gameId) => {
+
+  getGame(gameId)
+    .then(game => createPlayer(playerName, game.id))
+
 }

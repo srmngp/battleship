@@ -5,6 +5,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { Game } from './pages/Game'
+import { JoinGame } from './pages/JoinGame'
 import ErrorPage from './pages/Error'
 
 const router = createBrowserRouter([
@@ -18,7 +19,11 @@ const router = createBrowserRouter([
         element: <Home />
       },
       {
-        path: '/game/:id',
+        path: '/join/:gameId',
+        element: <JoinGame />
+      },
+      {
+        path: '/game/:gameId',
         element: <Game />
       }
     ]
