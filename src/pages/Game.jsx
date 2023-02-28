@@ -21,7 +21,6 @@ export const Game = () => {
 
   useEffect(() => {
     loadGame()
-
   }, [])
 
   return (

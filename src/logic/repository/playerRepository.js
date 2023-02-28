@@ -26,7 +26,7 @@ export const getPlayersOnSnapshot = (gameId, setPlayers) => {
 
   const unsubscribe = onSnapshot(queryPlayers, updatePlayers)
 
-  return unsubscribe
+  return unsubscribe // cuando unsuscribe?
 }
 
 const playersCollection = (gameId) => (collection(db, `Games/${gameId}/Players`))// TODO pq no puedo usar esto en todos los métodos??

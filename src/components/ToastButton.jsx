@@ -17,8 +17,8 @@ export const ToastButton = ({ text, clickAction, toastText }) => {
   }
 
   return (
-    <div>
-      <button onClick={onClick}>
+    <>
+      <button onClick={onClick} className='btn btn-secondary col-2'>
         {text}
       </button>
       {isShown && (
@@ -26,6 +26,6 @@ export const ToastButton = ({ text, clickAction, toastText }) => {
           <span>{toastText}</span>
         </div>
       )}
-    </div>
+    </>
   )
 }

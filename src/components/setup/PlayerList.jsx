@@ -12,7 +12,14 @@ export const PlayerList = ({ players }) => {
   )
 
   return (
-    playerList
+    <div className='playerList col-4 text-start'>
+      <h3>Players</h3>
+      {playerList}
+      <li className='otherPlayers'>
+        <span className='loader' />
+        <span className='text'>Waiting for other players</span>
+      </li>
+    </div>
   )
 
 }

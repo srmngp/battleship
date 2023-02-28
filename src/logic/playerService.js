@@ -9,7 +9,5 @@ export const createPlayer = async (playerName, gameId) => {
 
 export const getPlayersRealtime = (gameId, setPlayers) => {
 
-  const unsubscribe = getPlayersOnSnapshot(gameId, setPlayers)
-
-  return unsubscribe // cuando unsuscribe?
+  return getPlayersOnSnapshot(gameId, setPlayers)
 }
