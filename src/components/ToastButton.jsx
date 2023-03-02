@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export const ToastButton = ({ text, clickAction, toastText }) => {
+export const ToastButton = ({ text, clickAction, toastText }) => { // TODO add styles
 
   const [isShown, setIsShown] = useState(false)
 
@@ -22,7 +22,7 @@ export const ToastButton = ({ text, clickAction, toastText }) => {
         {text}
       </button>
       {isShown && (
-        <div className='toast'>
+        <div className='custom-toast'>
           <span>{toastText}</span>
         </div>
       )}

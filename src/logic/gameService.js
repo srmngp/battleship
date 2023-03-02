@@ -1,11 +1,14 @@
+import { Game } from './models/game.class'
 import { createPlayer } from './playerService'
-import { readGame, saveNewGame } from './repository/gameRepository'
+import { readGame, saveGame } from './repository/gameRepository'
 
-export const createGame = (player) => { // TODO estos return??
+export const createGame = (playerName) => { // TODO estos return??
 
-  const game = saveNewGame()
+  const newGame = new Game('', playerName)
+
+  const game = saveGame(newGame)
     .then(game => {
-      createPlayer(player, game.id)
+      createPlayer(playerName, game.id)
       return game
     })
 

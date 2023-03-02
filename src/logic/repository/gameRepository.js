@@ -1,12 +1,12 @@
 import { addDoc, collection, doc, getDoc } from 'firebase/firestore'
-import { Game, gameConverter } from '../models/game.class'
+import { gameConverter } from '../models/game.class'
 import { db } from './firebaseDb'
 
-export const saveNewGame = async () => {
+export const saveGame = async (game) => {
 
   const gamesRef = collection(db, 'Games').withConverter(gameConverter)
 
-  return addDoc(gamesRef, new Game())
+  return addDoc(gamesRef, game)
 }
 
 export const readGame = async (gameId) => {

@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { gameContext } from '../../pages/Game'
 import { ToastButton } from '../ToastButton'
 import { PlayerList } from './PlayerList'
 import { Settings } from './Settings'
 
-export const GameSetup = ({ game, playersCollection }) => {
+export const GameSetup = () => {
 
-  const [disabled, setDisabled] = useState('disabled')
+  const context = React.useContext(gameContext)
+  const game = context.game
+  const playerList = context.playerList
+
+  const [startButtonStyle, setStartButtonStyle] = useState('btn btn-primary col-2 disabled')
 
   const copyGameUrl = () => {
     const joinGameUrl = window.location.origin + '/join/' + game.id
@@ -14,22 +19,25 @@ export const GameSetup = ({ game, playersCollection }) => {
   }
 
   useEffect(() => {
-    console.log('Playhers updated!')
-    if (playersCollection.lenght > 1) {
-      console.log('enabled start')
-      setDisabled(<button className='btn btn-primary col-2'>💣 Start</button>)
+    if (playerList.length > 1) {
+      setStartButtonStyle('btn btn-primary col-2')
     }
-  }, [playersCollection])
+  }, [playerList])
 
   return (
     <div className='GameSetup row'>
 
-      <PlayerList players={playersCollection} />
-      <Settings />
-      <div className='row justify-content-center'>
+      <div className='col-4 text-start'>
+        <PlayerList players={playerList} />
+      </div>
 
-        <ToastButton text='🔗 Invite' clickAction={copyGameUrl} toastText='Link copied!' />
-        <button className='btn btn-primary col-2'>💣 Start</button>
+      <div className='col-8'>
+        <Settings />
+
+        <div className='row'>
+          <ToastButton text='🔗 Invite' clickAction={copyGameUrl} toastText='Link copied!' />
+          <button className={startButtonStyle}>💣 Start</button>
+        </div>
       </div>
 
     </div>

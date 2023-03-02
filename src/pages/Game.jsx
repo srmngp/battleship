@@ -5,17 +5,19 @@ import { GameSetup } from '../components/setup/GameSetup'
 import { getGame } from '../logic/gameService'
 import { getPlayersRealtime } from '../logic/playerService'
 
+export const gameContext = React.createContext(null)
+
 export const Game = () => {
 
   const { gameId } = useParams()
   const [game, setGame] = useState(null)
-  const [players, setPlayers] = useState([])
+  const [playerList, setPlayerList] = useState([])
 
   const loadGame = () => {
     getGame(gameId)
       .then(game => {
         setGame(game)
-        getPlayersRealtime(gameId, setPlayers)
+        getPlayersRealtime(gameId, setPlayerList)
       })
   }
 
@@ -24,11 +26,14 @@ export const Game = () => {
   }, [])
 
   return (
-    <>
+    <gameContext.Provider value={{ game, playerList }}>
+
       {game
-        ? <GameSetup game={game} playersCollection={players} />
+        ? <GameSetup />
         : <GameNotFound />}
-    </>
+
+    </gameContext.Provider>
+
   )
 
 }
