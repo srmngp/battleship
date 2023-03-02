@@ -5,7 +5,7 @@ import './index.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Home } from './pages/Home'
-import { Game } from './pages/Game'
+import { Lobby } from './pages/Lobby'
 import { JoinGame } from './pages/JoinGame'
 import ErrorPage from './pages/Error'
 
@@ -24,8 +24,8 @@ const router = createBrowserRouter([
         element: <JoinGame />
       },
       {
-        path: '/game/:gameId',
-        element: <Game />
+        path: '/lobby/:gameId',
+        element: <Lobby />
       }
     ]
   }

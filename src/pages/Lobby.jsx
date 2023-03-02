@@ -3,11 +3,12 @@ import { useParams } from 'react-router-dom'
 import { GameNotFound } from '../components/GameNotFound'
 import { GameSetup } from '../components/setup/GameSetup'
 import { getGame } from '../logic/gameService'
+import { readPlayerNameFromLocalStorage } from '../logic/localStorageManager'
 import { getPlayersRealtime } from '../logic/playerService'
 
 export const gameContext = React.createContext(null)
 
-export const Game = () => {
+export const Lobby = () => {
 
   const { gameId } = useParams()
   const [game, setGame] = useState(null)
@@ -25,8 +26,16 @@ export const Game = () => {
     loadGame()
   }, [])
 
+  const createContext = () => (
+    {
+      game,
+      playerList,
+      localPlayer: readPlayerNameFromLocalStorage()
+    }
+  )
+
   return (
-    <gameContext.Provider value={{ game, playerList }}>
+    <gameContext.Provider value={createContext()}>
 
       {game
         ? <GameSetup />

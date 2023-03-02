@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { copyGameUrl } from '../../logic/utils'
-import { gameContext } from '../../pages/Game'
+import { gameContext } from '../../pages/Lobby'
 import { ToastButton } from '../ToastButton'
 import { PlayerList } from './PlayerList'
 import { Settings } from './Settings'
@@ -10,6 +10,7 @@ export const GameSetup = () => {
   const context = React.useContext(gameContext)
   const game = context.game
   const playerList = context.playerList
+  const localPlayer = context.localPlayer
 
   const [startButtonStyle, setStartButtonStyle] = useState('btn btn-primary col-2 disabled')
 
@@ -31,7 +32,9 @@ export const GameSetup = () => {
 
         <div className='row'>
           <ToastButton text='🔗 Invite' clickAction={copyGameUrl(game.id)} toastText='Link copied!' />
-          <button className={startButtonStyle}>💣 Start</button>
+          {game.owner === localPlayer
+            ? <button className={startButtonStyle}>💣 Start</button>
+            : ''}
         </div>
       </div>
 

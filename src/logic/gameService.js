@@ -21,7 +21,7 @@ export const getGame = async (gameId) => {
 
   if (docSnap.exists()) {
     console.log(`Game ${gameId} found`, docSnap.data())
-    return docSnap
+    return docSnap.data()
   }
 
   console.log(`Game ${gameId} not found`)

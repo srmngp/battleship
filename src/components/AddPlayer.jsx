@@ -16,7 +16,7 @@ export const AddPlayer = ({ game }) => {
     e.preventDefault()
 
     addPlayerToGame(playerName, game.id)
-      .then(navigation(`/game/${game.id}`))
+      .then(navigation(`/lobby/${game.id}`))
   }
 
   return (

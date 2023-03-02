@@ -19,8 +19,8 @@ export const gameConverter = {
   },
 
   fromFirestore: (snapshot, options) => {
-    // const data = snapshot.data(options)
-    return new Game(snapshot.id)
+    const data = snapshot.data(options)
+    return new Game(snapshot.id, data.owner)
   }
 
 }
