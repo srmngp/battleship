@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { copyGameUrl } from '../../logic/utils'
 import { gameContext } from '../../pages/Game'
 import { ToastButton } from '../ToastButton'
 import { PlayerList } from './PlayerList'
@@ -11,12 +12,6 @@ export const GameSetup = () => {
   const playerList = context.playerList
 
   const [startButtonStyle, setStartButtonStyle] = useState('btn btn-primary col-2 disabled')
-
-  const copyGameUrl = () => {
-    const joinGameUrl = window.location.origin + '/join/' + game.id
-
-    navigator.clipboard.writeText(joinGameUrl)
-  }
 
   useEffect(() => {
     if (playerList.length > 1) {
@@ -35,7 +30,7 @@ export const GameSetup = () => {
         <Settings />
 
         <div className='row'>
-          <ToastButton text='🔗 Invite' clickAction={copyGameUrl} toastText='Link copied!' />
+          <ToastButton text='🔗 Invite' clickAction={copyGameUrl(game.id)} toastText='Link copied!' />
           <button className={startButtonStyle}>💣 Start</button>
         </div>
       </div>
