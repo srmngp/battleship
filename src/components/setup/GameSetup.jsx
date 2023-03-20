@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { copyGameUrl } from '../../logic/utils'
 import { gameContext } from '../../pages/Lobby'
 import { ToastButton } from '../ToastButton'
 import { PlayerList } from './PlayerList'
 import { Settings } from './Settings'
+import StartButton from './StartButton'
 
 export const GameSetup = () => {
 
   const context = React.useContext(gameContext)
   const game = context.game
   const playerList = context.playerList
-  const localPlayer = context.localPlayer
-
-  const [startButtonStyle, setStartButtonStyle] = useState('btn btn-primary col-2 disabled')
-
-  useEffect(() => {
-    if (playerList.length > 1) {
-      setStartButtonStyle('btn btn-primary col-2')
-    }
-  }, [playerList])
 
   return (
     <div className='GameSetup row'>
@@ -31,10 +23,8 @@ export const GameSetup = () => {
         <Settings />
 
         <div className='row'>
-          <ToastButton text='🔗 Invite' clickAction={copyGameUrl(game.id)} toastText='Link copied!' />
-          {game.owner === localPlayer
-            ? <button className={startButtonStyle}>💣 Start</button>
-            : ''}
+          <ToastButton text='🔗 Invite' clickAction={() => copyGameUrl(game.id)} toastText='Link copied!' />
+          <StartButton />
         </div>
       </div>
 

@@ -17,7 +17,7 @@ export const Home = () => {
     e.preventDefault()
 
     createGame(playerName)
-      .then(game => navigation(`/game/${game.id}`))
+      .then(game => navigation(`/lobby/${game.id}`))
   }
 
   return (

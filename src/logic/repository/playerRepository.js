@@ -4,10 +4,10 @@ import { db } from './firebaseDb'
 
 export const savePlayer = async (playerName, gameId) => {
 
-  const playersCollection = collection(db, `Games/${gameId}/Players`)
+  const queryPlayers = playersCollection(gameId)
     .withConverter(playerConverter)
 
-  return addDoc(playersCollection, new Player('', playerName))
+  return addDoc(queryPlayers, new Player('', playerName))
 
 }
 
@@ -29,4 +29,4 @@ export const getPlayersOnSnapshot = (gameId, setPlayers) => {
   return unsubscribe // cuando unsuscribe?
 }
 
-const playersCollection = (gameId) => (collection(db, `Games/${gameId}/Players`))// TODO pq no puedo usar esto en todos los métodos??
+const playersCollection = (gameId) => (collection(db, `Games/${gameId}/Players`))
