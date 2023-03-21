@@ -22,10 +22,11 @@ export const GameSetup = () => {
       <div className='col-8'>
         <Settings />
 
-        <div className='row'>
-          <ToastButton text='🔗 Invite' clickAction={() => copyGameUrl(game.id)} toastText='Link copied!' />
-          <StartButton />
-        </div>
+      </div>
+
+      <div className='col-12 justify-content-center'>
+        <ToastButton text='🔗 Invite' clickAction={() => copyGameUrl(game.id)} toastText='Link copied!' />
+        <StartButton />
       </div>
 
     </div>

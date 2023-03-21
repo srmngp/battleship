@@ -16,10 +16,9 @@ export const getPlayersOnSnapshot = (gameId, setPlayers) => {
   const queryPlayers = query(playersCollection(gameId))
 
   const updatePlayers = (querySnapshot) => {
-    const players = []
-    querySnapshot.forEach(doc => {
-      players.push(new Player(doc.id, doc.data().name))
-    })
+    const players = querySnapshot.docs.map(
+      (doc) => new Player(doc.id, doc.data().name)
+    )
 
     setPlayers(players)
   }

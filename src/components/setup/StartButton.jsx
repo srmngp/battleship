@@ -20,7 +20,7 @@ export default function StartButton () {
   return (
     <>
       {game.owner === localPlayer
-        ? <button className={startButtonStyle}>💣 Start</button>
+        ? <button form='gameSettingsForm' className={startButtonStyle}>💣 Start</button>
         : ''}
     </>
   )

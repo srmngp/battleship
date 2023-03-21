@@ -14,16 +14,12 @@ export const Lobby = () => {
   const [game, setGame] = useState(null)
   const [playerList, setPlayerList] = useState([])
 
-  const loadGame = () => {
-    getGame(gameId)
-      .then(game => {
-        setGame(game)
-        getPlayersRealtime(gameId, setPlayerList)
-      })
-  }
-
   useEffect(() => {
-    loadGame()
+
+    setGame(getGame(gameId))
+    const unsubscribePlayers = getPlayersRealtime(gameId, setPlayerList)
+
+    return () => unsubscribePlayers()
   }, [])
 
   const createContext = () => (
