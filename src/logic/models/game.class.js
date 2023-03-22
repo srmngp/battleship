@@ -2,7 +2,7 @@ export class Game {
 
   id = ''
   owner = ''
-  boardSize
+  boardSize = ''
 
   constructor (id, owner, boardSize) {
     this.id = id

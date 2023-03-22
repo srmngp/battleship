@@ -4,7 +4,7 @@ import { readGame, saveGame } from './repository/gameRepository'
 
 export const createGame = (playerName) => { // TODO estos return??
 
-  const newGame = new Game('', playerName)
+  const newGame = new Game('', playerName, 50)
 
   const game = saveGame(newGame)
     .then(game => {

@@ -28,7 +28,7 @@ export const Settings = () => {
 
       <Formik
         initialValues={{
-          boardSize: ''
+          boardSize: game.boardSize
         }}
         validationSchema={gameSettingsSchema}
         onSubmit={(values) => {

@@ -16,7 +16,10 @@ export const Lobby = () => {
 
   useEffect(() => {
 
-    setGame(getGame(gameId))
+    getGame(gameId)
+      .then(game => {
+        setGame(game)
+      })
     const unsubscribePlayers = getPlayersRealtime(gameId, setPlayerList)
 
     return () => unsubscribePlayers()
