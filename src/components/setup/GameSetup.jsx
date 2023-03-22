@@ -15,18 +15,22 @@ export const GameSetup = () => {
   return (
     <div className='GameSetup row'>
 
-      <div className='col-4 text-start'>
-        <PlayerList players={playerList} />
+      <div className='row padding-b-30'>
+
+        <div className='col-4 text-start'>
+          <PlayerList players={playerList} />
+        </div>
+
+        <div className='col-8'>
+          <Settings />
+        </div>
       </div>
 
-      <div className='col-8'>
-        <Settings />
-
-      </div>
-
-      <div className='col-12 justify-content-center'>
-        <ToastButton text='🔗 Invite' clickAction={() => copyGameUrl(game.id)} toastText='Link copied!' />
-        <StartButton />
+      <div className='row'>
+        <div className='col-12 justify-content-center'>
+          <ToastButton text='🔗 Invite' clickAction={() => copyGameUrl(game.id)} toastText='Link copied!' />
+          <StartButton />
+        </div>
       </div>
 
     </div>

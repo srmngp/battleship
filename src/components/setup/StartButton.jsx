@@ -8,7 +8,7 @@ export default function StartButton () {
   const playerList = context.playerList
   const localPlayer = context.localPlayer
 
-  const defatultStartStyle = 'btn btn-primary col-2 margin-l-10'
+  const defatultStartStyle = 'btn btn-primary col-2 margin-l-10 '
   const [startButtonStyle, setStartButtonStyle] = useState(defatultStartStyle + 'disabled')
 
   useEffect(() => {

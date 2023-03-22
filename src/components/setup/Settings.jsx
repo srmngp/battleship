@@ -1,7 +1,8 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
-import { ErrorMessage, Field, Form, Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import React from 'react'
 import * as Yup from 'yup'
+import { updateGame } from '../../logic/gameService'
 import { gameContext } from '../../pages/Lobby'
 
 const gameSettingsSchema = Yup.object({
@@ -18,8 +19,9 @@ export const Settings = () => {
   const localPlayer = context.localPlayer
 
   const handleBoardSizeChange = (event) => {
-    game.boardSize = event.target.value
-    // TODO updateGame
+    const newGame = { ...game, boardSize: event.target.value }
+    updateGame(newGame)
+    // TODO show changes on other devices!!
   }
 
   return (
@@ -36,31 +38,27 @@ export const Settings = () => {
           console.log(values)
         }}
       >
-        {({ errors, touched }) => (
+        {({ values, errors, touched, handleChange }) => (
           <Form id='gameSettingsForm'>
             <FormControl fullWidth>
               <InputLabel id='boardSize-label'>Board size</InputLabel>
-              <Field name='boardSize'>
-                {({ field }) => (
-                  <Select
-                    id='boardSize'
-                    label='Board size'
-                    labelId='boardSize-label'
-                    error={errors.boardSize && touched.boardSize}
-                    disabled={game.owner !== localPlayer}
-                    onChange={handleBoardSizeChange}
-                    {...field}
-                  >
-                    <MenuItem value='50'>Small (25x25)</MenuItem>
-                    <MenuItem value='150'>Medium (75x75)</MenuItem>
-                    <MenuItem value='350'>Big (175x175)</MenuItem>
-                  </Select>
-
-                )}
-              </Field>
-              {errors.boardSize && (
-                <ErrorMessage name='boardSize' component='div' />
-              )}
+              <Select
+                name='boardSize'
+                id='boardSize'
+                label='Board size'
+                labelId='boardSize-label'
+                value={values.boardSize}
+                error={errors.boardSize && touched.boardSize}
+                disabled={game.owner !== localPlayer}
+                onChange={(event) => {
+                  handleChange(event)
+                  handleBoardSizeChange(event)
+                }}
+              >
+                <MenuItem value='50'>Small (25x25)</MenuItem>
+                <MenuItem value='150'>Medium (75x75)</MenuItem>
+                <MenuItem value='350'>Big (175x175)</MenuItem>
+              </Select>
             </FormControl>
           </Form>
         )}

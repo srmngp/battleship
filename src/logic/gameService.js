@@ -1,6 +1,6 @@
 import { Game } from './models/game.class'
 import { createPlayer } from './playerService'
-import { readGame, saveGame } from './repository/gameRepository'
+import { getGameOnSnapshot, readGame, saveGame, updateGameDocument } from './repository/gameRepository'
 
 export const createGame = (playerName) => { // TODO estos return??
 
@@ -25,6 +25,15 @@ export const getGame = async (gameId) => {
   }
 
   console.log(`Game ${gameId} not found`)
+}
+
+export const updateGame = (game) => {
+  console.log('Updating game..')
+  updateGameDocument(game)
+}
+
+export const getGameRealTime = (gameId, setGame) => {
+  return getGameOnSnapshot(gameId, setGame)
 }
 
 export const addPlayerToGame = async (playerName, gameId) => {

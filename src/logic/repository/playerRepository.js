@@ -25,7 +25,7 @@ export const getPlayersOnSnapshot = (gameId, setPlayers) => {
 
   const unsubscribe = onSnapshot(queryPlayers, updatePlayers)
 
-  return unsubscribe // cuando unsuscribe?
+  return unsubscribe
 }
 
 const playersCollection = (gameId) => (collection(db, `Games/${gameId}/Players`))

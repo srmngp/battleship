@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { GameNotFound } from '../components/GameNotFound'
 import { GameSetup } from '../components/setup/GameSetup'
-import { getGame } from '../logic/gameService'
+import { getGame, getGameRealTime } from '../logic/gameService'
 import { readPlayerNameFromLocalStorage } from '../logic/localStorageManager'
 import { getPlayersRealtime } from '../logic/playerService'
 
@@ -20,9 +20,13 @@ export const Lobby = () => {
       .then(game => {
         setGame(game)
       })
+    const unsubscribeGame = getGameRealTime(gameId, setGame)
     const unsubscribePlayers = getPlayersRealtime(gameId, setPlayerList)
 
-    return () => unsubscribePlayers()
+    return () => {
+      unsubscribePlayers()
+      unsubscribeGame()
+    }
   }, [])
 
   const createContext = () => (
