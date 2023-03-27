@@ -1,5 +1,5 @@
 import { addDoc, collection, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore'
-import { Game, gameConverter } from '../models/game.class'
+import { gameConverter } from '../models/game.class'
 import { db } from './firebaseDb'
 
 export const saveGame = async (game) => {
@@ -16,6 +16,8 @@ export const readGame = async (gameId) => {
   return await getDoc(docRef)
 
 }
+
+export const getGameRef = (gameId) => (doc(db, 'Games', gameId))
 
 export const updateGameDocument = async (game) => {
   const docRef = doc(db, 'Games', game.id).withConverter(gameConverter)

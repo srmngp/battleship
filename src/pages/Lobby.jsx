@@ -1,48 +1,39 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import { GameNotFound } from '../components/GameNotFound'
 import { GameSetup } from '../components/setup/GameSetup'
-import { getGame, getGameRealTime } from '../logic/gameService'
 import { readPlayerNameFromLocalStorage } from '../logic/localStorageManager'
-import { getPlayersRealtime } from '../logic/playerService'
+import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
+import { getGameRef } from '../logic/repository/gameRepository'
+import { getPlayersRef } from '../logic/repository/playerRepository'
 
 export const gameContext = React.createContext(null)
 
 export const Lobby = () => {
 
   const { gameId } = useParams()
-  const [game, setGame] = useState(null)
-  const [playerList, setPlayerList] = useState([])
 
-  useEffect(() => {
-
-    getGame(gameId)
-      .then(game => {
-        setGame(game)
-      })
-    const unsubscribeGame = getGameRealTime(gameId, setGame)
-    const unsubscribePlayers = getPlayersRealtime(gameId, setPlayerList)
-
-    return () => {
-      unsubscribePlayers()
-      unsubscribeGame()
-    }
-  }, [])
+  const [gameSnapshot, gameLoading, gameError] = useDocument(getGameRef(gameId))
+  const [playerListSnapshot, playerListLoading, playerListError] = useCollection(getPlayersRef(gameId))
 
   const createContext = () => (
     {
-      game,
-      playerList,
+      game: { id: gameId, ...gameSnapshot?.data() },
+      playerList: playerListSnapshot?.docs.map(doc => doc.data()),
+      playerListLoading, // TODO usar esto para mostrar loading en PlayerList?
+      playerListError,
       localPlayer: readPlayerNameFromLocalStorage()
     }
   )
 
-  return (
+  return (// TODO loading components?
     <gameContext.Provider value={createContext()}>
 
-      {game
-        ? <GameSetup />
-        : <GameNotFound />}
+      <div>
+        {gameError && <GameNotFound />}
+        {gameLoading && <span>Document: Loading...</span>}
+        {gameSnapshot && <GameSetup />}
+      </div>
 
     </gameContext.Provider>
 

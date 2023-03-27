@@ -8,7 +8,7 @@ export const PlayerList = ({ players }) => {
   )
 
   const playerList = players.map(player =>
-    <li key={player.id} className={getLocalPlayerClass(player.name)}>{player.name}</li>
+    <li key={player.name} className={getLocalPlayerClass(player.name)}>{player.name}</li>
   )
 
   return (

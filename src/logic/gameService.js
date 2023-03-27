@@ -27,9 +27,11 @@ export const getGame = async (gameId) => {
   console.log(`Game ${gameId} not found`)
 }
 
-export const updateGame = (game) => {
+export const updateGameBoardSize = (game, newBoardSize) => {
   console.log('Updating game..')
-  updateGameDocument(game)
+
+  const newGame = { ...game, boardSize: newBoardSize }
+  updateGameDocument(newGame)
 }
 
 export const getGameRealTime = (gameId, setGame) => {
