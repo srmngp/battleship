@@ -8,6 +8,7 @@ import { Home } from './pages/Home'
 import { Lobby } from './pages/Lobby'
 import { JoinGame } from './pages/JoinGame'
 import ErrorPage from './pages/Error'
+import Game from './components/game/Game'
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/lobby/:gameId',
         element: <Lobby />
+      },
+      {
+        path: '/game/:gameId',
+        element: <Game />
       }
     ]
   }
