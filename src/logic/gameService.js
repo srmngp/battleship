@@ -1,30 +1,15 @@
-import { Game } from './models/game.class'
 import { createPlayer } from './playerService'
-import { getGameOnSnapshot, readGame, saveGame, updateGameDocument } from './repository/gameRepository'
+import { saveGame, updateGameDocument } from './repository/gameRepository'
 
-export const createGame = (playerName) => { // TODO estos return??
+export const createGame = async (playerName) => {
 
-  const newGame = new Game('', playerName, 50)
+  const newGame = { owner: playerName, boardSize: 50 }
 
-  const game = saveGame(newGame)
+  return saveGame(newGame)// TODO esto no es un poco raro??
     .then(game => {
-      createPlayer(playerName, game.id)
+      createPlayer(playerName, game)
       return game
     })
-
-  return game
-
-}
-
-export const getGame = async (gameId) => {
-  const docSnap = await readGame(gameId)
-
-  if (docSnap.exists()) {
-    console.log(`Game ${gameId} found`, docSnap.data())
-    return docSnap.data()
-  }
-
-  console.log(`Game ${gameId} not found`)
 }
 
 export const updateGameBoardSize = (game, newBoardSize) => {
@@ -34,13 +19,6 @@ export const updateGameBoardSize = (game, newBoardSize) => {
   updateGameDocument(newGame)
 }
 
-export const getGameRealTime = (gameId, setGame) => {
-  return getGameOnSnapshot(gameId, setGame)
-}
-
-export const addPlayerToGame = async (playerName, gameId) => {
-
-  getGame(gameId)
-    .then(game => createPlayer(playerName, game.id))
-
+export const addPlayerToGame = async (playerName, gameSnapshot) => {
+  createPlayer(playerName, gameSnapshot)
 }

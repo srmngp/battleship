@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Select from 'react-select'
 import { updateGameBoardSize } from '../../logic/gameService'
 import { gameContext } from '../../pages/Lobby'
@@ -15,18 +15,17 @@ export const Settings = () => {
   const game = context.game
   const localPlayer = context.localPlayer
 
-  const getSelectedOption = () => {
-    console.log('looking for option ')
-    return boardSizeOptions.find(option => option.value === game.boardSize)
-  }
+  const getSelectedOption = () => (
+    boardSizeOptions.find(option => option.value === game.boardSize)
+  )
 
   const handleChange = (selected) => {
     updateGameBoardSize(game, selected.value)
   }
 
   return (
-    <div className='col-8'>
-      <h2>Game settings</h2>
+    <div>
+      <h3>Game settings</h3>
 
       <label htmlFor='select-options'>Select an option:</label>
       <Select

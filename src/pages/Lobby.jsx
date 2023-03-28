@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { GameNotFound } from '../components/GameNotFound'
-import { GameSetup } from '../components/setup/GameSetup'
+import { GameSetup } from '../components/lobby/GameSetup'
 import { readPlayerNameFromLocalStorage } from '../logic/localStorageManager'
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
 import { getGameRef } from '../logic/repository/gameRepository'

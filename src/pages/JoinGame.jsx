@@ -1,28 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useDocument } from 'react-firebase-hooks/firestore'
 import { useParams } from 'react-router-dom'
 import { AddPlayer } from '../components/AddPlayer'
 import { GameNotFound } from '../components/GameNotFound'
-import { getGame } from '../logic/gameService'
+import { getGameRef } from '../logic/repository/gameRepository'
 
 export const JoinGame = () => {
 
   const { gameId } = useParams()
-  const [game, setGame] = useState(null)
-
-  const loadGame = () => {
-    getGame(gameId)
-      .then(game => { setGame(game) })
-  }
-
-  useEffect(() => {
-    loadGame()
-  }, [])
+  const [gameSnapshot, gameLoading, gameError] = useDocument(getGameRef(gameId))
 
   return (
     <>
-      {game
-        ? <AddPlayer game={game} />
-        : <GameNotFound />}
+      <div>
+        {gameError && <GameNotFound />}
+        {gameLoading && <span>Document: Loading...</span>}
+        {gameSnapshot && <AddPlayer gameSnapshot={gameSnapshot} />}
+      </div>
     </>
 
   )

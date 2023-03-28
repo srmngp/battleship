@@ -2,7 +2,7 @@ import { useRouteError } from 'react-router-dom'
 
 export default function ErrorPage () {
   const error = useRouteError()
-  console.error(error) //TODO dejar esto?
+  console.error(error) // TODO dejar esto?
 
   return (
     <div id='error-page'>

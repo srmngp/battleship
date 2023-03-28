@@ -13,17 +13,18 @@ export const GameSetup = () => {
   const playerList = context.playerList
 
   return (
-    <div className='GameSetup row'>
+    <div className='GameSetup'>
 
       <div className='row padding-b-30'>
 
-        <div className='col-4 text-start'>
+        <div className='col-4'>
           <PlayerList players={playerList} />
         </div>
 
         <div className='col-8'>
           <Settings />
         </div>
+
       </div>
 
       <div className='row'>
