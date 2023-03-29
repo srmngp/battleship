@@ -1,5 +1,5 @@
 import React from 'react'
-import { readPlayerNameFromLocalStorage } from '../../logic/localStorageManager'
+import { readPlayerNameFromLocalStorage } from '../logic/localStorageManager'
 
 export const PlayerList = ({ players }) => {
 

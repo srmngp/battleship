@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { updateGameSatus } from '../../logic/gameService'
 import { GAME_STATES } from '../../logic/utils'
-import { gameContext } from './ContextProvider'
+import { gameContext } from '../ContextProvider'
 
 export default function StartButton () {
 
@@ -27,7 +27,7 @@ export default function StartButton () {
   return (
     <>
       {game.owner === localPlayer
-        ? <button form='gameSettingsForm' className={startButtonStyle} onClick={handleClick()}>💣 Start</button>
+        ? <button form='gameSettingsForm' className={startButtonStyle} onClick={handleClick}>💣 Start</button>
         : ''}
     </>
   )

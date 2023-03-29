@@ -1,7 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import { updateGameBoardSize } from '../../logic/gameService'
-import { gameContext } from './ContextProvider'
+import { gameContext } from '../ContextProvider'
 
 const boardSizeOptions = [
   { value: 50, label: 'Small' },

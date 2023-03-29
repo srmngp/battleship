@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { copyGameUrl, GAME_STATES } from '../../logic/utils'
 import { ToastButton } from './ToastButton'
-import { PlayerList } from './PlayerList'
+import { PlayerList } from '../PlayerList'
 import { Settings } from './Settings'
 import StartButton from './StartButton'
-import { gameContext } from './ContextProvider'
+import { gameContext } from '../ContextProvider'
 import { useNavigate } from 'react-router-dom'
 
 export const GameSetup = () => {

@@ -1,10 +1,10 @@
 import React from 'react'
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
 import { useParams } from 'react-router-dom'
-import { readPlayerNameFromLocalStorage } from '../../logic/localStorageManager'
-import { getGameRef } from '../../logic/repository/gameRepository'
-import { getPlayersRef } from '../../logic/repository/playerRepository'
-import { GameNotFound } from '../GameNotFound'
+import { readPlayerNameFromLocalStorage } from '../logic/localStorageManager'
+import { getGameRef } from '../logic/repository/gameRepository'
+import { getPlayersRef } from '../logic/repository/playerRepository'
+import { GameNotFound } from './GameNotFound'
 
 export const gameContext = React.createContext(null)
 
@@ -31,7 +31,7 @@ export default function ContextProvider ({ children }) {
         {gameLoading && <span>Document: Loading...</span>}
 
         {gameSnapshot && children}
-        
+
       </div>
 
     </gameContext.Provider>

@@ -8,7 +8,7 @@ import { Home } from './pages/Home'
 import { Lobby } from './pages/Lobby'
 import { JoinGame } from './pages/JoinGame'
 import ErrorPage from './pages/Error'
-import Game from './components/game/Game'
+import Game from './pages/Game'
 
 const router = createBrowserRouter([
   {
