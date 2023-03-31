@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { Lobby } from './pages/Lobby'
-import { JoinGame } from './pages/JoinGame'
+import { Join } from './pages/Join'
 import ErrorPage from './pages/Error'
 import Game from './pages/Game'
 import ContextProvider from './components/ContextProvider'
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/join/:gameId',
-        element: <JoinGame />
+        element: <Join />
       },
       {
         path: '/lobby/:gameId',

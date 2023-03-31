@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { addPlayerToGame } from '../logic/gameService'
-import { readPlayerNameFromLocalStorage } from '../logic/localStorageManager'
+import { addPlayerToGame } from '../../logic/gameService'
+import { readPlayerNameFromLocalStorage } from '../../logic/localStorageManager'
 
 export const AddPlayer = ({ gameSnapshot }) => {
 
