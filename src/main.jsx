@@ -9,6 +9,7 @@ import { Lobby } from './pages/Lobby'
 import { JoinGame } from './pages/JoinGame'
 import ErrorPage from './pages/Error'
 import Game from './pages/Game'
+import ContextProvider from './components/ContextProvider'
 
 const router = createBrowserRouter([
   {
@@ -26,11 +27,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/lobby/:gameId',
-        element: <Lobby />
+        element: <ContextProvider><Lobby /></ContextProvider>
       },
       {
         path: '/game/:gameId',
-        element: <Game />
+        element: <ContextProvider><Game /></ContextProvider>
       }
     ]
   }
