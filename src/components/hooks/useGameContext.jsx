@@ -7,8 +7,9 @@ export default function useGameContext () {
 
   const game = context.game
   const playerList = context.playerList
+  const localPlayerName = context.localPlayerName
 
   return (
-    { game, playerList }
+    { game, playerList, localPlayerName }
   )
 }

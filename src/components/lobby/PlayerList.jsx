@@ -1,20 +1,22 @@
 import React from 'react'
-import { readPlayerNameFromLocalStorage } from '../logic/localStorageManager'
+import useGameContext from '../hooks/useGameContext'
 
-export const PlayerList = ({ players }) => {
+export const PlayerList = () => {
+
+  const { playerList, localPlayerName } = useGameContext()
 
   const getLocalPlayerClass = (name) => (
-    readPlayerNameFromLocalStorage() === name ? 'localPlayer' : ''
+    localPlayerName === name ? 'localPlayer' : ''
   )
 
-  const playerList = players.map(player =>
+  const listedPlayers = playerList.map(player =>
     <li key={player.name} className={getLocalPlayerClass(player.name)}>{player.name}</li>
   )
 
   return (
     <div className='playerList'>
       <h3>Players</h3>
-      {playerList}
+      {listedPlayers}
       <li className='otherPlayers'>
         <span className='loader' />
         <span className='text'>Waiting for other players</span>

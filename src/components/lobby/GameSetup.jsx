@@ -1,14 +1,14 @@
 import React from 'react'
 import { copyGameUrl } from '../../logic/utils'
 import { ToastButton } from './ToastButton'
-import { PlayerList } from '../PlayerList'
+import { PlayerList } from './PlayerList'
 import { Settings } from './Settings'
 import StartButton from './StartButton'
 import useGameContext from '../hooks/useGameContext'
 
 export const GameSetup = () => {
 
-  const { game, playerList } = useGameContext()
+  const { game } = useGameContext()
 
   return (
     <div className='GameSetup'>
@@ -16,7 +16,7 @@ export const GameSetup = () => {
       <div className='row padding-b-30'>
 
         <div className='col-4'>
-          <PlayerList players={playerList} />
+          <PlayerList />
         </div>
 
         <div className='col-8'>

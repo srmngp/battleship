@@ -4,9 +4,9 @@ import { updateGameBoardSize } from '../../logic/gameService'
 import { gameContext } from '../ContextProvider'
 
 const boardSizeOptions = [
-  { value: 50, label: 'Small' },
-  { value: 150, label: 'Medium' },
-  { value: 350, label: 'Large' }
+  { value: 49, label: 'Small' },
+  { value: 100, label: 'Medium' },
+  { value: 225, label: 'Large' }
 ]
 
 export const Settings = () => {

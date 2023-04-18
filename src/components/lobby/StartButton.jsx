@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { updateGameSatus } from '../../logic/gameService'
 import { GAME_STATES } from '../../logic/utils'
-import { gameContext } from '../ContextProvider'
+import useGameContext from '../hooks/useGameContext'
 
 export default function StartButton () {
 
-  const context = React.useContext(gameContext)
-  const game = context.game
-  const playerList = context.playerList
-  const localPlayer = context.localPlayer
+  const { game, playerList, localPlayerName } = useGameContext()
 
   const defatultStartStyle = 'btn btn-primary col-2 margin-l-10 '
   const [startButtonStyle, setStartButtonStyle] = useState(defatultStartStyle + 'disabled')
@@ -26,7 +23,7 @@ export default function StartButton () {
 
   return (
     <>
-      {game.owner === localPlayer
+      {game.owner === localPlayerName
         ? <button form='gameSettingsForm' className={startButtonStyle} onClick={handleClick}>💣 Start</button>
         : ''}
     </>

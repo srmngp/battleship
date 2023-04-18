@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { Cell } from './Cell'
-import { generateGrid } from '../logic/boardGenerator'
+import { generateGrid } from '../../logic/boardGenerator'
 
 export const Board = ({ readyFunction }) => {
 

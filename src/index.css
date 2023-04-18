@@ -1,25 +1,20 @@
-.game {
+.board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid {
   display: grid;
-  gap: 50px;
-  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  max-width: 80vw;
+  max-height: 80vh;
 }
 
 .player {
   width: fit-content;
   margin: 40px auto;
   text-align: center;
-}
-
-.grid {
-  width: fit-content;
-  margin: 40px auto;
-  text-align: center;
-}
-
-.player .grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 5px;
 }
 
 .square {

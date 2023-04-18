@@ -19,7 +19,7 @@ export default function ContextProvider ({ children }) {
     {
       game: { id: gameId, ...gameSnapshot?.data() },
       playerList: playerListSnapshot?.docs.map(doc => doc.data()),
-      localPlayer: readPlayerNameFromLocalStorage()
+      localPlayerName: readPlayerNameFromLocalStorage()
     }
   )
 
