@@ -5,7 +5,7 @@ import useGameContext from '../hooks/useGameContext'
 
 export default function StartButton () {
 
-  const { game, playerList, localPlayerName } = useGameContext()
+  const { game, playerList, localPlayer } = useGameContext()
 
   const defatultStartStyle = 'btn btn-primary col-2 margin-l-10 '
   const [startButtonStyle, setStartButtonStyle] = useState(defatultStartStyle + 'disabled')
@@ -23,7 +23,7 @@ export default function StartButton () {
 
   return (
     <>
-      {game.owner === localPlayerName
+      {game.owner === localPlayer.name
         ? <button form='gameSettingsForm' className={startButtonStyle} onClick={handleClick}>💣 Start</button>
         : ''}
     </>

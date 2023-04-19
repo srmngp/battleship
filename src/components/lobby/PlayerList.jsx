@@ -3,10 +3,10 @@ import useGameContext from '../hooks/useGameContext'
 
 export const PlayerList = () => {
 
-  const { playerList, localPlayerName } = useGameContext()
+  const { playerList, localPlayer } = useGameContext()
 
   const getLocalPlayerClass = (name) => (
-    localPlayerName === name ? 'localPlayer' : ''
+    localPlayer.name === name ? 'localPlayer' : ''
   )
 
   const listedPlayers = playerList.map(player =>
