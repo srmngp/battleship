@@ -1,6 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
-import { updateGameBoardSize } from '../../logic/gameService'
+import { updateGameBoardSize, updateGameFleet } from '../../logic/gameService'
 import { gameContext } from '../ContextProvider'
 
 const boardSizeOptions = [
@@ -9,31 +9,62 @@ const boardSizeOptions = [
   { value: 225, label: 'Large' }
 ]
 
+const fleetOptionMulti = [
+  { value: '🚤', label: '🚤' },
+  { value: '⛵⛵', label: '⛵⛵' },
+  { value: '🛥🛥🛥', label: '🛥🛥🛥' },
+  { value: '🚢🚢🚢🚢', label: '🚢🚢🚢🚢' }
+]
+
 export const Settings = () => {
 
   const context = React.useContext(gameContext)
   const game = context.game
   const localPlayer = context.localPlayer
 
-  const getSelectedOption = () => (
+  const findBoardSizeOption = () => (
     boardSizeOptions.find(option => option.value === game.boardSize)
   )
 
-  const handleChange = (selected) => {
+  const getSelectedFleetOption = () => {
+    console.log(game.fleet)
+    return fleetOptionMulti.filter(option => game.fleet?.includes(option.value))
+  }
+
+  const handleBoardSizeChange = (selected) => {
     updateGameBoardSize(game, selected.value)
   }
 
+  const handleFleetChange = (selected) => {
+    updateGameFleet(game, selected.map(option => option.value))
+  }
+
+  const playerIsNotGameOwner = () => (
+    localPlayer.name !== game.owner
+  )
   return (
     <div>
       <h3>Game settings</h3>
 
-      <label htmlFor='select-options'>Select an option:</label>
+      <label htmlFor='select-size'>Board size</label>
       <Select
-        id='select-options'
+        id='select-size'
         options={boardSizeOptions}
-        value={getSelectedOption()}
-        onChange={handleChange}
-        isDisabled={localPlayer !== game.owner}
+        value={findBoardSizeOption()}
+        onChange={handleBoardSizeChange}
+        isDisabled={playerIsNotGameOwner()}
+      />
+
+      <label htmlFor='select-fleet'>Fleet</label>
+      <Select
+        isMulti
+        id='select-fleet'
+        className='basic-multi-select'
+        classNamePrefix='select'
+        options={fleetOptionMulti}
+        value={getSelectedFleetOption()}
+        onChange={handleFleetChange}
+        isDisabled={playerIsNotGameOwner()}
       />
     </div>
   )

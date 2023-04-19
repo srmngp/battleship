@@ -4,7 +4,7 @@ import { Cell } from './Cell'
 import { generateGrid } from '../../logic/boardGenerator'
 import useGameContext from '../hooks/useGameContext'
 
-export const Board = () => {
+export const Board = ({ shipsPosition }) => {
 
   const { game } = useGameContext()
   const [grid, setGrid] = useState(generateGrid(game.boardSize))

@@ -5,7 +5,7 @@ import Fleet from './Fleet'
 
 export const SetupShips = () => {
 
-  const { playerList } = useGameContext()
+  const { playerList, localPlayer } = useGameContext()
 
   return (
     <div className='Game'>
@@ -18,11 +18,11 @@ export const SetupShips = () => {
         </div>
 
         <div className='col-4'>
-          <Fleet />
+          <Fleet pendingShips={localPlayer.pendingShips} />
         </div>
 
         <div className='col-8'>
-          <Board />
+          <Board shipsPosition={localPlayer.shipsPosition} />
         </div>
 
       </div>
