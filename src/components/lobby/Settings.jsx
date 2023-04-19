@@ -1,7 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import { updateGameBoardSize, updateGameFleet } from '../../logic/gameService'
-import { gameContext } from '../ContextProvider'
+import useGameContext from '../hooks/useGameContext'
 
 const boardSizeOptions = [
   { value: 49, label: 'Small' },
@@ -18,9 +18,7 @@ const fleetOptionMulti = [
 
 export const Settings = () => {
 
-  const context = React.useContext(gameContext)
-  const game = context.game
-  const localPlayer = context.localPlayer
+  const { game, localPlayer } = useGameContext()
 
   const findBoardSizeOption = () => (
     boardSizeOptions.find(option => option.value === game.boardSize)
@@ -42,6 +40,7 @@ export const Settings = () => {
   const playerIsNotGameOwner = () => (
     localPlayer.name !== game.owner
   )
+
   return (
     <div>
       <h3>Game settings</h3>
