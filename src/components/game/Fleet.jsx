@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
+import Ship from './Ship'
 
-export default function Fleet () {
-  const [fleet, setFleet] = useState(['🛥', '🚤', '⛵', '🚢'])
+export default function Fleet ({ pendingShips }) {
 
   return (
     <div>
       <p>Fleet</p>
-      {fleet.map((ship, index) => (
-        <span key={index}>{ship}</span>
+      {pendingShips.map((ship, index) => (
+        <Ship value={ship} key={index} />
       ))}
     </div>
   )

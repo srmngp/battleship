@@ -18,8 +18,8 @@
 }
 
 .square {
-  width: 20px;
-  height: 20px;
+  width: 35px;
+  height: 35px;
   border: 2px solid #eee;
   border-radius: 5px;
   display: grid;
@@ -27,6 +27,19 @@
   cursor: pointer;
   font-size: 18px;
 }
+
+.square .shipIcon { /* FIXME parece un poco ñapa */
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: -8px;
+  font-size: 1.2em;
+}
+
+.square.drag-over {
+  background-color: lightgray;
+}
+
 
 .playerList {
   display: grid;

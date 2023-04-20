@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useGameContext from '../hooks/useGameContext'
 import { Board } from './Board'
 import Fleet from './Fleet'
 
 export const SetupShips = () => {
 
-  const { playerList, localPlayer } = useGameContext()
+  const { game, playerList } = useGameContext()
+  const [fleet, setFleet] = useState(game.fleet)
+
+  const removeShipFromFleet = (ship) => {
+    const newFleet = fleet.filter(s => s !== ship)
+    setFleet(newFleet)
+  }
 
   return (
     <div className='Game'>
@@ -18,11 +24,11 @@ export const SetupShips = () => {
         </div>
 
         <div className='col-4'>
-          <Fleet pendingShips={localPlayer.pendingShips} />
+          <Fleet pendingShips={fleet} />
         </div>
 
         <div className='col-8'>
-          <Board shipsPosition={localPlayer.shipsPosition} />
+          <Board removeShipFromFleet={removeShipFromFleet} />
         </div>
 
       </div>
