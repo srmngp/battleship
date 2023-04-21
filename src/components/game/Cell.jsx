@@ -5,7 +5,6 @@ export const Cell = ({ value, addShip, index }) => {
   const [classState, setClassState] = useState('square')
 
   const handleDrop = (event) => {
-    event.preventDefault()
     const ship = event.dataTransfer.getData('ship')
     addShip(index, ship)
     setClassState('square')

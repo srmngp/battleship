@@ -6,7 +6,7 @@
 
 .grid {
   display: grid;
-  gap: 0.5rem;
+  gap: 0.3rem;
   max-width: 80vw;
   max-height: 80vh;
 }
@@ -21,7 +21,7 @@
   width: 35px;
   height: 35px;
   border: 2px solid #eee;
-  border-radius: 5px;
+  border-radius: 3px;
   display: grid;
   place-items: center;
   cursor: pointer;

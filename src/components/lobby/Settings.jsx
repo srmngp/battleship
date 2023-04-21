@@ -24,10 +24,9 @@ export const Settings = () => {
     boardSizeOptions.find(option => option.value === game.boardSize)
   )
 
-  const getSelectedFleetOption = () => {
-    console.log(game.fleet)
-    return fleetOptionMulti.filter(option => game.fleet?.includes(option.value))
-  }
+  const getSelectedFleetOption = () => (
+    fleetOptionMulti.filter(option => game.fleet?.includes(option.value))
+  )
 
   const handleBoardSizeChange = (selected) => {
     updateGameBoardSize(game, selected.value)
