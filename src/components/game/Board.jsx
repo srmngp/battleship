@@ -14,13 +14,16 @@ export const Board = ({ removeShipFromFleet }) => {
     gridTemplateRows: `repeat(${sideLength}, 1fr)`
   }
 
-  const addShip = (index, value) => {
-    if (grid[index] !== null) {
+  const addShip = (gridCellIndex, value) => {
+    if (grid[gridCellIndex] !== null) {
       return
     }
 
     const newGrid = [...grid]
-    newGrid[index] = value
+    value.label.forEach((ship, index) => {
+      newGrid[gridCellIndex + index] = ship
+    })
+
     setGrid(newGrid)
     removeShipFromFleet(value)
   }
@@ -28,9 +31,11 @@ export const Board = ({ removeShipFromFleet }) => {
   return (
     <main className='board'>
       <div className='grid' style={gridSizeStyle}>
+
         {grid.map((ship, index) => (
           <Cell key={index} index={index} value={ship} addShip={addShip} />
         ))}
+
       </div>
 
     </main>

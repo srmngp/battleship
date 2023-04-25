@@ -9,11 +9,11 @@ const boardSizeOptions = [
   { value: 225, label: 'Large' }
 ]
 
-const fleetOptionMulti = [
-  { value: '🚤', label: '🚤' },
-  { value: '⛵⛵', label: '⛵⛵' },
-  { value: '🛥🛥🛥', label: '🛥🛥🛥' },
-  { value: '🚢🚢🚢🚢', label: '🚢🚢🚢🚢' }
+const fleetOption = [
+  { value: 1, label: ['🚤'] },
+  { value: 2, label: ['⛵', '⛵'] },
+  { value: 3, label: ['🛥', '🛥', '🛥'] },
+  { value: 4, label: ['🚢', '🚢', '🚢', '🚢'] }
 ]
 
 export const Settings = () => {
@@ -24,16 +24,12 @@ export const Settings = () => {
     boardSizeOptions.find(option => option.value === game.boardSize)
   )
 
-  const getSelectedFleetOption = () => (
-    fleetOptionMulti.filter(option => game.fleet?.includes(option.value))
-  )
-
   const handleBoardSizeChange = (selected) => {
     updateGameBoardSize(game, selected.value)
   }
 
   const handleFleetChange = (selected) => {
-    updateGameFleet(game, selected.map(option => option.value))
+    updateGameFleet(game, selected)
   }
 
   const playerIsNotGameOwner = () => (
@@ -59,8 +55,8 @@ export const Settings = () => {
         id='select-fleet'
         className='basic-multi-select'
         classNamePrefix='select'
-        options={fleetOptionMulti}
-        value={getSelectedFleetOption()}
+        options={fleetOption}
+        value={game.fleet}
         onChange={handleFleetChange}
         isDisabled={playerIsNotGameOwner()}
       />

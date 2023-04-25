@@ -8,8 +8,8 @@ export const SetupShips = () => {
   const { game, playerList } = useGameContext()
   const [fleet, setFleet] = useState(game.fleet)
 
-  const removeShipFromFleet = (ship) => {
-    const newFleet = fleet.filter(s => s !== ship)
+  const removeShipFromFleet = (shipAdded) => {
+    const newFleet = fleet.filter(ship => ship.value !== shipAdded.value)
     setFleet(newFleet)
   }
 

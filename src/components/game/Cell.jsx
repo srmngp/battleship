@@ -5,7 +5,7 @@ export const Cell = ({ value, addShip, index }) => {
   const [classState, setClassState] = useState('square')
 
   const handleDrop = (event) => {
-    const ship = event.dataTransfer.getData('ship')
+    const ship = JSON.parse(event.dataTransfer.getData('ship'))
     addShip(index, ship)
     setClassState('square')
   }
