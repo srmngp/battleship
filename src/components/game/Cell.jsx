@@ -1,29 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useDroppable } from '@dnd-kit/core'
 
-export const Cell = ({ value, addShip, index }) => {
+export const Cell = ({ value, index }) => {
 
-  const [classState, setClassState] = useState('square')
-
-  const handleDrop = (event) => {
-    const ship = JSON.parse(event.dataTransfer.getData('ship'))
-    addShip(index, ship)
-    setClassState('square')
-  }
-
-  const handleDragOver = (event) => {
-    event.preventDefault()
-    setClassState('square drag-over')
-  }
+  const { setNodeRef, isOver } = useDroppable({
+    id: `cell-${index}`,
+    data: {
+      index,
+      type: 'cell'
+    }
+  })
 
   return (
     <div
-      onDrop={handleDrop}
-      onDragOver={handleDragOver}
-      onDragLeave={() => setClassState('square')}
-      className={classState}
+      ref={setNodeRef}
+      className={`square ${isOver ? 'drag-over' : ''}`}
     >
       {value}
     </div>
   )
-
 }

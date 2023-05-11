@@ -1,31 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Cell } from './Cell'
-import useGameContext from '../hooks/useGameContext'
 
-export const Board = ({ removeShipFromFleet }) => {
+export const Board = ({ grid }) => {
 
-  const { game } = useGameContext()
-  const [grid, setGrid] = useState(Array(game.boardSize).fill(null))
-
-  const sideLength = Math.sqrt(game.boardSize)
+  const sideLength = Math.sqrt(grid.length)
   const gridSizeStyle = {
     gridTemplateColumns: `repeat(${sideLength}, 1fr)`,
     gridTemplateRows: `repeat(${sideLength}, 1fr)`
-  }
-
-  const addShip = (gridCellIndex, value) => {
-    if (grid[gridCellIndex] !== null) {
-      return
-    }
-
-    const newGrid = [...grid]
-    value.label.forEach((ship, index) => {
-      newGrid[gridCellIndex + index] = ship
-    })
-
-    setGrid(newGrid)
-    removeShipFromFleet(value)
   }
 
   return (
@@ -33,7 +15,7 @@ export const Board = ({ removeShipFromFleet }) => {
       <div className='grid' style={gridSizeStyle}>
 
         {grid.map((ship, index) => (
-          <Cell key={index} index={index} value={ship} addShip={addShip} />
+          <Cell key={index} index={index} value={ship} />
         ))}
 
       </div>
