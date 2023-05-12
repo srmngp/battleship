@@ -1,0 +1,11 @@
+/* https://codepen.io/team/TattooProjects/pen/abaLQgM */
+@import url("https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap");
+
+.header{
+    font-family: "Alfa Slab One", cursive;
+    text-align: center;
+    font-size: 45px;
+    word-spacing: -5px;
+    color: #fff;
+    text-shadow: rgb(0, 0, 0) 2px 2px 2px;
+}

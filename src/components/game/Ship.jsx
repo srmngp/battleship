@@ -1,11 +1,11 @@
 import React from 'react'
 import { useDraggable } from '@dnd-kit/core'
 
-export default function Ship ({ value }) {
+export default function Ship ({ ship }) {
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: `ship-${value.label.join('')}`,
-    data: { ship: JSON.stringify(value) }
+    id: `ship-${ship.value}`,
+    data: { ship }
   })
 
   const style = transform
@@ -21,7 +21,7 @@ export default function Ship ({ value }) {
       ref={setNodeRef}
       style={style}
     >
-      {value.label.join('')}
+      {ship.label.join('')}
     </div>
   )
 }

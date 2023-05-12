@@ -7,7 +7,7 @@ export default function Fleet ({ pendingShips }) {
     <div>
       <p>Fleet</p>
       {pendingShips.map((ship, index) => (
-        <Ship value={ship} key={index} />
+        <Ship ship={ship} key={index} />
       ))}
     </div>
   )

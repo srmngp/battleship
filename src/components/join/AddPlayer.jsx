@@ -1,43 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from 'react'
 import { addPlayerToGame } from '../../logic/gameService'
-import { readPlayerNameFromLocalStorage } from '../../logic/localStorageManager'
+import PlayerCreator from '../player/PlayerCreator'
+import { useNavigate } from 'react-router-dom'
 
 export const AddPlayer = ({ gameSnapshot }) => {
 
-  const [playerName, setPlayerName] = useState('')
   const navigation = useNavigate()
 
-  useEffect(() => {
-    setPlayerName(readPlayerNameFromLocalStorage())
-  }, [])
-
-  const submit = async (e) => {
-    e.preventDefault()
-
-    addPlayerToGame(playerName, gameSnapshot)
+  const addPlayer = (playerData) => {
+    console.log('addPlayer', playerData)
+    addPlayerToGame(playerData, gameSnapshot)
       .then(navigation(`/lobby/${gameSnapshot.id}`))
   }
 
   return (
     <>
-      <h2>You have veen invited to join a game</h2>
+      <h2>You have been invited to join a game</h2>
 
-      <div className='lobby'>
-        <form onSubmit={submit}>
-
-          <input// TODO no permitir que el nombre del jugador sea vacío
-            type='text' placeholder='Payer name'
-            value={playerName}
-            onChange={(e) => setPlayerName(e.currentTarget.value)}
-          />
-
-          <button type='submit'>
-            Join game
-          </button>
-
-        </form>
-      </div>
+      <PlayerCreator createAction={addPlayer} buttonText='Join game' />
     </>
   )
 }

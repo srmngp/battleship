@@ -15,7 +15,7 @@ export const SetupShips = () => {
       return
     }
 
-    const ship = JSON.parse(event.active.data.current.ship)
+    const ship = event.active.data.current.ship
     const index = event.over.data.current.index
 
     addShip(index, ship)

@@ -4,9 +4,11 @@ import { Header } from './components/Header'
 
 function App () {
   return (
-    <div className='App container'>
+    <div className='App container flex-center'>
       <Header />
-      <Outlet />
+      <div className='flex-center'>
+        <Outlet />
+      </div>
     </div>
   )
 }

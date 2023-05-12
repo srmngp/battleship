@@ -1,9 +1,10 @@
 import React from 'react'
+import '../styles/header.css'
 
 export const Header = () => {
   return (
-    <div className='header padding-10 padding-b-30'>
-      <h1>The Battleship</h1>
+    <div className='padding-10 padding-b-30'>
+      <span className='header'>The Battleship</span>
       <h1>💣💥⛵</h1>
     </div>
 
