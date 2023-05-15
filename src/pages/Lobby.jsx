@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { gameContext } from '../components/ContextProvider'
 import { GameSetup } from '../components/lobby/GameSetup'
 import { GAME_STATES } from '../logic/utils'
+import useGameContext from '../components/hooks/useGameContext'
 
 export const Lobby = () => {
 
-  // TODO esto podría ser un hook?
-  const context = React.useContext(gameContext)
-  const game = context.game
+  const game = useGameContext()
 
   const navigation = useNavigate()
 

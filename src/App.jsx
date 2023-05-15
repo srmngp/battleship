@@ -4,7 +4,7 @@ import { Header } from './components/Header'
 
 function App () {
   return (
-    <div className='App container flex-center'>
+    <div className='App container flex-center magicpattern'>
       <Header />
       <div className='flex-center'>
         <Outlet />

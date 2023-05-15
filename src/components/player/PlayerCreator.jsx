@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import AvatarSelector from './AvatarSelector'
 import InputPlayerName from './InputPlayerName'
+import '../../styles/playerCreator.css'
 
 export default function PlayerCreator ({ createAction, buttonText }) {
 

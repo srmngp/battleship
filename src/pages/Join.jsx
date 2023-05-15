@@ -12,7 +12,7 @@ export const Join = () => {
 
   return (
     <>
-      <div>
+      <div className='flex-center'>
         {gameError && <GameNotFound />}
         {gameLoading && <span>Document: Loading...</span>}
         {gameSnapshot && <AddPlayer gameSnapshot={gameSnapshot} />}
