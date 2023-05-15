@@ -14,9 +14,8 @@ export const AddPlayer = ({ gameSnapshot }) => {
   }
 
   return (
-    <div className='flex-center'>
-      <div className='flex-center'>You have been invited to join a game</div>pendiente de colocar bien!
-
+    <div>
+      <div className='flex-center'>You have been invited to join a game</div>
       <PlayerCreator createAction={addPlayer} buttonText='Join game' />
     </div>
   )

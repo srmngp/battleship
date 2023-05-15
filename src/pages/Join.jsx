@@ -12,11 +12,9 @@ export const Join = () => {
 
   return (
     <>
-      <div className='flex-center'>
-        {gameError && <GameNotFound />}
-        {gameLoading && <span>Document: Loading...</span>}
-        {gameSnapshot && <AddPlayer gameSnapshot={gameSnapshot} />}
-      </div>
+      {gameError && <GameNotFound />}
+      {gameLoading && <span>Document: Loading...</span>}
+      {gameSnapshot && <AddPlayer gameSnapshot={gameSnapshot} />}
     </>
 
   )

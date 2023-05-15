@@ -11,12 +11,6 @@
   max-height: 80vh;
 }
 
-.player {
-  width: fit-content;
-  margin: 40px auto;
-  text-align: center;
-}
-
 .square {
   width: 35px;
   height: 35px;

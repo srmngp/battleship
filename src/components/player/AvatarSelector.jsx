@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import '../../styles/avatarSelector.css'
 
 export default function AvatarSelector ({ updateAvatarUrl, url }) {
 
@@ -13,7 +12,7 @@ export default function AvatarSelector ({ updateAvatarUrl, url }) {
 
   return (
     <div className='avatar-selector'>
-      <img className='avatar' src={url} />
+      <img className='avatar mx-auto' src={url} />
       <button className='randomize' onClick={handleAvatarClick}>↺</button>
     </div>
   )

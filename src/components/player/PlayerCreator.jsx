@@ -15,9 +15,9 @@ export default function PlayerCreator ({ createAction, buttonText }) {
   return (
     <>
 
-      <div className='user-creation'>
+      <div className='row'>
 
-        <div className='user-panel'>
+        <div className='user-panel bg-blue col-5 mx-auto text-center'>
 
           <AvatarSelector updateAvatarUrl={setAvatarUrl} url={avatarUrl} />
 

@@ -4,11 +4,17 @@ import { Header } from './components/Header'
 
 function App () {
   return (
-    <div className='App container flex-center magicpattern'>
+    <div className='App container magicpattern'>
       <Header />
-      <div className='flex-center'>
-        <Outlet />
+
+      <div className='row'>
+        <div className='col-sm-1' />
+        <div className='col'>
+          <Outlet />
+        </div>
+        <div className='col-sm-1' />
       </div>
+
     </div>
   )
 }
