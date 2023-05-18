@@ -40,6 +40,8 @@
   text-align: center;
 }
 
+
+/*FIXME remove other players style*/
 .otherPlayers {
   display: flex;
   align-items:center;

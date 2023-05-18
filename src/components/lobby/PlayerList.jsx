@@ -14,13 +14,7 @@ export const PlayerList = () => {
   return (
     <div className='playerList'>
 
-      <h3>Players</h3>
       {listedPlayers}
-
-      <li className='otherPlayers'>
-        <span className='loader' />
-        <span className='text'>Waiting for other players</span>
-      </li>
 
     </div>
   )

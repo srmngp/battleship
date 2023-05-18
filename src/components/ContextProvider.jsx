@@ -26,13 +26,10 @@ export default function ContextProvider ({ children }) {
   return (
     <gameContext.Provider value={createContext()}>
 
-      <div>
-        {gameError && <GameNotFound />}
-        {gameLoading && <span>Document: Loading...</span>}
+      {gameError && <GameNotFound />}
+      {gameLoading && <span>Document: Loading...</span>}
 
-        {gameSnapshot && children}
-
-      </div>
+      {gameSnapshot && children}
 
     </gameContext.Provider>
   )

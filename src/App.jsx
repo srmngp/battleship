@@ -7,7 +7,7 @@ function App () {
     <div className='App container magicpattern'>
       <Header />
 
-      <div className='row'>
+      <div className='row h-75'>
         <div className='col-sm-1' />
         <div className='col'>
           <Outlet />

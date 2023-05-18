@@ -18,7 +18,7 @@ export const ToastButton = ({ text, clickAction, toastText }) => { // TODO add s
 
   return (
     <>
-      <button onClick={onClick} className='btn btn-secondary col-2'>
+      <button onClick={onClick} className='button button-secondary'>
         {text}
       </button>
       {isShown && (

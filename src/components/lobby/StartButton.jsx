@@ -7,8 +7,8 @@ export default function StartButton () {
 
   const { game, playerList, localPlayer } = useGameContext()
 
-  const defatultStartStyle = 'btn btn-primary col-2 margin-l-10 '
-  const [startButtonStyle, setStartButtonStyle] = useState(defatultStartStyle + 'disabled')
+  const defatultStartStyle = 'button button-primary margin-l-10'
+  const [startButtonStyle, setStartButtonStyle] = useState(defatultStartStyle + ' disabled')
 
   useEffect(() => {
     if (playerList.length > 1) {
@@ -21,10 +21,19 @@ export default function StartButton () {
     updateGameSatus(game, GAME_STATES.SETUP_SHIPS)
   }
 
+  const button = (
+    <button
+      className={startButtonStyle}
+      onClick={handleClick}
+    >
+      💣 Start
+    </button>
+  )
+
   return (
     <>
       {game.owner === localPlayer.name
-        ? <button form='gameSettingsForm' className={startButtonStyle} onClick={handleClick}>💣 Start</button>
+        ? button
         : ''}
     </>
   )
