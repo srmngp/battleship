@@ -60,3 +60,40 @@
     border-radius: 50%;
     background-color: #0e2e7fa8;
 }
+
+
+@media (max-width: 767px) {
+
+    .playerList {
+        display: flex;
+        flex-direction: row;
+        max-width: 396px;
+        overflow: auto;
+        margin-bottom: 10px;
+    }
+
+    .player {
+        flex-direction: column;
+        min-width: 100px;
+        max-width: 100px;
+        background: none;
+        text-align: center;
+        padding: 0px;
+        margin: 5px;
+    }
+
+    .player .avatar {
+        margin: 0px;
+    }
+    
+    .player .localPlayerIcon-bg {
+        bottom: 25px;
+        left: 60px;
+    }
+
+    .player .ownerIcon-bg {
+        bottom: 27px;
+        left: 22px;
+    }
+
+}
