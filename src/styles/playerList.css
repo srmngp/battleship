@@ -15,6 +15,7 @@
     margin-bottom: 10px;
     border-radius: 100px 25px 25px 100px;;
     width: 100%;
+    position: relative;
 }
 
 .player .avatar {
@@ -24,12 +25,38 @@
     margin-right: 20px;
 }
 
+.player .localPlayer {
+    margin-left: -2px;
+    margin-top: -2px;
+}
+
+.player .localPlayerIcon-bg {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: 10px;
+    left: 40px;
+    border-radius: 50%;
+    background-color: #0e2e7fa8; 
+}
+
 .player .name {
     flex: 1;
     text-align: left;
 }
 
-.player .icon {
-    margin-right: 20px;
-    font-size: 1.8em;
+.player .ownerIcon {
+    margin-left: -4px;
+    margin-top: -4px;
+    font-size: 25px;
+}
+
+.player .ownerIcon-bg {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    bottom: 12px;
+    left: 10px;
+    border-radius: 50%;
+    background-color: #0e2e7fa8;
 }

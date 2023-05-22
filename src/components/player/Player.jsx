@@ -7,19 +7,34 @@ export const Player = ({ player }) => {
 
   return (
     <div key={player} className='player'>
+
       <img className='avatar' src={player.avatarUrl} />
-      {player.name === localPlayer.name &&
-        <i className='material-symbols-rounded'>
-          person
-        </i>}
+
+      {player.name === localPlayer.name && localPLayerIcon()}
 
       <span className='name'>
         {player.name}
       </span>
 
-      {game.owner === player.name &&
-        <i className='material-symbols-rounded icon'>military_tech</i>}
+      {game.owner === player.name && ownerIcon()}
+
     </div>
   )
 
 }
+
+const localPLayerIcon = () => (
+  <span className='localPlayerIcon-bg'>
+    <i className='material-symbols-rounded localPlayer'>
+      account_circle
+    </i>
+  </span>
+)
+
+const ownerIcon = () => (
+  <span className='ownerIcon-bg'>
+    <i className='material-symbols-rounded ownerIcon'>
+      workspace_premium
+    </i>
+  </span>
+)
