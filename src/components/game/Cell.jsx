@@ -14,7 +14,7 @@ export const Cell = ({ value, index }) => {
   return (
     <div
       ref={setNodeRef}
-      className={`square ${isOver ? 'drag-over' : ''}`}
+      className={`square cell-${index}`}
     >
       {value}
     </div>

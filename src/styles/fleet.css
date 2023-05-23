@@ -14,8 +14,3 @@
 .ship-container  > .square:last-child {
     border-right: 1px solid #eee;
 }
-
-.square.ship-size-3.drag-over + .square,
-.square.ship-size-3.drag-over + .square + .square {
-    background-color: lightgray;
-}

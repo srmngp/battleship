@@ -28,11 +28,6 @@
   font-size: 1.2em;
 }
 
-.square.drag-over {
-  background-color: lightgray;
-}
-
-
 .playerList {
   display: grid;
   text-align: center;
