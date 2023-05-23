@@ -1,0 +1,21 @@
+.ship-container {
+    display: flex;
+    padding: 5px;
+}
+
+.ship-container .square {
+    border-right: none;
+    border-left: none;
+}
+.ship-container  > .square:first-child {
+    border-left: 1px solid #eee; 
+}
+
+.ship-container  > .square:last-child {
+    border-right: 1px solid #eee;
+}
+
+.square.ship-size-3.drag-over + .square,
+.square.ship-size-3.drag-over + .square + .square {
+    background-color: lightgray;
+}

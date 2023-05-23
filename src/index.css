@@ -6,16 +6,14 @@
 
 .grid {
   display: grid;
-  gap: 0.3rem;
   max-width: 80vw;
-  max-height: 80vh;
+  max-height: 80vw;
 }
 
 .square {
   width: 35px;
   height: 35px;
-  border: 2px solid #eee;
-  border-radius: 3px;
+  border: 1px solid #eee;
   display: grid;
   place-items: center;
   cursor: pointer;

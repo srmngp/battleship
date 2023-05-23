@@ -10,18 +10,24 @@ export default function Ship ({ ship }) {
 
   const style = transform
     ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+        display: 'flex'
       }
     : undefined
 
   return (
     <div
+      className='ship-container'
       {...attributes}
       {...listeners}
       ref={setNodeRef}
       style={style}
     >
-      {ship.label.join('')}
+      {ship.label.map((ship, index) => (
+        <div className='square' key={index}>
+          {ship}
+        </div>
+      ))}
     </div>
   )
 }

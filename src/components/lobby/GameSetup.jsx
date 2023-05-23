@@ -1,14 +1,22 @@
-import React from 'react'
-import { copyGameUrl } from '../../logic/utils'
+import React, { useEffect } from 'react'
+import { GAME_STATES, copyGameUrl } from '../../logic/utils'
 import { ToastButton } from './ToastButton'
 import { PlayerList } from './PlayerList'
 import { Settings } from './Settings'
 import StartButton from './StartButton'
 import useGameContext from '../hooks/useGameContext'
+import { useNavigate } from 'react-router-dom'
 
 export const GameSetup = () => {
 
   const { game } = useGameContext()
+  const navigation = useNavigate()
+
+  useEffect(() => {
+    if (game.status === GAME_STATES.SETUP_SHIPS) {
+      navigation(`/game/${game.id}`)
+    }
+  }, [game])
 
   return (
     <div className='GameSetup'>
