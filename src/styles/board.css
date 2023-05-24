@@ -1,3 +1,7 @@
+/*
+    ñapa para q el hover ocupe el espacio del barco
+    cuando se coloquen en vertical no servirá :(
+*/
 .square.drag-over {
     background-color: lightgray;
 }

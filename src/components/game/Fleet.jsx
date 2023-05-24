@@ -4,11 +4,13 @@ import Ship from './Ship'
 export default function Fleet ({ pendingShips }) {
 
   return (
-    <div>
-      <p>Fleet</p>
-      {pendingShips.map((ship, index) => (
-        <Ship ship={ship} key={index} />
-      ))}
-    </div>
+    <>
+      <span>Fleet</span>
+      <div className='fleet'>
+        {pendingShips.map((ship, index) => (
+          <Ship ship={ship} key={index} />
+        ))}
+      </div>
+    </>
   )
 }

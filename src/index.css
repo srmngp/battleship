@@ -33,14 +33,6 @@
   text-align: center;
 }
 
-
-/*FIXME remove other players style*/
-.otherPlayers {
-  display: flex;
-  align-items:center;
-  margin: 0 auto;
-}
-
 .otherPlayers .text {
   margin-left: 5px;
 }

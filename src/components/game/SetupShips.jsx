@@ -5,6 +5,7 @@ import Fleet from './Fleet'
 import { DndContext } from '@dnd-kit/core'
 import '../../styles/fleet.css'
 import '../../styles/board.css'
+import ReadyButton from './ReadyButton'
 
 export const SetupShips = () => {
 
@@ -13,21 +14,21 @@ export const SetupShips = () => {
   const [grid, setGrid] = useState(Array(game.boardSize).fill(null))
 
   const handleDragOver = (event) => {
+    cleanAllCellsHover()
     // Este método es una ñapa :( para que hover ocupe el espacio del ship.
     // Junto con el css de .ship-size-{}
-    console.log(event)
     if (!event.over || event.over.data.current.type !== 'cell') {
       return
     }
 
-    cleanAllCellsHover()
-
     const cellOver = document.getElementsByClassName(`cell-${event.over.data.current.index}`)
-    cellOver[0].classList.add('drag-over', `ship-size-${event.active.data.current.ship.value}`)
+    const shipSize = `ship-size-${event.active.data.current.ship.value}`
 
+    cellOver[0].classList.add('drag-over', shipSize)
   }
 
   const handleDragEnd = (event) => {
+    cleanAllCellsHover()
     if (!event.over || event.over.data.current.type !== 'cell') {
       return
     }
@@ -36,7 +37,6 @@ export const SetupShips = () => {
     const index = event.over.data.current.index
 
     addShip(index, ship)
-    cleanAllCellsHover()
   }
 
   const addShip = (gridCellIndex, ship) => {
@@ -59,32 +59,39 @@ export const SetupShips = () => {
   }
 
   return (
-    <div className='Game'>
-      <div className='row padding-b-30'>
+    <div className='Game row'>
 
-        <DndContext onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
+      <DndContext
+        onDragEnd={handleDragEnd}
+        onDragOver={handleDragOver}
+      >
 
-          <div className='row bg-blue'>
+        <div className='row bg-blue'>
 
-            <div>
-              <h2>Choose the ships positions</h2>
-              <p>{playerList.filter(player => player.shipsReady).length}/{playerList.length} Players ready</p>
-            </div>
-
-            <div className='col-md-4'>
-              <Fleet pendingShips={fleet} />
-            </div>
-
-            <div className='col-md-8'>
-              <Board grid={grid} />
-            </div>
+          <div>
+            <h2>Choose the ships positions</h2>
+            <p>{playerList.filter(player => player.ready).length}/{playerList.length} Players ready</p>
           </div>
 
-        </DndContext>
+          <div className='col-md-4'>
+            <Fleet pendingShips={fleet} />
+          </div>
 
-      </div>
+          <div className='col-md-8'>
+            <Board grid={grid} />
+          </div>
+
+        </div>
+
+        <div className='row pt-2'>
+          <div className='col'>
+            <ReadyButton fleet={fleet} />
+          </div>
+        </div>
+
+      </DndContext>
+
     </div>
-
   )
 }
 

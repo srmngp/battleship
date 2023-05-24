@@ -1,3 +1,8 @@
+.fleet {
+    display: flex;
+    flex-direction: column;
+}
+
 .ship-container {
     display: flex;
     padding: 5px;
@@ -13,4 +18,16 @@
 
 .ship-container  > .square:last-child {
     border-right: 1px solid #eee;
+}
+
+@media (max-width: 767px) {
+
+    .fleet {
+        flex-direction: row;
+        max-width: 400px;
+        overflow: auto;
+        margin: auto;
+        padding-bottom: 1rem;
+    }
+
 }

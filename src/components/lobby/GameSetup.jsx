@@ -35,7 +35,7 @@ export const GameSetup = () => {
 
       </div>
 
-      <div className='row padding-10'>
+      <div className='row pt-2'>
         <div className='col'>
           <ToastButton text='🔗 Invite' clickAction={() => copyGameUrl(game.id)} toastText='Link copied!' />
           <StartButton />

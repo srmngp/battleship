@@ -3,7 +3,7 @@ import { useDroppable } from '@dnd-kit/core'
 
 export const Cell = ({ value, index }) => {
 
-  const { setNodeRef, isOver } = useDroppable({
+  const { setNodeRef } = useDroppable({
     id: `cell-${index}`,
     data: {
       index,

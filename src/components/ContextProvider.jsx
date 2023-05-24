@@ -15,13 +15,22 @@ export default function ContextProvider ({ children }) {
   const [gameSnapshot, gameLoading, gameError] = useDocument(getGameRef(gameId))
   const [playerListSnapshot] = useCollection(getPlayersRef(gameId))
 
-  const createContext = () => (
-    {
-      game: { id: gameId, ...gameSnapshot?.data() },
-      playerList: playerListSnapshot?.docs.map(doc => doc.data()),
-      localPlayer: playerListSnapshot?.docs.find(doc => doc.data().name === readPlayerNameFromLocalStorage()).data()
+  const createContext = () => {
+
+    const game = { id: gameId, ...gameSnapshot?.data() }
+    const playerList = playerListSnapshot?.docs.map(doc => doc.data())
+
+    const localPlayer = { // FIXME avoid duplication
+      ...playerListSnapshot?.docs.find(doc => doc.data().name === readPlayerNameFromLocalStorage()).data(),
+      id: playerListSnapshot?.docs.find(doc => doc.data().name === readPlayerNameFromLocalStorage()).id
     }
-  )
+
+    return {
+      game,
+      playerList,
+      localPlayer
+    }
+  }
 
   return (
     <gameContext.Provider value={createContext()}>
