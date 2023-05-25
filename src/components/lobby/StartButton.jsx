@@ -7,12 +7,11 @@ export default function StartButton () {
 
   const { game, playerList, localPlayer } = useGameContext()
 
-  const defatultStartStyle = 'button button-primary margin-l-10'
-  const [startButtonStyle, setStartButtonStyle] = useState(defatultStartStyle + ' disabled')
+  const [buttonDisabled, setButtonDisabled] = useState(true)
 
   useEffect(() => {
     if (playerList.length > 1) {
-      setStartButtonStyle(defatultStartStyle)
+      setButtonDisabled(false)
     }
   }, [playerList])
 
@@ -23,8 +22,9 @@ export default function StartButton () {
 
   const button = (
     <button
-      className={startButtonStyle}
+      className='button button-primary margin-l-10'
       onClick={handleClick}
+      disabled={buttonDisabled}
     >
       💣 Start
     </button>

@@ -3,9 +3,9 @@ import useGameContext from '../hooks/useGameContext'
 import { Board } from './Board'
 import Fleet from './Fleet'
 import { DndContext } from '@dnd-kit/core'
+import ReadyButton from './ReadyButton'
 import '../../styles/fleet.css'
 import '../../styles/board.css'
-import ReadyButton from './ReadyButton'
 
 export const SetupShips = () => {
 
