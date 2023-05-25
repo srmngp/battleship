@@ -7,7 +7,7 @@ import StartButton from './StartButton'
 import useGameContext from '../hooks/useGameContext'
 import { useNavigate } from 'react-router-dom'
 
-export const GameSetup = () => {
+export const SetupGame = () => {
 
   const { game } = useGameContext()
   const navigation = useNavigate()
@@ -19,7 +19,7 @@ export const GameSetup = () => {
   }, [game])
 
   return (
-    <div className='GameSetup'>
+    <>
 
       <div className='row bg-blue'>
 
@@ -42,7 +42,7 @@ export const GameSetup = () => {
         </div>
       </div>
 
-    </div>
+    </>
   )
 
 }

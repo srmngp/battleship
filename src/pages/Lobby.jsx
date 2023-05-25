@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { GameSetup } from '../components/lobby/GameSetup'
+import { SetupGame } from '../components/lobby/SetupGame'
 import { GAME_STATES } from '../logic/utils'
 import useGameContext from '../components/hooks/useGameContext'
 
@@ -17,7 +17,7 @@ export const Lobby = () => {
   }, [game])
 
   return (
-    <GameSetup />
+    <SetupGame />
   )
 
 }
