@@ -6,10 +6,13 @@ import { DndContext } from '@dnd-kit/core'
 import ReadyButton from './ReadyButton'
 import '../../styles/fleet.css'
 import '../../styles/board.css'
+import { setPlayerAsReady } from '../../logic/playerService'
+import { updateGameSatus } from '../../logic/gameService'
+import { GAME_STATES } from '../../logic/utils'
 
 export const SetupShips = () => {
 
-  const { game, playerList } = useGameContext()
+  const { game, playerList, localPlayer } = useGameContext()
   const [fleet, setFleet] = useState(game.fleet)
   const [grid, setGrid] = useState(Array(game.boardSize).fill(null))
 
@@ -58,40 +61,50 @@ export const SetupShips = () => {
     setFleet(newFleet)
   }
 
+  const readyClick = () => {
+    console.log('Player ready')
+    setPlayerAsReady({ ...localPlayer, grid })
+
+    if (getNumberOfPlayersReady() === playerList.length) {
+      console.log('Starting game!')
+      updateGameSatus(game, GAME_STATES.IN_PROGRESS)
+    }
+  }
+
+  const getNumberOfPlayersReady = () => (
+    playerList.filter(player => player.ready).length
+  )
+
   return (
-    <div className='Game row'>
+    <DndContext
+      onDragEnd={handleDragEnd}
+      onDragOver={handleDragOver}
+    >
+      <div className='row bg-blue'>
 
-      <DndContext
-        onDragEnd={handleDragEnd}
-        onDragOver={handleDragOver}
-      >
-
-        <div className='row bg-blue'>
-
-          <div>
-            <h2>Choose the ships positions</h2>
-            <p>{playerList.filter(player => player.ready).length}/{playerList.length} Players ready</p>
-          </div>
-
-          <div className='col-md-4'>
-            <Fleet pendingShips={fleet} />
-          </div>
-
-          <div className='col-md-8'>
-            <Board grid={grid} />
-          </div>
-
+        <div>
+          <h2>Choose the ships positions</h2>
         </div>
 
-        <div className='row pt-2'>
-          <div className='col'>
-            <ReadyButton fleet={fleet} />
-          </div>
+        <div className='col-md-4'>
+          <Fleet pendingShips={fleet} />
         </div>
 
-      </DndContext>
+        <div className='col-md-8'>
+          <Board grid={grid} />
+        </div>
 
-    </div>
+      </div>
+
+      <div className='row pt-2'>
+        <p>{getNumberOfPlayersReady()}/{playerList.length} Players ready</p>
+
+        <div className='col'>
+          <ReadyButton fleet={fleet} onClick={readyClick} />
+        </div>
+      </div>
+
+    </DndContext>
   )
 }
 

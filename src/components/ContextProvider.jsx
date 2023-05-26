@@ -22,6 +22,7 @@ export default function ContextProvider ({ children }) {
 
     const localPlayer = { // FIXME avoid duplication
       ...playerListSnapshot?.docs.find(doc => doc.data().name === readPlayerNameFromLocalStorage()).data(),
+      gameId,
       id: playerListSnapshot?.docs.find(doc => doc.data().name === readPlayerNameFromLocalStorage()).id
     }
 

@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import useGameContext from '../hooks/useGameContext'
-import { setPlayerAsReady } from '../../logic/playerService'
+import React, { useState, useEffect, useRef } from 'react'
 
-export default function ReadyButton ({ fleet }) {
+export default function ReadyButton ({ fleet, onClick }) {
 
-  const [className, setClassName] = useState('button button-primary ready disabled')
   const [buttonDisabled, setButtonDisabled] = useState(true)
-
-  const { game, localPlayer } = useGameContext()
+  const startButton = useRef()
 
   useEffect(() => {
-    setClassName(fleet.length === 0 ? 'button button-primary ready' : 'button button-primary ready disabled')
+    setButtonDisabled(fleet.length !== 0)
+    startButton.current.focus()
   }, [fleet])
 
-  const handleClick = () => {
-    console.log('Player ready')
-    setPlayerAsReady(game, localPlayer)
-  }
-
   return (
-    <button className='button button-primary' onClick={handleClick} disabled={buttonDisabled}>
+    <button
+      ref={startButton}
+      className='button button-primary'
+      onClick={onClick}
+      disabled={buttonDisabled}
+    >
       <span className='icon material-symbols-rounded'>
         select_check_box
       </span>

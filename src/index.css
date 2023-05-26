@@ -28,11 +28,6 @@
   font-size: 1.2em;
 }
 
-.playerList {
-  display: grid;
-  text-align: center;
-}
-
 .otherPlayers .text {
   margin-left: 5px;
 }

@@ -6,9 +6,9 @@ export const createPlayer = async (playerData, gameSnapshot) => {
     .then(savePlayerNameInLocalStorage(playerData.name))
 }
 
-export const setPlayerAsReady = (game, player) => {
+export const setPlayerAsReady = (player) => {
   console.log('Updating player as ready', player)
   const newPlayer = { ...player, ready: true }
 
-  upadatePlayerDocument(game.id, newPlayer)
+  upadatePlayerDocument(player.gameId, newPlayer)
 }

@@ -21,7 +21,7 @@ export const SetupGame = () => {
   return (
     <>
 
-      <div className='row bg-blue'>
+      <div className='setup-gamerow bg-blue'>
 
         <div className='col-md-4'>
           <h3>Players</h3>

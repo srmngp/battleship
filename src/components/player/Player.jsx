@@ -5,6 +5,7 @@ export const Player = ({ player }) => {
 
   const { localPlayer, game } = useGameContext()
 
+  // FIXME fix icon position when user has 2 lines name on mobile screens
   return (
     <div key={player} className='player'>
 
