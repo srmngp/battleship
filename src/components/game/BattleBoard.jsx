@@ -3,7 +3,7 @@ import React from 'react'
 import { Cell } from './Cell'
 import { getSquareStyle } from '../../logic/utils'
 
-export const Board = ({ grid }) => {
+export const BattleBoard = ({ grid }) => {
 
   const gridSizeStyle = getSquareStyle(grid.length)
 

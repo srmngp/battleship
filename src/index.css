@@ -11,8 +11,8 @@
 }
 
 .square {
-  width: 35px;
-  height: 35px;
+  width: 33px;
+  height: 33px;
   border: 1px solid #eee;
   display: grid;
   place-items: center;

@@ -10,3 +10,11 @@ export const copyGameUrl = (gameId) => {
 
   window.navigator.clipboard.writeText(joinGameUrl)
 }
+
+export const getSquareStyle = (length) => {
+  const sideLength = Math.sqrt(length)
+  return {
+    gridTemplateColumns: `repeat(${sideLength}, 1fr)`,
+    gridTemplateRows: `repeat(${sideLength}, 1fr)`
+  }
+}

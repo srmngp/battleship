@@ -15,11 +15,13 @@ export default function Battle () {
         <h2>Choose the missile target</h2>
       </div>
 
-      <div className='enemy-list'>
+      <div className='enemy-list row'>
         {playerList.map(player => (
-          <div key={player.id}>
-            <Player player={player} />
-            <Board grid={player.grid} />
+          <div key={player.id} className='p-3 col-md-12'>
+            <div className='enemy-container'>
+              <Player player={player} />
+              <Board grid={player.grid} />
+            </div>
           </div>
         ))}
       </div>

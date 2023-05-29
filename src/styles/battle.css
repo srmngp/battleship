@@ -1,5 +1,13 @@
-.enemy-list {
-    display: flex;
-    flex-direction: column;
-    row-gap: 2em;
+.enemy-container {
+    border-radius: 25px 5px 5px 5px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.enemy-list .player {
+    background: none;
+}
+
+.enemy-list .ownerIcon-bg,
+.enemy-list .localPlayerIcon-bg {
+    display: none;
 }
