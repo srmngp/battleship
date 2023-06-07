@@ -3,7 +3,9 @@ import React from 'react'
 import { Cell } from './Cell'
 import { getSquareStyle } from '../../logic/utils'
 
-export const BattleBoard = ({ grid }) => {
+export const BattleBoard = ({ player, onCellClick }) => {
+
+  const grid = player.hitsGrid
 
   const gridSizeStyle = getSquareStyle(grid.length)
 
@@ -11,8 +13,14 @@ export const BattleBoard = ({ grid }) => {
     <main className='board pb-3'>
       <div className='grid' style={gridSizeStyle}>
 
-        {grid.map((ship, index) => (
-          <Cell key={index} index={index} value={ship} />
+        {grid.map((cell, index) => (
+          <Cell
+            key={index}
+            index={index}
+            value={getShotResult(cell)}
+            tooltip={getShotOrigin(cell)}
+            onClick={() => onCellClick(player, index)}
+          />
         ))}
 
       </div>
@@ -20,4 +28,14 @@ export const BattleBoard = ({ grid }) => {
     </main>
   )
 
+}
+
+const getShotResult = (cell) => {
+  if (!cell) return
+  return cell.shot.hitted ? '💥' : '🌊'
+}
+
+const getShotOrigin = (cell) => {
+  if (!cell) return ''
+  return cell.shot.origin
 }

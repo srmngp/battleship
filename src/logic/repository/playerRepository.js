@@ -9,7 +9,7 @@ export const getPlayersRef = (gameId) => (
   collection(db, `Games/${gameId}/Players`)
 )
 
-export const upadatePlayerDocument = (gameId, player) => {
+export const updatePlayerDocument = (gameId, player) => {
   const docRef = doc(db, `Games/${gameId}/Players`, player.id)
 
   console.log(`Updating ${docRef} to`, player)

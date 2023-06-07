@@ -12,7 +12,11 @@ export const Board = ({ grid }) => {
       <div className='grid' style={gridSizeStyle}>
 
         {grid.map((ship, index) => (
-          <Cell key={index} index={index} value={ship} />
+          <Cell
+            key={index}
+            index={index}
+            value={ship}
+          />
         ))}
 
       </div>

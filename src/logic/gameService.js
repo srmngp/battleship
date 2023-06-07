@@ -6,7 +6,7 @@ export const createGame = async (playerData) => {
 
   const newGame = { owner: playerData.name, status: 'AT_LOBBY' }
 
-  return saveGame(newGame)// TODO esto no es un poco raro??
+  return saveGame(newGame)// FIXME esto no es un poco raro??
     .then(game => {
       createPlayer(playerData, game)
       return game

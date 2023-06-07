@@ -8,7 +8,7 @@ export const createExampleGame = () => {
     id: 'test-game',
     boardSize: 49,
     fleet: [{ label: ['🚤'], value: 1 }, { label: ['🛥', '🛥', '🛥'], value: 3 }],
-    owner: 'Player 1',
+    owner: 'Player-1',
     status: 'IN_PROGRESS',
     players: [
       { name: 'Player 1', color: 'red' },

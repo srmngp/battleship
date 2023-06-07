@@ -14,7 +14,7 @@ export const SetupShips = () => {
 
   const { game, playerList, localPlayer } = useGameContext()
   const [fleet, setFleet] = useState(game.fleet)
-  const [grid, setGrid] = useState(Array(game.boardSize).fill(null))
+  const [shipsGrid, setGrid] = useState(Array(game.boardSize).fill(null))
 
   const handleDragOver = (event) => {
     cleanAllCellsHover()
@@ -43,11 +43,11 @@ export const SetupShips = () => {
   }
 
   const addShip = (gridCellIndex, ship) => {
-    if (grid[gridCellIndex] !== null) {
+    if (shipsGrid[gridCellIndex] !== null) {
       return
     }
 
-    const newGrid = [...grid]
+    const newGrid = [...shipsGrid]
     ship.label.forEach((ship, index) => {
       newGrid[gridCellIndex + index] = ship
     })
@@ -63,7 +63,13 @@ export const SetupShips = () => {
 
   const readyClick = () => {
     console.log('Player ready')
-    setPlayerAsReady({ ...localPlayer, grid })
+    setPlayerAsReady({
+      ...localPlayer,
+      shipsGrid,
+      hitsGrid: Array(game.boardSize).fill(null),
+      currentPlayer: game.owner
+      // FIXME poner ready aqui o crear el player en otro sitio
+    })
 
     if (getNumberOfPlayersReady() === playerList.length) {
       console.log('Starting game!')
@@ -91,7 +97,7 @@ export const SetupShips = () => {
         </div>
 
         <div className='col-md-8'>
-          <Board grid={grid} />
+          <Board grid={shipsGrid} />
         </div>
 
       </div>

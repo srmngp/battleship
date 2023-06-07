@@ -5,7 +5,7 @@ import '../../styles/playerCreator.css'
 
 export default function PlayerCreator ({ createAction, buttonText }) {
 
-  const [name, setName] = useState()
+  const [name, setName] = useState('')
   const [avatarUrl, setAvatarUrl] = useState()
 
   const handleButtonClick = () => {
