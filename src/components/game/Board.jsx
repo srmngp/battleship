@@ -14,7 +14,7 @@ export const Board = ({ grid }) => {
         {grid.map((ship, index) => (
           <Cell
             key={index}
-            index={index}
+            id={index}
             value={ship}
           />
         ))}

@@ -15,7 +15,7 @@ export const Cell = ({ value, id, onClick }) => {
     <div
       id={id}
       ref={setNodeRef}
-      className='square'
+      className={`square cell-${id}`}
       onClick={onClick}
     >
 

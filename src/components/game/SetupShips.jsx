@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useGameContext from '../hooks/useGameContext'
 import { Board } from './Board'
 import Fleet from './Fleet'
@@ -16,6 +16,13 @@ export const SetupShips = () => {
   const [fleet, setFleet] = useState(game.fleet)
   const [shipsGrid, setGrid] = useState(Array(game.boardSize).fill(null))
 
+  useEffect(() => {
+    if (getNumberOfPlayersReady() === playerList.length) {
+      console.log('Starting game!')
+      updateGameSatus(game, GAME_STATES.IN_PROGRESS)
+    }
+  }, [playerList])
+
   const handleDragOver = (event) => {
     cleanAllCellsHover()
     // Este método es una ñapa :( para que hover ocupe el espacio del ship.
@@ -24,7 +31,7 @@ export const SetupShips = () => {
       return
     }
 
-    const cellOver = document.getElementsByClassName(`cell-${event.over.data.current.index}`)
+    const cellOver = document.getElementsByClassName(`cell-${event.over.data.current.id}`)
     const shipSize = `ship-size-${event.active.data.current.ship.value}`
 
     cellOver[0].classList.add('drag-over', shipSize)
@@ -37,7 +44,7 @@ export const SetupShips = () => {
     }
 
     const ship = event.active.data.current.ship
-    const index = event.over.data.current.index
+    const index = event.over.data.current.id
 
     addShip(index, ship)
   }
@@ -70,11 +77,6 @@ export const SetupShips = () => {
       currentPlayer: game.owner
       // FIXME poner ready aqui o crear el player en otro sitio
     })
-
-    if (getNumberOfPlayersReady() === playerList.length) {
-      console.log('Starting game!')
-      updateGameSatus(game, GAME_STATES.IN_PROGRESS)
-    }
   }
 
   const getNumberOfPlayersReady = () => (
