@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Cell } from './Cell'
 import { getSquareStyle } from '../../logic/utils'
+import { Tooltip } from 'react-tooltip'
 
 export const BattleBoard = ({ player, onCellClick }) => {
 
@@ -9,18 +10,33 @@ export const BattleBoard = ({ player, onCellClick }) => {
 
   const gridSizeStyle = getSquareStyle(grid.length)
 
+  const getTooltip = (cell, index) => {
+    return (
+      cell &&
+        <Tooltip
+          anchorSelect={`#${getCellId(index)}`}
+          content={`Shot by ${cell.shot.origin}`} // FIXME revisar este texto
+        />
+    )
+  }
+
+  const getCellId = (index) => (
+    `player-${player.id}-cell-${index}`
+  )
+
   return (
     <main className='board pb-3'>
       <div className='grid' style={gridSizeStyle}>
 
         {grid.map((cell, index) => (
-          <Cell
-            key={index}
-            index={index}
-            value={getShotResult(cell)}
-            tooltip={getShotOrigin(cell)}
-            onClick={() => onCellClick(player, index)}
-          />
+          <div key={index}>
+            <Cell
+              id={getCellId(index)}
+              value={getShotResult(cell)}
+              onClick={() => onCellClick(player, index)}
+            />
+            {getTooltip(cell, index)}
+          </div>
         ))}
 
       </div>
@@ -33,9 +49,4 @@ export const BattleBoard = ({ player, onCellClick }) => {
 const getShotResult = (cell) => {
   if (!cell) return
   return cell.shot.hitted ? '💥' : '🌊'
-}
-
-const getShotOrigin = (cell) => {
-  if (!cell) return ''
-  return cell.shot.origin
 }

@@ -1,27 +1,26 @@
 import React from 'react'
 import { useDroppable } from '@dnd-kit/core'
-import { Tooltip } from 'react-tooltip'
 
-export const Cell = ({ value, index, onClick, tooltip }) => {
+export const Cell = ({ value, id, onClick }) => {
 
   const { setNodeRef } = useDroppable({
-    id: `cell-${index}`,
+    id,
     data: {
-      index,
+      id,
       type: 'cell'
     }
   })
+
   return (
     <div
+      id={id}
       ref={setNodeRef}
-      className={`square cell-${index}`}
+      className='square'
       onClick={onClick}
-      data-tooltip-id={`tooltip-cell-${index}`}
-      data-tooltip-content={`Shooted by ${tooltip}`}
     >
 
       {value}
-      {tooltip !== '' && <Tooltip id={`tooltip-cell-${index}`} />}
     </div>
   )
+
 }
