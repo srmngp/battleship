@@ -71,15 +71,11 @@ export const SetupShips = () => {
       // FIXME poner ready aqui o crear el player en otro sitio
     })
 
-    if (getNumberOfPlayersReady() === playerList.length - 1) { // Last player in getting ready starts the game
+    if (isThisTheLastPlayerSettingShips(playerList)) { // Last player in getting ready starts the game
       console.log('Starting game!')
       updateGameSatus(game, GAME_STATES.IN_PROGRESS)
     }
   }
-
-  const getNumberOfPlayersReady = () => (
-    playerList.filter(player => player.ready).length
-  )
 
   return (
     <DndContext
@@ -118,3 +114,11 @@ const cleanAllCellsHover = () => {
   const allCells = document.getElementsByClassName('square')
   Array.from(allCells).forEach(cell => cell.classList.remove('drag-over'))
 }
+
+const isThisTheLastPlayerSettingShips = (playerList) => (
+  getNumberOfPlayersReady(playerList) === playerList.length - 1
+)
+
+const getNumberOfPlayersReady = (playerList) => (
+  playerList.filter(player => player.ready).length
+)

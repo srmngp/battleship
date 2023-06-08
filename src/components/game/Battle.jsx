@@ -3,21 +3,34 @@ import useGameContext from '../hooks/useGameContext'
 import { Player } from '../player/Player'
 import '../../styles/battle.css'
 import { BattleBoard } from './BattleBoard'
-import { setShootTo } from '../../logic/playerService'
+import { resolveBombs, setBombTo } from '../../logic/playerService'
+import StatusInfo from './StatusInfo'
 
 export default function Battle () {
 
   const { playerList, localPlayer } = useGameContext()
 
-  const selectCellTarget = (playerTarget, cellIndex) => {
+  const selectTargetCell = (playerTarget, cellIndex) => {
+
+    if (localPlayer.hasSelectedTarget) return
+
     console.log(`${playerTarget.name} selected as target, shooting to cell ${cellIndex}`)
-    setShootTo(playerTarget, cellIndex)
+    setBombTo(localPlayer, playerTarget, cellIndex)
+
+    setTimeout(() => {
+
+      if (isThisTheLastPlayerShoting(playerList)) {
+        resolveBombs(playerList)
+      }
+
+    }, 3000)
+
   }
 
   return (
     <div className='row bg-blue'>
 
-      <h2>Choose the target cell</h2>
+      <StatusInfo playerList={playerList} localPlayer={localPlayer} />
 
       <div className='board-list row'>
 
@@ -36,7 +49,7 @@ export default function Battle () {
               <Player player={player} />
               <BattleBoard
                 player={player}
-                onCellClick={selectCellTarget}
+                onCellClick={selectTargetCell}
               />
             </div>
           ))}
@@ -46,3 +59,7 @@ export default function Battle () {
     </div>
   )
 }
+
+const isThisTheLastPlayerShoting = (playerList) => (
+  playerList.filter(player => player.hasSelectedTarget).length >= playerList.length - 1
+)

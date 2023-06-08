@@ -17,6 +17,9 @@ export const Player = ({ player }) => {
         {player.name}
       </span>
 
+      {!player.hasSelectedTarget &&
+        <span className='💣'>💣</span>}
+
       {game.owner === player.name && ownerIcon()}
 
     </div>

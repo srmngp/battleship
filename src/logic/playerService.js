@@ -8,25 +8,71 @@ export const createPlayer = async (playerData, gameSnapshot) => {
 
 export const setPlayerAsReady = (player) => {
   console.log('Updating player as ready', player)
-  const newPlayer = { ...player, ready: true }
+  const newPlayerData = { ...player, ready: true }// FIXME rename to shipsReady
 
-  updatePlayerDocument(player.gameId, newPlayer)
+  updatePlayerDocument(player.gameId, newPlayerData)
+}
+export const setBombTo = (localPlayer, targetPlayer, cellIndex) => {
+
+  const newTargetPlayerData = {
+    ...targetPlayer,
+    hitsGrid: printBombOnGrid(targetPlayer, cellIndex)
+  }
+  updatePlayerDocument(targetPlayer.gameId, newTargetPlayerData)
+
+  const newLocalPlayerData = {
+    ...localPlayer,
+    hasSelectedTarget: true
+  }
+  updatePlayerDocument(localPlayer.gameId, newLocalPlayerData)
 }
 
-export const setShootTo = (player, cellIndex) => {
-  const newPlayer = { ...player, hitsGrid: printShotOnGrid(player, cellIndex) }
+export const resolveBombs = (playerList) => {
+  playerList.forEach(player => {
+    console.log(`Resolving booms from player ${player.name}`)
 
-  updatePlayerDocument(player.gameId, newPlayer)
+    const newPlayerData = {
+      ...player,
+      hasSelectedTarget: false,
+      hitsGrid: resolveBombsOnGrid(player)
+    }
+
+    updatePlayerDocument(player.gameId, newPlayerData)
+  })
 }
 
-const printShotOnGrid = (player, cellIndex) => {
+const printBombOnGrid = (player, cellIndex) => {
   const localPlayer = readPlayerNameFromLocalStorage()
   const hitsGrid = [...player.hitsGrid]
-  const shipsGrid = [...player.grid]
 
-  const shotResult = shipsGrid[cellIndex] !== null
-
-  hitsGrid[cellIndex] = { shot: { origin: localPlayer, hitted: shotResult } }
+  hitsGrid[cellIndex] = { shot: { origin: localPlayer } }
 
   return hitsGrid
+}
+
+const resolveBombsOnGrid = (player) => {
+  const shipsGrid = [...player.grid]
+  const hitsGrid = [...player.hitsGrid]
+
+  hitsGrid.forEach((cell, index) => {
+    if (cellIsBomb(cell)) {
+      console.log(`Bomb in cell ${index}`)
+      const isHitted = shipsGrid[index] !== null
+
+      const newShotData = {
+        origin: cell.shot.origin,
+        hitted: isHitted
+      }
+
+      hitsGrid[index] = { shot: newShotData }
+    }
+  })
+
+  return hitsGrid
+}
+
+const cellIsBomb = (cell) => {
+  if (cell === null) return false
+
+  return cell.shot.hitted === undefined
 }

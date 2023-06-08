@@ -15,7 +15,7 @@ export const BattleBoard = ({ player, onCellClick }) => {
       cell &&
         <Tooltip
           anchorSelect={`#${getCellId(index)}`}
-          content={`Shot by ${cell.shot.origin}`} // FIXME revisar este texto
+          content={`Shot by ${cell.shot?.origin}`} // FIXME revisar este texto
         />
     )
   }
@@ -32,7 +32,7 @@ export const BattleBoard = ({ player, onCellClick }) => {
           <div key={index}>
             <Cell
               id={getCellId(index)}
-              value={getShotResult(cell)}
+              value={getCellValue(cell)}
               onClick={() => onCellClick(player, index)}
             />
             {getTooltip(cell, index)}
@@ -46,7 +46,10 @@ export const BattleBoard = ({ player, onCellClick }) => {
 
 }
 
-const getShotResult = (cell) => {
+const getCellValue = (cell) => {
   if (!cell) return
+
+  if (cell.shot.hitted === undefined) return '💣'
+
   return cell.shot.hitted ? '💥' : '🌊'
 }

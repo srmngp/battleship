@@ -18,8 +18,9 @@ export const Cell = ({ value, id, onClick }) => {
       className={`square cell-${id}`}
       onClick={onClick}
     >
-
-      {value}
+      <span className={value}>
+        {value}
+      </span>
     </div>
   )
 
