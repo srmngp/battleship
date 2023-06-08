@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import useGameContext from '../hooks/useGameContext'
 import { Board } from './Board'
 import Fleet from './Fleet'
@@ -15,13 +15,6 @@ export const SetupShips = () => {
   const { game, playerList, localPlayer } = useGameContext()
   const [fleet, setFleet] = useState(game.fleet)
   const [shipsGrid, setGrid] = useState(Array(game.boardSize).fill(null))
-
-  useEffect(() => {
-    if (getNumberOfPlayersReady() === playerList.length) {
-      console.log('Starting game!')
-      updateGameSatus(game, GAME_STATES.IN_PROGRESS)
-    }
-  }, [playerList])
 
   const handleDragOver = (event) => {
     cleanAllCellsHover()
@@ -77,6 +70,11 @@ export const SetupShips = () => {
       currentPlayer: game.owner
       // FIXME poner ready aqui o crear el player en otro sitio
     })
+
+    if (getNumberOfPlayersReady() === playerList.length - 1) { // Last player in getting ready starts the game
+      console.log('Starting game!')
+      updateGameSatus(game, GAME_STATES.IN_PROGRESS)
+    }
   }
 
   const getNumberOfPlayersReady = () => (
