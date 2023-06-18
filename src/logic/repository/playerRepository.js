@@ -22,11 +22,11 @@ export const updatePlayerDocument = (player) => { // FIXME shouldn't be necessar
   updateDoc(docRef, player)
 }
 
-export const updatePlayerFields = async (player, fields) => {
+export const updatePlayerFields = (player, fields) => {
   console.log(`Updating ${player.name} fields`, fields)
   const docRef = getDocRef(player)
 
-  await updateDoc(docRef, fields)
+  updateDoc(docRef, fields)
 }
 
 const getDocRef = (player) => (

@@ -64,5 +64,5 @@ export default function Battle () {
 }
 
 const isThisTheLastPlayerShoting = (playerList) => (
-  playerList.filter(player => player.hasSelectedTarget).length >= playerList.length
+  playerList.filter(player => player.hasSelectedTarget).length === playerList.length
 )

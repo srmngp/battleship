@@ -27,9 +27,8 @@ export const setBombTo = (localPlayer, targetPlayer, cellIndex) => {
   updatePlayerFields(localPlayer, localPlayerUpdatedFields)
 }
 
-export const resolveBombs = async (playerList) => {
-  const listplayers = [...playerList]
-  for (const player of listplayers) {
+export const resolveBombs = (playerList) => {
+  playerList.forEach((player) => {
     console.log(`Resolving ${player.name}'s bombs`)
 
     const newFields = {
@@ -37,8 +36,8 @@ export const resolveBombs = async (playerList) => {
       hitsGrid: resolveBombsOnGrid(player)
     }
 
-    await updatePlayerFields(player, newFields)
-  }
+    updatePlayerFields(player, newFields)
+  })
 }
 
 const printBombOnGrid = (localPlayer, targetPlayer, cellIndex) => {
