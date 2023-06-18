@@ -16,6 +16,11 @@ export const setPlayerAsReady = (player) => {
 export const setBombTo = (localPlayer, targetPlayer, cellIndex) => {
   console.log(`${targetPlayer.name} selected as target, shooting to cell ${cellIndex}`)
 
+  if (cellWasAlreadyShot(targetPlayer, cellIndex)) {
+    console.log('Cell was already shot, ignoring')
+    return
+  }
+
   const targetPlayerUpdatedFields = {
     hitsGrid: printBombOnGrid(localPlayer, targetPlayer, cellIndex)
   }
@@ -73,4 +78,8 @@ const cellIsBomb = (cell) => {
   if (cell === null) return false
 
   return cell.shot.isBomb
+}
+
+const cellWasAlreadyShot = (player, cellIndex) => {
+  return player.hitsGrid[cellIndex] !== null
 }

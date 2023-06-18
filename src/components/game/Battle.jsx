@@ -18,16 +18,14 @@ export default function Battle () {
     }
 
     setBombTo(localPlayer, targetPlayer, cellIndex)
-
-    endTurn()
   }
 
   const endTurn = () => {
-    if (isThisTheLastPlayerShoting(playerList)) {
-      setTimeout(() => {
+    setTimeout(() => {
+      if (isThisTheLastPlayerShoting(playerList)) {
         resolveBombs(playerList)
-      }, 3000)
-    }
+      }
+    }, 3000)
   }
 
   return (
