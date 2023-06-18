@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useGameContext from '../hooks/useGameContext'
 import { Player } from '../player/Player'
 import '../../styles/battle.css'
@@ -10,21 +10,24 @@ export default function Battle () {
 
   const { playerList, localPlayer } = useGameContext()
 
-  const selectTargetCell = (playerTarget, cellIndex) => {
+  useEffect(() => { endTurn() }, [playerList])
 
-    if (localPlayer.hasSelectedTarget) return
+  const selectTargetCell = (targetPlayer, cellIndex) => {
+    if (localPlayer.hasSelectedTarget) {
+      return
+    }
 
-    console.log(`${playerTarget.name} selected as target, shooting to cell ${cellIndex}`)
-    setBombTo(localPlayer, playerTarget, cellIndex)
+    setBombTo(localPlayer, targetPlayer, cellIndex)
 
-    setTimeout(() => {
+    endTurn()
+  }
 
-      if (isThisTheLastPlayerShoting(playerList)) {
+  const endTurn = () => {
+    if (isThisTheLastPlayerShoting(playerList)) {
+      setTimeout(() => {
         resolveBombs(playerList)
-      }
-
-    }, 3000)
-
+      }, 3000)
+    }
   }
 
   return (
@@ -61,5 +64,5 @@ export default function Battle () {
 }
 
 const isThisTheLastPlayerShoting = (playerList) => (
-  playerList.filter(player => player.hasSelectedTarget).length >= playerList.length - 1
+  playerList.filter(player => player.hasSelectedTarget).length >= playerList.length
 )

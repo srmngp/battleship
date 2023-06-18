@@ -1,5 +1,5 @@
-import { readPlayerNameFromLocalStorage, savePlayerNameInLocalStorage } from './localStorageManager'
-import { savePlayer, updatePlayerDocument } from './repository/playerRepository'
+import { savePlayerNameInLocalStorage } from './localStorageManager'
+import { savePlayer, updatePlayerDocument, updatePlayerFields } from './repository/playerRepository'
 
 export const createPlayer = async (playerData, gameSnapshot) => {
   savePlayer(playerData, gameSnapshot)
@@ -10,42 +10,41 @@ export const setPlayerAsReady = (player) => {
   console.log('Updating player as ready', player)
   const newPlayerData = { ...player, ready: true }// FIXME rename to shipsReady
 
-  updatePlayerDocument(player.gameId, newPlayerData)
+  updatePlayerDocument(newPlayerData)
 }
+
 export const setBombTo = (localPlayer, targetPlayer, cellIndex) => {
+  console.log(`${targetPlayer.name} selected as target, shooting to cell ${cellIndex}`)
 
-  const newTargetPlayerData = {
-    ...targetPlayer,
-    hitsGrid: printBombOnGrid(targetPlayer, cellIndex)
+  const targetPlayerUpdatedFields = {
+    hitsGrid: printBombOnGrid(localPlayer, targetPlayer, cellIndex)
   }
-  updatePlayerDocument(targetPlayer.gameId, newTargetPlayerData)
+  updatePlayerFields(targetPlayer, targetPlayerUpdatedFields)
 
-  const newLocalPlayerData = {
-    ...localPlayer,
+  const localPlayerUpdatedFields = {
     hasSelectedTarget: true
   }
-  updatePlayerDocument(localPlayer.gameId, newLocalPlayerData)
+  updatePlayerFields(localPlayer, localPlayerUpdatedFields)
 }
 
-export const resolveBombs = (playerList) => {
-  playerList.forEach(player => {
-    console.log(`Resolving booms from player ${player.name}`)
+export const resolveBombs = async (playerList) => {
+  const listplayers = [...playerList]
+  for (const player of listplayers) {
+    console.log(`Resolving ${player.name}'s bombs`)
 
-    const newPlayerData = {
-      ...player,
+    const newFields = {
       hasSelectedTarget: false,
       hitsGrid: resolveBombsOnGrid(player)
     }
 
-    updatePlayerDocument(player.gameId, newPlayerData)
-  })
+    await updatePlayerFields(player, newFields)
+  }
 }
 
-const printBombOnGrid = (player, cellIndex) => {
-  const localPlayer = readPlayerNameFromLocalStorage()
-  const hitsGrid = [...player.hitsGrid]
+const printBombOnGrid = (localPlayer, targetPlayer, cellIndex) => {
+  const hitsGrid = [...targetPlayer.hitsGrid]
 
-  hitsGrid[cellIndex] = { shot: { origin: localPlayer } }
+  hitsGrid[cellIndex] = { shot: { origin: localPlayer.name, isBomb: true } }
 
   return hitsGrid
 }
@@ -74,5 +73,5 @@ const resolveBombsOnGrid = (player) => {
 const cellIsBomb = (cell) => {
   if (cell === null) return false
 
-  return cell.shot.hitted === undefined
+  return cell.shot.isBomb
 }
