@@ -6,8 +6,8 @@ import { DndContext } from '@dnd-kit/core'
 import ReadyButton from './ReadyButton'
 import '../../styles/fleet.css'
 import '../../styles/board.css'
-import { setPlayerAsReady } from '../../logic/playerService'
-import { updateGameSatus } from '../../logic/gameService'
+import { updatePlayer } from '../../logic/playerService'
+import { updateGameStatus } from '../../logic/gameService'
 import { GAME_STATES } from '../../logic/utils'
 
 export const SetupShips = () => {
@@ -63,17 +63,17 @@ export const SetupShips = () => {
 
   const readyClick = () => {
     console.log('Player ready')
-    setPlayerAsReady({
-      ...localPlayer,
-      shipsGrid,
-      hitsGrid: Array(game.boardSize).fill(null),
-      currentPlayer: game.owner
-      // FIXME poner ready aqui o crear el player en otro sitio
-    })
+    updatePlayer(localPlayer,
+      {
+        id: localPlayer.id,
+        shipsReady: true,
+        shipsGrid,
+        hitsGrid: Array(game.boardSize).fill(null)
+      })
 
     if (isThisTheLastPlayerSettingShips(playerList)) { // Last player in getting ready starts the game
       console.log('Starting game!')
-      updateGameSatus(game, GAME_STATES.IN_PROGRESS)
+      updateGameStatus(game, GAME_STATES.IN_PROGRESS)
     }
   }
 
@@ -99,7 +99,7 @@ export const SetupShips = () => {
       </div>
 
       <div className='row pt-2'>
-        <p>{getNumberOfPlayersReady()}/{playerList.length} Players ready</p>
+        <p>{getNumberOfPlayersReady(playerList)}/{playerList.length} Players ready</p>
 
         <div className='col'>
           <ReadyButton fleet={fleet} onClick={readyClick} />
@@ -116,9 +116,9 @@ const cleanAllCellsHover = () => {
 }
 
 const isThisTheLastPlayerSettingShips = (playerList) => (
-  getNumberOfPlayersReady(playerList) === playerList.length - 1
+  getNumberOfPlayersReady(playerList) >= playerList.length - 1
 )
 
 const getNumberOfPlayersReady = (playerList) => (
-  playerList.filter(player => player.ready).length
+  playerList.filter(player => player.shipsReady).length
 )

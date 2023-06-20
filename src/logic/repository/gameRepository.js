@@ -15,3 +15,10 @@ export const updateGameDocument = (game) => {
 
   updateDoc(docRef, game)
 }
+
+export const updateGameFields = (gameId, fields) => {
+  console.log(`Updating ${gameId} fields`, fields)
+  const docRef = doc(db, 'Games', gameId)
+
+  updateDoc(docRef, fields)
+}

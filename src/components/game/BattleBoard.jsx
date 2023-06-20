@@ -25,7 +25,7 @@ export const BattleBoard = ({ player, onCellClick }) => {
   )
 
   return (
-    <main className='board pb-3'>
+    <main className={`board pb-3 ${!player.shipsRemainAfloat ? 'loser opacity-50' : ''}`}>
       <div className='grid' style={gridSizeStyle}>
 
         {grid.map((cell, index) => (

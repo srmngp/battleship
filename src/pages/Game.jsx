@@ -12,6 +12,7 @@ export default function Game () {
     <>
       {game.status === GAME_STATES.SETUP_SHIPS && <SetupShips />}
       {game.status === GAME_STATES.IN_PROGRESS && <Battle />}
+      {game.status === GAME_STATES.FINISHED && <Battle />}
     </>
   )
 

@@ -1,5 +1,6 @@
 import { createPlayer } from './playerService'
-import { saveGame, updateGameDocument } from './repository/gameRepository'
+import { saveGame, updateGameDocument, updateGameFields } from './repository/gameRepository'
+import { GAME_STATES } from './utils'
 
 export const createGame = async (playerData) => {
   console.log(`Creating game for player: ${playerData.name}`, playerData)
@@ -31,9 +32,29 @@ export const updateGameFleet = (game, newFleet) => {
   updateGameDocument(newGame)
 }
 
-export const updateGameSatus = (game, newStatus) => {
-  console.log(`Updating game status to: ${newStatus}`)
+export const updateGameStatus = (game, status) => {
+  console.log(`Updating game status to: ${status}`)
 
-  const newGame = { ...game, status: newStatus }
+  const newGame = { ...game, status }
   updateGameDocument(newGame)
+}
+
+export const checkIfGameHasEnded = (playerList) => {
+  console.log('Ending turn')
+  console.log('Checking if game has ended')
+
+  const alivePlayers = playerList.filter(player => player.shipsRemainAfloat)
+
+  if (alivePlayers.length === 1) {
+    endGame(alivePlayers[0])
+  }
+
+}
+
+const endGame = (winner) => {
+  console.log(`Game ended, winner is ${winner.name}`)
+  console.log(`${winner.name} is the winner`)
+
+  updateGameFields(winner.gameId, { status: GAME_STATES.FINISHED, winner: winner.name })
+
 }

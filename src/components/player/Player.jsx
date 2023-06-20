@@ -1,5 +1,6 @@
 import React from 'react'
 import useGameContext from '../hooks/useGameContext'
+import { Confetti } from './Confetti'
 
 export const Player = ({ player }) => {
 
@@ -10,11 +11,14 @@ export const Player = ({ player }) => {
     <div key={player} className='player'>
 
       <img className='avatar' src={player.avatarUrl} />
+      {game.winner === player.name && <Confetti />}
 
       {player.name === localPlayer.name && localPLayerIcon()}
 
       <span className='name'>
         {player.name}
+        {!player.shipsRemainAfloat &&
+          <span className='skull'>💀</span>}
       </span>
 
       {!player.hasSelectedTarget &&

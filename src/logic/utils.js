@@ -18,3 +18,25 @@ export const getSquareStyle = (length) => {
     gridTemplateRows: `repeat(${sideLength}, 1fr)`
   }
 }
+
+export const loserGrid = (
+  [
+    null, '⬛', '⬛', '⬛', '⬛', '⬛', null,
+    '⬛', '⬛', '⬛', '⬛', '⬛', '⬛', '⬛',
+    '⬛', null, null, '⬛', null, null, '⬛',
+    '⬛', null, null, '⬛', null, null, '⬛',
+    '⬛', '⬛', '⬛', '⬛', '⬛', '⬛', '⬛',
+    null, '⬛', '⬛', '⬛', '⬛', '⬛', null,
+    null, '⬛', null, '⬛', null, '⬛', null
+  ])
+
+export const winnerGrid = (
+  [
+    null, null, null, null, null, null, null,
+    null, '🟨', '🟨', '🟨', '🟨', '🟨',
+    null, '🟨', '🟨', '🟨', '🟨', '🟨', '🟨',
+    '🟨', '🟨', null, '🟨', '🟨', '🟨', null,
+    '🟨', '🟨', '🟨', '🟨', '🟨', '🟨', '🟨',
+    null, null, null, null, '🟨', null, null,
+    null, null, null, '🟨', '🟨', '🟨', null, null
+  ])

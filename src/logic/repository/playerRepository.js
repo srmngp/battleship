@@ -3,15 +3,17 @@ import { db } from './firebaseDb'
 
 export const savePlayer = async (playerData, gameSnapshot) => (
   addDoc(
-    getPlayersRef(gameSnapshot.id),
+    getPlayersCollectionRef(gameSnapshot.id),
     {
       name: playerData.name,
       avatarUrl: playerData.avatarUrl,
-      gameId: gameSnapshot.id
+      gameId: gameSnapshot.id,
+      shipsRemainAfloat: true,
+      shipsReady: false
     })
 )
 
-export const getPlayersRef = (gameId) => (
+export const getPlayersCollectionRef = (gameId) => (
   collection(db, `Games/${gameId}/Players`)
 )
 

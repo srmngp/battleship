@@ -23,7 +23,7 @@
 }
 
 .square .💣 {
-  animation: shake 0.8s;
+  animation: shake 0.9s;
   /* When the animation is finished, start again */
   animation-iteration-count: infinite;
 }

@@ -5,12 +5,14 @@ import '../../styles/battle.css'
 import { BattleBoard } from './BattleBoard'
 import { resolveBombs, setBombTo } from '../../logic/playerService'
 import StatusInfo from './StatusInfo'
+import { checkIfGameHasEnded } from '../../logic/gameService'
 
 export default function Battle () {
 
   const { playerList, localPlayer } = useGameContext()
 
   useEffect(() => { endTurn() }, [playerList])
+  useEffect(() => { checkIfGameHasEnded(playerList) }, [playerList])
 
   const selectTargetCell = (targetPlayer, cellIndex) => {
     if (localPlayer.hasSelectedTarget) {
@@ -21,17 +23,17 @@ export default function Battle () {
   }
 
   const endTurn = () => {
-    setTimeout(() => {
-      if (isThisTheLastPlayerShoting(playerList)) {
+    if (isThisTheLastPlayerShoting(playerList)) {
+      setTimeout(() => {
         resolveBombs(playerList)
-      }
-    }, 3000)
+      }, 3000)
+    }
   }
 
   return (
     <div className='row bg-blue'>
 
-      <StatusInfo playerList={playerList} localPlayer={localPlayer} />
+      <StatusInfo />
 
       <div className='board-list row'>
 
@@ -62,5 +64,5 @@ export default function Battle () {
 }
 
 const isThisTheLastPlayerShoting = (playerList) => (
-  playerList.filter(player => player.hasSelectedTarget).length === playerList.length
+  playerList.every(player => player.hasSelectedTarget)
 )

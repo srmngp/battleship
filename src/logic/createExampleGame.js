@@ -30,6 +30,7 @@ const buildNewTestPlayer = (number) => {
     gameId: 'test-game',
     name: `Player-${number}`,
     ready: true,
+    shipsRemainAfloat: true,
     avatarUrl: `https://garticphone.com/images/avatar/${number}.svg`,
     grid: ['🚤', null, null, null, null, null, null, '🛥', '🛥', '🛥', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
     hitsGrid: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
