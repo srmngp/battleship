@@ -5,6 +5,35 @@ export const GAME_STATES = {
   FINISHED: 'FINISHED'
 }
 
+export const defaultGame = {
+  status: 'AT_LOBBY',
+  boardSize: 49,
+  fleet: [
+    {
+      value: 1,
+      label: [
+        '🚤'
+      ]
+    },
+    {
+      value: 2,
+      label: [
+        '⛵',
+        '⛵'
+      ]
+    },
+    {
+      value: 3,
+      label: [
+        '🛥',
+        '🛥',
+        '🛥'
+      ]
+    }
+  ]
+
+}
+
 export const copyGameUrl = (gameId) => {
   const joinGameUrl = window.location.origin + '/join/' + gameId
 

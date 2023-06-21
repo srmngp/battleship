@@ -1,6 +1,7 @@
 import React from 'react'
 import useGameContext from '../hooks/useGameContext'
 import { Confetti } from './Confetti'
+import { GAME_STATES } from '../../logic/utils'
 
 export const Player = ({ player }) => {
 
@@ -21,7 +22,7 @@ export const Player = ({ player }) => {
           <span className='skull'>💀</span>}
       </span>
 
-      {!player.hasSelectedTarget &&
+      {!player.hasSelectedTarget && game.status !== GAME_STATES.LOBBY &&
         <span className='💣'>💣</span>}
 
       {game.owner === player.name && ownerIcon()}

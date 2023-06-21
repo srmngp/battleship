@@ -1,11 +1,11 @@
 import { createPlayer } from './playerService'
 import { saveGame, updateGameDocument, updateGameFields } from './repository/gameRepository'
-import { GAME_STATES } from './utils'
+import { GAME_STATES, defaultGame } from './utils'
 
 export const createGame = async (playerData) => {
   console.log(`Creating game for player: ${playerData.name}`, playerData)
 
-  const newGame = { owner: playerData.name, status: 'AT_LOBBY' }
+  const newGame = { owner: playerData.name, ...defaultGame }
 
   return saveGame(newGame)// FIXME esto no es un poco raro??
     .then(game => {
