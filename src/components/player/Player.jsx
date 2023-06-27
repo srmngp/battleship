@@ -7,19 +7,26 @@ export const Player = ({ player }) => {
 
   const { localPlayer, game } = useGameContext()
 
+  const playerAvatar = (<img className='avatar' src={player.avatarUrl} />)
+  const skullGif = (
+    <img
+      className='avatar'
+      src='https://em-content.zobj.net/source/animated-noto-color-emoji/356/skull_1f480.gif' alt='Skull on Noto Color Emoji, Animated 15.0'
+      width='120' height='120'
+    />
+  )
   // FIXME fix icon position when user has 2 lines name on mobile screens
   return (
     <div key={player} className='player'>
 
-      <img className='avatar' src={player.avatarUrl} />
+      {player.shipsRemainAfloat ? playerAvatar : skullGif}
+
       {game.winner === player.name && <Confetti />}
 
       {player.name === localPlayer.name && localPLayerIcon()}
 
       <span className='name'>
         {player.name}
-        {!player.shipsRemainAfloat &&
-          <span className='skull'>💀</span>}
       </span>
 
       {!player.hasSelectedTarget && game.status !== GAME_STATES.LOBBY &&
