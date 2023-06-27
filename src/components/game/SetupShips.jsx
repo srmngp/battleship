@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import useGameContext from '../hooks/useGameContext'
 import { Board } from './Board'
 import Fleet from './Fleet'
-import { DndContext } from '@dnd-kit/core'
+import { DndContext, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core'
 import ReadyButton from './ReadyButton'
 import '../../styles/fleet.css'
 import '../../styles/board.css'
@@ -77,10 +77,21 @@ export const SetupShips = () => {
     }
   }
 
+  const mouseSensor = useSensor(MouseSensor)
+  const touchSensor = useSensor(TouchSensor)
+  const keyboardSensor = useSensor(KeyboardSensor)
+
+  const sensors = useSensors(
+    mouseSensor,
+    touchSensor,
+    keyboardSensor
+  )
+
   return (
     <DndContext
       onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}
+      sensors={sensors}
     >
       <div className='row bg-blue'>
 
