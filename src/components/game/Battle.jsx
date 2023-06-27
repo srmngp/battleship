@@ -6,16 +6,17 @@ import { BattleBoard } from './BattleBoard'
 import { resolveBombs, setBombTo } from '../../logic/playerService'
 import StatusInfo from './StatusInfo'
 import { checkIfGameHasEnded } from '../../logic/gameService'
+import { GAME_STATES } from '../../logic/utils'
 
 export default function Battle () {
 
-  const { playerList, localPlayer } = useGameContext()
+  const { game, playerList, localPlayer } = useGameContext()
 
   useEffect(() => { endTurn() }, [playerList])
   useEffect(() => { checkIfGameHasEnded(playerList) }, [playerList])
 
   const selectTargetCell = (targetPlayer, cellIndex) => {
-    if (localPlayer.hasSelectedTarget) {
+    if (localPlayer.hasSelectedTarget || game.status === GAME_STATES.FINISHED) {
       return
     }
 
@@ -26,7 +27,7 @@ export default function Battle () {
     if (isThisTheLastPlayerShoting(playerList)) {
       setTimeout(() => {
         resolveBombs(playerList)
-      }, 3000)
+      }, 1800)
     }
   }
 

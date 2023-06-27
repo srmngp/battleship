@@ -15,7 +15,7 @@ export default function StatusInfo () {
 
     if (!localPlayer.hasSelectedTarget) return <h2>Choose the target cell</h2>
 
-    localPlayer.hasSelectedTarget && !allPlayersChoosedTarget()
+    return !allPlayersChoosedTarget()
       ? <h2>Wait for the opponent to make a move</h2>
       : <h2>Processing results...</h2>
   }

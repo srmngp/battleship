@@ -32,7 +32,12 @@ const router = createBrowserRouter([
       {
         path: '/game/:gameId',
         element: <ContextProvider><Game /></ContextProvider>
+      },
+      {
+        path: '*',
+        element: <ErrorPage />
       }
+
     ]
   }
 

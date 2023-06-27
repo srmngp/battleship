@@ -32,7 +32,7 @@ const buildNewTestPlayer = (number) => {
     ready: true,
     shipsRemainAfloat: true,
     avatarUrl: `https://garticphone.com/images/avatar/${number}.svg`,
-    grid: ['🚤', null, null, null, null, null, null, '🛥', '🛥', '🛥', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+    shipsGrid: ['🚤', null, null, null, null, null, null, '🛥', '🛥', '🛥', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
     hitsGrid: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
   }
 

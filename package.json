@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.8",
+    "@dnd-kit/utilities": "^3.2.1",
     "bootstrap": "^5.2.3",
     "canvas-confetti": "1.6.0",
     "firebase": "^9.17.1",
