@@ -98,6 +98,10 @@
   color: #011c3fc4;
 }
 
+.hint{
+  margin-bottom: 0;
+}
+
 
 .magicpattern {
   background-size: cover;

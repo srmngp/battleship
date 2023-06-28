@@ -97,6 +97,8 @@ export const SetupShips = () => {
 
         <div>
           <h2>Choose the ships positions</h2>
+          <p className='hint'>Drag the ships to the board</p>
+          <p>Tap to rotate</p>
         </div>
 
         <div className='col-md-4'>
@@ -123,7 +125,8 @@ export const SetupShips = () => {
 
 const cleanAllCellsHover = () => {
   const allCells = document.getElementsByClassName('square')
-  Array.from(allCells).forEach(cell => cell.classList.remove('drag-over'))
+  Array.from(allCells).forEach(cell =>
+    cell.classList.remove('drag-over', 'ship-size-1', 'ship-size-2', 'ship-size-3', 'ship-size-4'))
 }
 
 const isThisTheLastPlayerSettingShips = (playerList) => (
