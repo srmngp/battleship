@@ -6,6 +6,7 @@
     font-size: 1.2em;
     font-weight: 500;
     gap: 0.3em;
+    padding:2px /* PQ necesito esto para evitar que se vea el scroll aunq no llegue al max */
 }
 
 .player {
