@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDroppable } from '@dnd-kit/core'
 
-export const Cell = ({ value, id, onClick }) => {
+export const Cell = ({ id, onClick, children }) => {
 
   const { setNodeRef } = useDroppable({
     id,
@@ -18,9 +18,7 @@ export const Cell = ({ value, id, onClick }) => {
       className={`square cell-${id}`}
       onClick={onClick}
     >
-      <span className={value}>
-        {value}
-      </span>
+      {children}
     </div>
   )
 

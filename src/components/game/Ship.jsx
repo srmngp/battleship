@@ -1,5 +1,7 @@
 import React from 'react'
 import { useDraggable } from '@dnd-kit/core'
+import { Cell } from './Cell'
+import { CSS } from '@dnd-kit/utilities'
 
 export default function Ship ({ ship }) {
 
@@ -8,12 +10,7 @@ export default function Ship ({ ship }) {
     data: { ship }
   })
 
-  const style = transform
-    ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-        display: 'flex'
-      }
-    : undefined
+  const style = { transform: CSS.Translate.toString(transform) }
 
   return (
     <div
@@ -23,10 +20,10 @@ export default function Ship ({ ship }) {
       ref={setNodeRef}
       style={style}
     >
-      {ship.label.map((ship, index) => (
-        <div className='square' key={index}>
-          {ship}
-        </div>
+      {ship.label.map((label, index) => (
+        <Cell key={index}>
+          {label}
+        </Cell>
       ))}
     </div>
   )

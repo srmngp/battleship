@@ -34,6 +34,8 @@ export const defaultGame = {
 
 }
 
+export const EMPTY_CELL = { label: '' }
+
 export const copyGameUrl = (gameId) => {
   const joinGameUrl = window.location.origin + '/join/' + gameId
 

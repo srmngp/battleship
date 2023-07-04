@@ -43,17 +43,29 @@ export const SetupShips = () => {
   }
 
   const addShip = (gridCellIndex, ship) => {
-    if (shipsGrid[gridCellIndex] !== null) {
+    if (!possitionAvaliable(gridCellIndex, ship)) {
       return
     }
 
     const newGrid = [...shipsGrid]
-    ship.label.forEach((ship, index) => {
-      newGrid[gridCellIndex + index] = ship
-    })
+    for (let i = 0; i < ship.value; i++) {
+      newGrid[gridCellIndex + i] = { ...ship, part: i }
+    }
 
     setGrid(newGrid)
     removeShipFromFleet(ship)
+  }
+
+  const possitionAvaliable = (gridCellIndex, ship) => {
+    if (shipsGrid[gridCellIndex] !== null) {
+      return false
+    }
+    for (let i = 1; i < ship.value; i++) {
+      if (shipsGrid[gridCellIndex + i] !== null) {
+        return false
+      }
+    }
+    return true
   }
 
   const removeShipFromFleet = (shipAdded) => {

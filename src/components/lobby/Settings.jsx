@@ -93,7 +93,7 @@ const boardSizeOptions = [
   { value: 225, label: 'Large' }
 ]
 
-const fleetOption = [
+const fleetOption = [// Using react-select is required to have a "value" property
   { value: 1, label: ['🚤'] },
   { value: 2, label: ['⛵', '⛵'] },
   { value: 3, label: ['🛥', '🛥', '🛥'] },

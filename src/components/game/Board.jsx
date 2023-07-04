@@ -15,8 +15,9 @@ export const Board = ({ grid }) => {
           <Cell
             key={index}
             id={index}
-            value={ship}
-          />
+          >
+            {ship && ship.label[ship.part]}
+          </Cell>
         ))}
 
       </div>
