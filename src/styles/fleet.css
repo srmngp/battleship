@@ -1,11 +1,11 @@
 .fleet {
     display: flex;
     flex-direction: column;
+    gap: 1.2rem;
 }
 
 .ship-container {
     display: flex;
-    padding: 5px;
 }
 
 .ship-container .square {

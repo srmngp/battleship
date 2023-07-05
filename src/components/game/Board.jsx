@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Cell } from './Cell'
 import { getSquareStyle } from '../../logic/utils'
+import ShipPart from './ShipPart'
 
 export const Board = ({ grid }) => {
 
@@ -11,12 +12,12 @@ export const Board = ({ grid }) => {
     <main className='board pb-3'>
       <div className='grid' style={gridSizeStyle}>
 
-        {grid.map((ship, index) => (
+        {grid.map((cellData, index) => (
           <Cell
             key={index}
             id={index}
           >
-            {ship && ship.label[ship.part]}
+            {cellData && <ShipPart part={cellData} />}
           </Cell>
         ))}
 

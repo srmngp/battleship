@@ -32,9 +32,10 @@ export const BattleBoard = ({ player, onCellClick }) => {
           <div key={index}>
             <Cell
               id={getCellId(index)}
-              value={getCellValue(cell)}
               onClick={() => onCellClick(player, index)}
-            />
+            >
+              {getCellValue(cell)}
+            </Cell>
             {getTooltip(cell, index)}
           </div>
         ))}

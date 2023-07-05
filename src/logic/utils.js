@@ -5,31 +5,26 @@ export const GAME_STATES = {
   FINISHED: 'FINISHED'
 }
 
+export const boardSizeOptions = [
+  { size: 49, label: 'Small' },
+  { size: 100, label: 'Medium' },
+  { size: 225, label: 'Large' }
+]
+
+export const fleetOptions = [
+  { size: 1, parts: [{ sprite: '<=>' }] },
+  { size: 2, parts: [{ sprite: '<=' }, { sprite: '=>' }] },
+  { size: 3, parts: [{ sprite: '<=' }, { sprite: '=' }, { sprite: '=>' }] },
+  { size: 4, parts: [{ sprite: '<=' }, { sprite: '=' }, { sprite: '=' }, { sprite: '=>' }] }
+]
+
 export const defaultGame = {
   status: 'AT_LOBBY',
   boardSize: 49,
   fleet: [
-    {
-      value: 1,
-      label: [
-        '🚤'
-      ]
-    },
-    {
-      value: 2,
-      label: [
-        '⛵',
-        '⛵'
-      ]
-    },
-    {
-      value: 3,
-      label: [
-        '🛥',
-        '🛥',
-        '🛥'
-      ]
-    }
+    fleetOptions[0],
+    fleetOptions[1],
+    fleetOptions[2]
   ]
 
 }

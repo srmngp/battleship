@@ -3,17 +3,18 @@ import Select from 'react-select'
 import { updateGameBoardSize, updateGameFleet } from '../../logic/gameService'
 import useGameContext from '../hooks/useGameContext'
 import '../../styles/settings.css'
+import { boardSizeOptions, fleetOptions } from '../../logic/utils'
 
 export const Settings = () => {
 
   const { game, localPlayer } = useGameContext()
 
   const findBoardSizeOption = () => (
-    boardSizeOptions.find(option => option.value === game.boardSize)
+    boardSizeOptions.find(option => option.size === game.boardSize)
   )
 
   const handleBoardSizeChange = (selected) => {
-    updateGameBoardSize(game, selected.value)
+    updateGameBoardSize(game, selected.size)
   }
 
   const handleFleetChange = (selected) => {
@@ -44,8 +45,10 @@ export const Settings = () => {
           <Select
             id='select-size'
             className='select'
-            options={boardSizeOptions}
             value={findBoardSizeOption()}
+            options={boardSizeOptions}
+            getOptionValue={option => option.size}
+            getOptionLabel={option => option.label}
             onChange={handleBoardSizeChange}
             isDisabled={playerIsNotGameOwner()}
             styles={selectStyles}
@@ -73,8 +76,10 @@ export const Settings = () => {
             isMulti
             id='select-fleet'
             className='select'
-            options={fleetOption}
             value={game.fleet}
+            getOptionValue={option => option.size}
+            getOptionLabel={option => option.parts.map(part => part.sprite).join('')}
+            options={fleetOptions}
             onChange={handleFleetChange}
             isDisabled={playerIsNotGameOwner()}
             styles={selectStyles}
@@ -86,19 +91,6 @@ export const Settings = () => {
   )
 
 }
-
-const boardSizeOptions = [
-  { value: 49, label: 'Small' },
-  { value: 100, label: 'Medium' },
-  { value: 225, label: 'Large' }
-]
-
-const fleetOption = [// Using react-select is required to have a "value" property
-  { value: 1, label: ['🚤'] },
-  { value: 2, label: ['⛵', '⛵'] },
-  { value: 3, label: ['🛥', '🛥', '🛥'] },
-  { value: 4, label: ['🚢', '🚢', '🚢', '🚢'] }
-]
 
 const selectStyles = {
   control: (provided) => ({

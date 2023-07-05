@@ -1,13 +1,13 @@
-import React from 'react'
 import { useDraggable } from '@dnd-kit/core'
-import { Cell } from './Cell'
 import { CSS } from '@dnd-kit/utilities'
+import React from 'react'
+import { fleetOptions } from '../../logic/utils'
 
-export default function Ship ({ ship }) {
+export default function ShipPart ({ part }) {
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: `ship-${ship.size}`,
-    data: { ship }
+    id: `ship-${part.shipSize}`,
+    data: { ship: { ...getShip(part.shipSize), firstPartPosition: part.firstPartPosition } }
   })
 
   const style = { transform: CSS.Translate.toString(transform) }
@@ -20,11 +20,11 @@ export default function Ship ({ ship }) {
       ref={setNodeRef}
       style={style}
     >
-      {ship.parts.map((part, index) => (
-        <Cell key={index}>
-          {part.sprite}
-        </Cell>
-      ))}
+      {part.sprite}
     </div>
   )
 }
+
+const getShip = (size) => (
+  fleetOptions.find(ship => ship.size === size)
+)

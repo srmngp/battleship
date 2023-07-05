@@ -25,7 +25,7 @@ export const SetupShips = () => {
     }
 
     const cellOver = document.getElementsByClassName(`cell-${event.over.data.current.id}`)
-    const shipSize = `ship-size-${event.active.data.current.ship.value}`
+    const shipSize = `ship-size-${event.active.data.current.ship.size}`
 
     cellOver[0].classList.add('drag-over', shipSize)
   }
@@ -44,33 +44,53 @@ export const SetupShips = () => {
 
   const addShip = (gridCellIndex, ship) => {
     if (!possitionAvaliable(gridCellIndex, ship)) {
+      console.log('Position not available')
       return
     }
+    console.log('Adding ship to grid', ship)
 
     const newGrid = [...shipsGrid]
-    for (let i = 0; i < ship.value; i++) {
-      newGrid[gridCellIndex + i] = { ...ship, part: i }
-    }
+
+    ship.parts.forEach((part, index) => {
+      const partIndex = gridCellIndex + index
+      const cellData = { ...part, shipSize: ship.size, firstPartPosition: gridCellIndex }
+
+      newGrid[partIndex] = cellData
+    })
+
+    removeShipFromFleet(ship)
+    removeShipFromPreviousPosition(ship, newGrid)
 
     setGrid(newGrid)
-    removeShipFromFleet(ship)
   }
 
   const possitionAvaliable = (gridCellIndex, ship) => {
     if (shipsGrid[gridCellIndex] !== null) {
       return false
     }
+
     for (let i = 1; i < ship.value; i++) {
       if (shipsGrid[gridCellIndex + i] !== null) {
         return false
       }
     }
+
     return true
   }
 
   const removeShipFromFleet = (shipAdded) => {
-    const newFleet = fleet.filter(ship => ship.value !== shipAdded.value)
+    const newFleet = fleet.filter(ship => ship.size !== shipAdded.size)
     setFleet(newFleet)
+  }
+
+  const removeShipFromPreviousPosition = (ship, newGrid) => {
+    if (!ship.firstPartPosition) {
+      return
+    }
+
+    ship.parts.forEach((part, index) => {
+      newGrid[ship.firstPartPosition + index] = null
+    })
   }
 
   const readyClick = () => {
