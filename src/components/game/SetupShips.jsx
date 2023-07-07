@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import useGameContext from '../hooks/useGameContext'
 import { Board } from './Board'
 import Fleet from './Fleet'
-import { DndContext, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core'
+import { DndContext, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core'
 import ReadyButton from './ReadyButton'
 import '../../styles/fleet.css'
 import '../../styles/board.css'
@@ -10,7 +10,7 @@ import { updatePlayer } from '../../logic/playerService'
 import { updateGameStatus } from '../../logic/gameService'
 import { GAME_STATES } from '../../logic/utils'
 
-export const SetupShips = () => {
+export const SetupShips = () => { // TODO: This component is too big, refactor it pls
 
   const { game, playerList, localPlayer } = useGameContext()
   const [fleet, setFleet] = useState(game.fleet)
@@ -18,16 +18,15 @@ export const SetupShips = () => {
 
   const handleDragOver = (event) => {
     cleanAllCellsHover()
-    // Este método es una ñapa :( para que hover ocupe el espacio del ship.
-    // Junto con el css de .ship-size-{}
     if (!event.over || event.over.data.current.type !== 'cell') {
       return
     }
+    console.log('Drag over', event)
 
-    const cellOver = document.getElementsByClassName(`cell-${event.over.data.current.id}`)
-    const shipSize = `ship-size-${event.active.data.current.ship.size}`
+    const ship = event.active.data.current
+    const cellOverIndex = event.over.id
 
-    cellOver[0].classList.add('drag-over', shipSize)
+    setHoverBackground(cellOverIndex, ship)
   }
 
   const handleDragEnd = (event) => {
@@ -35,48 +34,82 @@ export const SetupShips = () => {
     if (!event.over || event.over.data.current.type !== 'cell') {
       return
     }
+    console.log('Drag end', event)
 
-    const ship = event.active.data.current.ship
-    const index = event.over.data.current.id
+    const ship = event.active.data.current
+    const targetCellIndex = event.over.id
 
-    addShip(index, ship)
+    addShip(targetCellIndex, ship)
   }
 
-  const addShip = (gridCellIndex, ship) => {
-    if (!possitionAvaliable(gridCellIndex, ship)) {
+  const addShip = (targetCellIndex, ship) => {
+    if (!possitionAvaliable(targetCellIndex, ship)) {
       console.log('Position not available')
       return
     }
     console.log('Adding ship to grid', ship)
 
     const newGrid = [...shipsGrid]
+    removeShipFromPreviousPosition(ship, newGrid)
 
     ship.parts.forEach((part, index) => {
-      const partIndex = gridCellIndex + index
-      const cellData = { ...part, shipSize: ship.size, firstPartPosition: gridCellIndex }
+      const cellData = {
+        ...part,
+        shipSize: ship.size,
+        firstPartPosition: targetCellIndex,
+        isHorizontal: ship.isHorizontal
+      }
+      const partIndex = getPartIndex(targetCellIndex, index, ship.isHorizontal)
 
       newGrid[partIndex] = cellData
     })
 
     removeShipFromFleet(ship)
-    removeShipFromPreviousPosition(ship, newGrid)
 
     setGrid(newGrid)
   }
 
-  const possitionAvaliable = (gridCellIndex, ship) => {
-    if (shipsGrid[gridCellIndex] !== null) {
-      return false
+  const getPartIndex = (targetCellIndex, partIndex, isHorizontal) => {
+    if (isHorizontal) {
+      return targetCellIndex + partIndex
     }
-
-    for (let i = 1; i < ship.value; i++) {
-      if (shipsGrid[gridCellIndex + i] !== null) {
-        return false
-      }
-    }
-
-    return true
+    // grid is a square, so we can know the cells in each row by square root of the array size
+    const rowLength = Math.sqrt(shipsGrid.length)
+    return targetCellIndex + (partIndex * rowLength)
   }
+
+  const setHoverBackground = (cellOverIndex, ship) => {
+    ship.parts.forEach((part, index) => {
+      const partIndex = getPartIndex(cellOverIndex, index, ship.isHorizontal)
+      const cellOver = document.getElementsByClassName(`cell-${partIndex}`)[0]
+
+      cellOver?.classList.add('drag-over')
+    })
+  }
+
+  const possitionAvaliable = (targetCellIndex, ship) => {
+    return shipFitsInGrid(targetCellIndex, ship) && !shipOverlapsAnotherShip(targetCellIndex, ship)
+  }
+
+  const shipFitsInGrid = (targetCellIndex, ship) => {
+    if (ship.isHorizontal) {
+      // grid is a square, so we can know the number of rows by square root of the array size
+      const numberOfRows = Math.sqrt(shipsGrid.length)
+      const firstPartRow = Math.floor(targetCellIndex / numberOfRows)
+      const lastPartRow = Math.floor((targetCellIndex + ship.size - 1) / numberOfRows)
+
+      return firstPartRow === lastPartRow
+    }
+
+    return getPartIndex(targetCellIndex, ship.size - 1, ship.isHorizontal) < shipsGrid.length
+  }
+
+  const shipOverlapsAnotherShip = (targetCellIndex, ship) => (
+    ship.parts.some((part, index) =>
+      shipsGrid[getPartIndex(targetCellIndex, index, ship.isHorizontal)] !== null && // there is a ship in the cell
+      shipsGrid[getPartIndex(targetCellIndex, index, ship.isHorizontal)].shipSize !== ship.size // the ship in the cell is not the same
+    )
+  )
 
   const removeShipFromFleet = (shipAdded) => {
     const newFleet = fleet.filter(ship => ship.size !== shipAdded.size)
@@ -84,7 +117,7 @@ export const SetupShips = () => {
   }
 
   const removeShipFromPreviousPosition = (ship, newGrid) => {
-    if (!ship.firstPartPosition) {
+    if (ship.firstPartPosition === undefined) { // first time adding ship
       return
     }
 
@@ -103,20 +136,26 @@ export const SetupShips = () => {
         hitsGrid: Array(game.boardSize).fill(null)
       })
 
-    if (isThisTheLastPlayerSettingShips(playerList)) { // Last player in getting ready starts the game
+    if (isThisTheLastPlayerSettingShips(playerList)) {
       console.log('Starting game!')
       updateGameStatus(game, GAME_STATES.IN_PROGRESS)
     }
   }
 
-  const mouseSensor = useSensor(MouseSensor)
-  const touchSensor = useSensor(TouchSensor)
-  const keyboardSensor = useSensor(KeyboardSensor)
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: { // FIXME This generates errors in console but is needed for rotating ships
+      delay: 150
+    }
+  })
+  const touchSensor = useSensor(TouchSensor, {
+    activationConstraint: {
+      delay: 150
+    }
+  })
 
   const sensors = useSensors(
     mouseSensor,
-    touchSensor,
-    keyboardSensor
+    touchSensor
   )
 
   return (
@@ -158,7 +197,7 @@ export const SetupShips = () => {
 const cleanAllCellsHover = () => {
   const allCells = document.getElementsByClassName('square')
   Array.from(allCells).forEach(cell =>
-    cell.classList.remove('drag-over', 'ship-size-1', 'ship-size-2', 'ship-size-3', 'ship-size-4'))
+    cell.classList.remove('drag-over', 'vertical', 'horizontal'))
 }
 
 const isThisTheLastPlayerSettingShips = (playerList) => (

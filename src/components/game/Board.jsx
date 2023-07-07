@@ -9,21 +9,25 @@ export const Board = ({ grid }) => {
   const gridSizeStyle = getSquareStyle(grid.length)
 
   return (
-    <main className='board pb-3'>
-      <div className='grid' style={gridSizeStyle}>
+    <>
+      <h5>Board</h5>
+      <main className='board pb-3'>
 
-        {grid.map((cellData, index) => (
-          <Cell
-            key={index}
-            id={index}
-          >
-            {cellData && <ShipPart part={cellData} />}
-          </Cell>
-        ))}
+        <div className='grid' style={gridSizeStyle}>
 
-      </div>
+          {grid.map((cellData, index) => (
+            <Cell
+              key={index}
+              id={index}
+            >
+              {cellData && <ShipPart part={cellData} />}
+            </Cell>
+          ))}
 
-    </main>
+        </div>
+
+      </main>
+    </>
   )
 
 }

@@ -1,24 +1,4 @@
-/*
-    ñapa para q el hover ocupe el espacio del barco
-    cuando se coloquen en vertical no servirá :(
-*/
 .square.drag-over {
-    background-color: lightgray;
-}
-
-.square.ship-size-2.drag-over + .square{
-    background-color: lightgray;
-}
-
-.square.ship-size-3.drag-over + .square,
-.square.ship-size-3.drag-over + .square + .square {
-    background-color: lightgray;
-}
-
-
-.square.ship-size-4.drag-over + .square,
-.square.ship-size-4.drag-over + .square + .square,
-.square.ship-size-4.drag-over + .square + .square +.square {
     background-color: lightgray;
 }
 

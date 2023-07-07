@@ -1,11 +1,16 @@
 .fleet {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     gap: 1.2rem;
 }
 
 .ship-container {
     display: flex;
+    justify-content: center;
+}
+
+.vertical {
+    transform: rotate(90deg);
 }
 
 .ship-container .square {

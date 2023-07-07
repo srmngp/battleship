@@ -7,14 +7,18 @@ export default function ShipPart ({ part }) {
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: `ship-${part.shipSize}`,
-    data: { ship: { ...getShip(part.shipSize), firstPartPosition: part.firstPartPosition } }
+    data: {
+      ...getShip(part.shipSize),
+      firstPartPosition: part.firstPartPosition,
+      isHorizontal: part.isHorizontal
+    }
   })
 
   const style = { transform: CSS.Translate.toString(transform) }
 
   return (
     <div
-      className='ship-container'
+      className={`ship-container ${part.isHorizontal ? 'horizontal' : 'vertical'}`}
       {...attributes}
       {...listeners}
       ref={setNodeRef}

@@ -6,7 +6,6 @@ export const Cell = ({ id, onClick, children }) => {
   const { setNodeRef } = useDroppable({
     id,
     data: {
-      id,
       type: 'cell'
     }
   })
