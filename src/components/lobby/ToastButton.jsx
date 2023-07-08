@@ -1,31 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Tooltip } from 'react-tooltip'
 
-export const ToastButton = ({ text, clickAction, toastText }) => { // TODO add styles
-
-  const [isShown, setIsShown] = useState(false)
-
-  const onClick = () => {
-    clickAction()
-    showToast(2000)
-  }
-
-  const showToast = (milis) => {
-    setIsShown(true)
-    setTimeout(() => {
-      setIsShown(false)
-    }, milis)
-  }
+export const ToastButton = ({ text, clickAction, toastText }) => {
 
   return (
     <>
-      <button onClick={onClick} className='button button-secondary'>
+      <button
+        id='inviteButton' onClick={clickAction}
+        className='button button-secondary inviteButton'
+      >
         {text}
       </button>
-      {isShown && (
-        <div className='custom-toast'>
-          <span>{toastText}</span>
-        </div>
-      )}
+      <Tooltip
+        anchorSelect='#inviteButton'
+        openOnClick
+        delayHide={1000}
+        content={toastText}
+      />
     </>
   )
 }
