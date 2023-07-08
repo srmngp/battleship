@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import AvatarSelector from './AvatarSelector'
 import InputPlayerName from './InputPlayerName'
 import '../../styles/playerCreator.css'
+import Button from 'react-bootstrap/Button'
 
-export default function PlayerCreator ({ createAction, buttonText }) {
+export default function PlayerCreator ({ createAction }) {
 
   const [name, setName] = useState('')
   const [avatarUrl, setAvatarUrl] = useState()
@@ -25,14 +26,17 @@ export default function PlayerCreator ({ createAction, buttonText }) {
 
         </div>
 
-        <div className='button-panel'>
-          <button className='create-game-button' onClick={handleButtonClick}>
-            {buttonText}
-          </button>
+        <div className='button-panel p-2'>
+          <Button
+            variant='light'
+            onClick={handleButtonClick}
+            disabled={!name}
+          >
+            Join game
+          </Button>
         </div>
 
       </div>
-
     </>
   )
 }

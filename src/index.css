@@ -44,6 +44,12 @@
   margin-left: 16px;
 }
 
+.btn {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+
 @keyframes flash {
   0% {
     background-color: #FFF2;

@@ -46,7 +46,8 @@ export const checkIfGameHasEnded = (playerList) => {
   const alivePlayers = playerList.filter(player => player.shipsRemainAfloat)
 
   if (alivePlayers.length === 1) {
-    endGame(alivePlayers[0])
+    const winner = alivePlayers[0]
+    endGame(winner)
   }
 
 }
