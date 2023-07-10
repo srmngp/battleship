@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDraggable } from '@dnd-kit/core'
 import { Cell } from './Cell'
+import { getSprite } from '../../logic/utils'
 
 export default function Ship ({ ship }) {
 
@@ -28,7 +29,7 @@ export default function Ship ({ ship }) {
     >
       {ship.parts.map((part, index) => (
         <Cell key={index}>
-          {part.sprite}
+          <img src={getSprite(part.sprite)} alt='ship' />
         </Cell>
       ))}
     </div>

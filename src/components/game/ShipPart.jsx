@@ -1,7 +1,7 @@
 import { useDraggable } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
 import React from 'react'
-import { fleetOptions } from '../../logic/utils'
+import { fleetOptions, getSprite } from '../../logic/utils'
 
 export default function ShipPart ({ part }) {
 
@@ -24,7 +24,7 @@ export default function ShipPart ({ part }) {
       ref={setNodeRef}
       style={style}
     >
-      {part.sprite}
+      <img src={getSprite(part.sprite)} alt='ship' />
     </div>
   )
 }

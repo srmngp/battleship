@@ -78,7 +78,7 @@ export const Settings = () => {
             className='select'
             value={game.fleet}
             getOptionValue={option => option.size}
-            getOptionLabel={option => option.parts.map(part => part.sprite).join('')}
+            getOptionLabel={option => option.parts.map(part => part.sprite).join('')}// TODO: SHOW BOAT SPRITES
             options={fleetOptions}
             onChange={handleFleetChange}
             isDisabled={playerIsNotGameOwner()}

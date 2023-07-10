@@ -13,7 +13,7 @@ export const Join = () => {
   return (
     <>
       {gameError && <GameNotFound />}
-      {gameLoading && <span>Document: Loading...</span>}
+      {gameLoading && <span>Loading...</span>}
       {gameSnapshot && <AddPlayer gameSnapshot={gameSnapshot} />}
     </>
 

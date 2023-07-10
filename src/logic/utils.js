@@ -12,10 +12,10 @@ export const boardSizeOptions = [
 ]
 
 export const fleetOptions = [
-  { size: 1, parts: [{ sprite: '<=>' }] },
-  { size: 2, parts: [{ sprite: '<=' }, { sprite: '=>' }] },
-  { size: 3, parts: [{ sprite: '<=' }, { sprite: '=' }, { sprite: '=>' }] },
-  { size: 4, parts: [{ sprite: '<=' }, { sprite: '=' }, { sprite: '=' }, { sprite: '=>' }] }
+  { size: 1, parts: [{ sprite: '1.svg' }] },
+  { size: 2, parts: [{ sprite: '2.1.svg' }, { sprite: '2.2.svg' }] },
+  { size: 3, parts: [{ sprite: '3.1.svg' }, { sprite: '3.2.svg' }, { sprite: '3.3.svg' }] },
+  { size: 4, parts: [{ sprite: '4.1.svg' }, { sprite: '4.2.svg' }, { sprite: '4.3.svg' }, { sprite: '4.4.svg' }] }
 ]
 
 export const defaultGame = {
@@ -45,24 +45,6 @@ export const getSquareStyle = (length) => {
   }
 }
 
-export const loserGrid = (
-  [
-    null, '⬛', '⬛', '⬛', '⬛', '⬛', null,
-    '⬛', '⬛', '⬛', '⬛', '⬛', '⬛', '⬛',
-    '⬛', null, null, '⬛', null, null, '⬛',
-    '⬛', null, null, '⬛', null, null, '⬛',
-    '⬛', '⬛', '⬛', '⬛', '⬛', '⬛', '⬛',
-    null, '⬛', '⬛', '⬛', '⬛', '⬛', null,
-    null, '⬛', null, '⬛', null, '⬛', null
-  ])
-
-export const winnerGrid = (
-  [
-    null, null, null, null, null, null, null,
-    null, '🟨', '🟨', '🟨', '🟨', '🟨',
-    null, '🟨', '🟨', '🟨', '🟨', '🟨', '🟨',
-    '🟨', '🟨', null, '🟨', '🟨', '🟨', null,
-    '🟨', '🟨', '🟨', '🟨', '🟨', '🟨', '🟨',
-    null, null, null, null, '🟨', null, null,
-    null, null, null, '🟨', '🟨', '🟨', null, null
-  ])
+export const getSprite = (spriteName) => {
+  return `../src/assets/sprites/${spriteName}`
+}
