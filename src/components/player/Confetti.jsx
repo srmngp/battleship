@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import confetti from 'canvas-confetti'
 
-export const Confetti = () => {
+export const Confetti = () => { // TODO show 2 confetti cannons
   const confettiRef = useRef(null)
 
   useEffect(() => {

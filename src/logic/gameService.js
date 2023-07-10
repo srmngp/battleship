@@ -40,7 +40,6 @@ export const updateGameStatus = (game, status) => {
 }
 
 export const checkIfGameHasEnded = (playerList) => {
-  console.log('Ending turn')
   console.log('Checking if game has ended')
 
   const alivePlayers = playerList.filter(player => player.shipsRemainAfloat)

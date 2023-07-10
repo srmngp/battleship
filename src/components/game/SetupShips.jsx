@@ -142,7 +142,7 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
     }
   }
 
-  const mouseSensor = useSensor(MouseSensor, {
+  const mouseSensor = useSensor(MouseSensor, { // FIXME if mouse does not move, ship is moved to next cells
     activationConstraint: { // FIXME This generates errors in console but is needed for rotating ships
       delay: 150
     }
