@@ -1,9 +1,10 @@
 import React from 'react'
-import Select from 'react-select'
+import Select, { components } from 'react-select'
 import { updateGameBoardSize, updateGameFleet } from '../../logic/gameService'
 import useGameContext from '../hooks/useGameContext'
 import '../../styles/settings.css'
 import { boardSizeOptions, fleetOptions } from '../../logic/utils'
+import Ship from '../game/Ship'
 
 export const Settings = () => {
 
@@ -18,6 +19,7 @@ export const Settings = () => {
   }
 
   const handleFleetChange = (selected) => {
+    console.log('selected', selected)
     updateGameFleet(game, selected)
   }
 
@@ -77,9 +79,10 @@ export const Settings = () => {
             id='select-fleet'
             className='select'
             value={game.fleet}
-            getOptionValue={option => option.size}
-            getOptionLabel={option => option.parts.map(part => part.sprite).join('')}// TODO: SHOW BOAT SPRITES
             options={fleetOptions}
+            components={{ Option: customOption, MultiValueLabel: customMultiValueLabel }}
+            getOptionValue={option => option.size}
+            getOptionLabel={option => option.parts.map(part => part.sprite).join('')}
             onChange={handleFleetChange}
             isDisabled={playerIsNotGameOwner()}
             styles={selectStyles}
@@ -91,6 +94,16 @@ export const Settings = () => {
   )
 
 }
+
+const customOption = ({ innerProps, data }) => (
+  <div {...innerProps}> {/* This div is needed, idk why */}
+    <Ship {...innerProps} ship={data} />
+  </div>
+)
+
+const customMultiValueLabel = ({ innerProps, data }) => (
+  <Ship {...innerProps} ship={data} {...innerProps} />
+)
 
 const selectStyles = {
   control: (provided) => ({

@@ -1,5 +1,5 @@
 import React from 'react'
-import Ship from './Ship'
+import DraggableShip from './DraggableShip'
 
 export default function Fleet ({ pendingShips }) {
 
@@ -8,7 +8,7 @@ export default function Fleet ({ pendingShips }) {
       <h5>Fleet</h5>
       <div className='fleet'>
         {pendingShips.map((ship, index) => (
-          <Ship ship={ship} key={index} />
+          <DraggableShip ship={ship} key={index} />
         ))}
       </div>
     </>
