@@ -48,9 +48,13 @@ export const BattleBoard = ({ player, onCellClick }) => {
 }
 
 const getCellValue = (cell) => {
-  if (!cell) return
+  if (!cell) {
+    return
+  }
 
-  if (cell.shot.hitted === undefined) return '💣'
+  if (cell.shot.hitted === undefined) {
+    return <div className='💣'>💣</div>
+  }
 
   return cell.shot.hitted ? '💥' : '🌊'
 }
