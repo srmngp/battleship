@@ -17,11 +17,11 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
   const [shipsGrid, setGrid] = useState(Array(game.boardSize).fill(null))
 
   const handleDragOver = (event) => {
-    cleanAllCellsHover()
     if (!event.over || event.over.data.current.type !== 'cell') {
       return
     }
     console.log('Drag over', event)
+    cleanAllCellsHover()
 
     const ship = event.active.data.current
     const cellOverIndex = event.over.id
