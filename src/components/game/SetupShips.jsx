@@ -1,20 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useGameContext from '../hooks/useGameContext'
 import { Board } from './Board'
 import Fleet from './Fleet'
 import { DndContext, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core'
-import ReadyButton from './ReadyButton'
 import '../../styles/fleet.css'
 import '../../styles/board.css'
 import { updatePlayer } from '../../logic/playerService'
 import { updateGameStatus } from '../../logic/gameService'
 import { GAME_STATES } from '../../logic/utils'
+import { Button } from 'react-bootstrap'
 
 export const SetupShips = () => { // TODO: This component is too big, refactor it pls
 
   const { game, playerList, localPlayer } = useGameContext()
   const [fleet, setFleet] = useState(game.fleet)
   const [shipsGrid, setGrid] = useState(Array(game.boardSize).fill(null))
+
+  useEffect(() => { startBattle() }, [playerList])
 
   const handleDragOver = (event) => {
     if (!event.over || event.over.data.current.type !== 'cell') {
@@ -135,11 +137,14 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
         shipsGrid,
         hitsGrid: Array(game.boardSize).fill(null)
       })
+  }
 
-    if (isThisTheLastPlayerSettingShips(playerList)) {
-      console.log('Starting game!')
-      updateGameStatus(game, GAME_STATES.IN_PROGRESS)
+  const startBattle = () => {
+    if (!everyPlayerIsReady(playerList)) {
+      return
     }
+    console.log('Starting game!')
+    updateGameStatus(game, GAME_STATES.IN_PROGRESS)
   }
 
   const mouseSensor = useSensor(MouseSensor, { // FIXME if mouse does not move, ship is moved to next cells
@@ -186,7 +191,17 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
         <p>{getNumberOfPlayersReady(playerList)}/{playerList.length} Players ready</p>
 
         <div className='col'>
-          <ReadyButton fleet={fleet} onClick={readyClick} />
+          <Button
+            className='button'
+            variant='light'
+            onClick={readyClick}
+            disabled={fleet.length !== 0}
+          >
+            <span className='icon material-symbols-rounded'>
+              select_check_box
+            </span>
+            Ready
+          </Button>
         </div>
       </div>
 
@@ -200,8 +215,8 @@ const cleanAllCellsHover = () => {
     cell.classList.remove('drag-over', 'vertical', 'horizontal'))
 }
 
-const isThisTheLastPlayerSettingShips = (playerList) => (
-  getNumberOfPlayersReady(playerList) >= playerList.length - 1
+const everyPlayerIsReady = (playerList) => (
+  playerList.every(player => player.shipsReady)
 )
 
 const getNumberOfPlayersReady = (playerList) => (

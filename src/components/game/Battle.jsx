@@ -24,7 +24,7 @@ export default function Battle () {
   }
 
   const endTurn = () => {
-    if (isThisTheLastPlayerShoting(playerList)) {
+    if (everyPlayerHasSelectedTarget(playerList)) {
       setTimeout(() => {
         resolveBombs(playerList)
       }, 1800)
@@ -64,6 +64,6 @@ export default function Battle () {
   )
 }
 
-const isThisTheLastPlayerShoting = (playerList) => (
+const everyPlayerHasSelectedTarget = (playerList) => (
   playerList.every(player => player.hasSelectedTarget)
 )
