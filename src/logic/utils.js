@@ -46,5 +46,5 @@ export const getSquareStyle = (length) => {
 }
 
 export const getSprite = (spriteName) => {
-  return `../public/sprites/${spriteName}`
+  return `/sprites/${spriteName}`
 }
