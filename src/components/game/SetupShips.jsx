@@ -85,31 +85,49 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
       const partIndex = getPartIndex(cellOverIndex, index, ship.isHorizontal)
       const cellOver = document.getElementsByClassName(`cell-${partIndex}`)[0]
 
-      cellOver?.classList.add('drag-over')
+      if (partFitsInGrid(cellOverIndex, index, ship.isHorizontal)) {
+        cellOver?.classList.add('drag-over')
+      }
+      if (!possitionAvaliable(cellOverIndex, ship)) {
+        cellOver?.classList.add('wrong')
+      }
     })
   }
 
-  const possitionAvaliable = (targetCellIndex, ship) => {
-    return shipFitsInGrid(targetCellIndex, ship) && !shipOverlapsAnotherShip(targetCellIndex, ship)
+  const partFitsInGrid = (cellOverIndex, partIndex, isHorizontal) => {
+    console.log('partFitsInGrid', cellOverIndex, partIndex, isHorizontal)
+    return isHorizontal
+      ? partFitsInRow(cellOverIndex, partIndex)
+      : partFitsInColumn(cellOverIndex, partIndex)
   }
 
-  const shipFitsInGrid = (targetCellIndex, ship) => {
-    if (ship.isHorizontal) {
-      // grid is a square, so we can know the number of rows by square root of the array size
-      const numberOfRows = Math.sqrt(shipsGrid.length)
-      const firstPartRow = Math.floor(targetCellIndex / numberOfRows)
-      const lastPartRow = Math.floor((targetCellIndex + ship.size - 1) / numberOfRows)
+  const partFitsInRow = (cellOverIndex, partIndex) => {
+    // grid is a square, so we can know the number of rows by square root of the array size
+    const numberOfRows = Math.sqrt(shipsGrid.length)
+    const firstPartRow = Math.floor(cellOverIndex / numberOfRows)
+    const partRow = Math.floor((cellOverIndex + partIndex) / numberOfRows)
 
-      return firstPartRow === lastPartRow
-    }
-
-    return getPartIndex(targetCellIndex, ship.size - 1, ship.isHorizontal) < shipsGrid.length
+    return firstPartRow === partRow
   }
+
+  const partFitsInColumn = (partIndex) => {
+    return partIndex < shipsGrid.length
+  }
+
+  const possitionAvaliable = (cellOverIndex, ship) => {
+    return everyPartFitsOnGrid(cellOverIndex, ship) && !shipOverlapsAnotherShip(cellOverIndex, ship)
+  }
+
+  const everyPartFitsOnGrid = (cellOverIndex, ship) => (
+    ship.parts.every((part, index) => (
+      partFitsInGrid(cellOverIndex, index, ship.isHorizontal))
+    )
+  )
 
   const shipOverlapsAnotherShip = (targetCellIndex, ship) => (
     ship.parts.some((part, index) =>
       shipsGrid[getPartIndex(targetCellIndex, index, ship.isHorizontal)] !== null && // there is a ship in the cell
-      shipsGrid[getPartIndex(targetCellIndex, index, ship.isHorizontal)].shipSize !== ship.size // the ship in the cell is not the same
+      shipsGrid[getPartIndex(targetCellIndex, index, ship.isHorizontal)]?.shipSize !== ship.size // the ship in the cell is not the same
     )
   )
 
@@ -212,7 +230,7 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
 const cleanAllCellsHover = () => {
   const allCells = document.getElementsByClassName('square')
   Array.from(allCells).forEach(cell =>
-    cell.classList.remove('drag-over', 'vertical', 'horizontal'))
+    cell.classList.remove('drag-over', 'vertical', 'horizontal', 'wrong'))
 }
 
 const everyPlayerIsReady = (playerList) => (
