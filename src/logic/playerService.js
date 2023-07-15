@@ -11,6 +11,7 @@ export const updatePlayer = (player, newFields) => {
 
   updatePlayerFields(player, newFields)
 }
+// FIXME create board/game service
 
 export const setBombTo = (localPlayer, targetPlayer, cellIndex) => {
   console.log(`${targetPlayer.name} selected as target, shooting to cell ${cellIndex}`)
@@ -60,17 +61,20 @@ const resolveBombsOnGrid = (player) => {
   const hitsGrid = [...player.hitsGrid]
 
   hitsGrid.forEach((cell, index) => {
-    if (cellIsBomb(cell)) {
-      console.log(`Bomb in cell ${index}`)
-      const isHitted = shipsGrid[index] !== null
-
-      const newShotData = {
-        origin: cell.shot.origin,
-        hitted: isHitted
-      }
-
-      hitsGrid[index] = { shot: newShotData }
+    if (!cellIsBomb(cell)) {
+      return
     }
+
+    console.log(`Bomb in cell ${index}`)
+    const isHitted = shipsGrid[index] !== null
+
+    const newShotData = {
+      origin: cell.shot.origin,
+      hitted: isHitted,
+      shipSize: isHitted ? shipsGrid[index].shipSize : ''
+    }
+
+    hitsGrid[index] = { shot: newShotData }
   })
 
   return hitsGrid

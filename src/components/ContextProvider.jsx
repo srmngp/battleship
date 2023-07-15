@@ -18,13 +18,15 @@ export default function ContextProvider ({ children }) {
   const createContext = () => {
 
     const game = { id: gameId, ...gameSnapshot?.data() }
-    const playerList = playerListSnapshot?.docs.map(doc => doc.data())
+    const playerList = playerListSnapshot?.docs.map(doc => (
+      {
+        ...doc.data(),
+        id: doc.id,
+        isLocalPlayer: doc.data().name === readPlayerNameFromLocalStorage()
+      }
+    ))
 
-    const localPlayer = { // FIXME avoid duplication
-      ...playerListSnapshot?.docs.find(doc => doc.data().name === readPlayerNameFromLocalStorage()).data(),
-      gameId,
-      id: playerListSnapshot?.docs.find(doc => doc.data().name === readPlayerNameFromLocalStorage()).id
-    }
+    const localPlayer = playerList?.find(player => player.isLocalPlayer)
 
     return {
       game,

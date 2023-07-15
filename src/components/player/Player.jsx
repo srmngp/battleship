@@ -23,7 +23,7 @@ export const Player = ({ player }) => {
 
       {game.winner === player.name && <Confetti />}
 
-      {player.name === localPlayer.name && localPLayerIcon()}
+      {player.isLocalPlayer && localPLayerIcon()}
 
       <span className='name'>
         {player.name}

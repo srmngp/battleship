@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Cell } from './Cell'
 import { getSquareStyle } from '../../logic/utils'
-import ShipPart from './ShipPart'
+import DraggableShipPart from './DraggableShipPart'
 
 export const Board = ({ grid }) => {
 
@@ -10,7 +10,6 @@ export const Board = ({ grid }) => {
 
   return (
     <>
-      <h5>Board</h5>
       <main className='board pb-3'>
 
         <div className='grid' style={gridSizeStyle}>
@@ -20,7 +19,7 @@ export const Board = ({ grid }) => {
               key={index}
               id={index}
             >
-              {cellData && <ShipPart part={cellData} />}
+              {cellData && <DraggableShipPart part={cellData} />}
             </Cell>
           ))}
 

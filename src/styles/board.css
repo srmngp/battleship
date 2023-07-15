@@ -14,9 +14,14 @@
 }
 
 .square img {
-  width: 100%;
-  height: 100%;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
+}
+
+.shot {
+  z-index: 1;
+  position: absolute;
 }
 
 @keyframes shake {

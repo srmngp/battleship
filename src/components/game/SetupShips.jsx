@@ -81,7 +81,7 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
   }
 
   const setHoverBackground = (cellOverIndex, ship) => {
-    ship.parts.forEach((part, index) => {
+    ship.parts.forEach((part, index) => { // part is not used but needed
       const partIndex = getPartIndex(cellOverIndex, index, ship.isHorizontal)
       const cellOver = document.getElementsByClassName(`cell-${partIndex}`)[0]
 
@@ -95,7 +95,6 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
   }
 
   const partFitsInGrid = (cellOverIndex, partIndex, isHorizontal) => {
-    console.log('partFitsInGrid', cellOverIndex, partIndex, isHorizontal)
     return isHorizontal
       ? partFitsInRow(cellOverIndex, partIndex)
       : partFitsInColumn(cellOverIndex, partIndex)
@@ -200,6 +199,7 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
         </div>
 
         <div className='col-md-8'>
+          <h5>Board</h5>
           <Board grid={shipsGrid} />
         </div>
 
