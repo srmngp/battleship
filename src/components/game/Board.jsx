@@ -5,7 +5,7 @@ import { getSquareStyle } from '../../logic/utils'
 import DraggableShipPart from './DraggableShipPart'
 import useGameContext from '../hooks/useGameContext'
 
-export const Board = ({ grid }) => {
+export const Board = ({ grid, addShip }) => {
 
   const gridSizeStyle = getSquareStyle(grid.length)
   const { localPlayer } = useGameContext()
@@ -21,7 +21,7 @@ export const Board = ({ grid }) => {
               key={index}
               id={index}
             >
-              {cellData && <DraggableShipPart part={cellData} />}
+              {cellData && <DraggableShipPart part={cellData} addShip={addShip} index={index} />}
             </Cell>
           ))}
 

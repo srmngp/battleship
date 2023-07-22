@@ -62,7 +62,7 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
   const addShip = (targetCellIndex, ship) => {
     if (!possitionAvaliable(targetCellIndex, ship)) {
       console.log(`Possition ${targetCellIndex} not avaliable for ship ${ship}`)
-      return
+      return false
     }
     console.log('Adding ship to grid possition', targetCellIndex, ship)
 
@@ -84,6 +84,7 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
     removeShipFromFleet(ship)
 
     setGrid(newGrid)
+    return true
   }
 
   const setPlayerAsNotReady = () => {
@@ -155,12 +156,10 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
   }
 
   const removeShipFromPreviousPosition = (ship, newGrid) => {
-    if (ship.firstPartPosition === undefined) { // first time adding ship
-      return
-    }
-
-    ship.parts.forEach((part, index) => {
-      newGrid[getPartIndex(ship.firstPartPosition, index, ship.isHorizontal)] = null
+    newGrid.forEach((cell, index) => {
+      if (cell?.shipSize === ship.size) {
+        newGrid[index] = null
+      }
     })
   }
 
@@ -243,7 +242,7 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
 
         <div className='col-md-8'>
           <h5>Board</h5>
-          <Board grid={shipsGrid} />
+          <Board grid={shipsGrid} addShip={addShip} />
         </div>
 
       </div>
