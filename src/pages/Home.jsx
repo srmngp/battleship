@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createGame } from '../logic/gameService'
 import PlayerCreator from '../components/player/PlayerCreator'
-import { createExampleGame } from '../logic/createExampleGame'
+// import { createExampleGame } from '../logic/createExampleGame'
 
 export const Home = () => {
 
@@ -17,13 +17,13 @@ export const Home = () => {
     <>
       <PlayerCreator createAction={createGameButton} buttonText='Create game' />
 
-      <button onClick={() => {
+      {/* <button onClick={() => {
         createExampleGame()
         navigation('/game/test-game')
       }}
       >
         Create example game
-      </button>
+      </button> */}
     </>
   )
 
