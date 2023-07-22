@@ -141,7 +141,7 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
     }
 
     ship.parts.forEach((part, index) => {
-      newGrid[ship.firstPartPosition + index] = null
+      newGrid[getPartIndex(ship.firstPartPosition, index, ship.isHorizontal)] = null
     })
   }
 

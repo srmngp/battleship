@@ -1,7 +1,6 @@
 import { useDraggable } from '@dnd-kit/core'
 import React from 'react'
 import { fleetOptions } from '../../logic/utils'
-import { CSS } from '@dnd-kit/utilities'
 import ShipPart from './ShipPart'
 
 export default function DraggableShipPart ({ part }) {
@@ -15,7 +14,11 @@ export default function DraggableShipPart ({ part }) {
     }
   })
 
-  const style = { transform: CSS.Translate.toString(transform) }
+  const style = {
+    transform: transform
+      ? `translate3d(${transform.x}px, ${transform.y}px, 0) ${part.isHorizontal ? 'rotate(0deg)' : 'rotate(90deg)'}`
+      : undefined
+  }
 
   return (
     <div
