@@ -6,13 +6,18 @@ import useGameContext from '../components/hooks/useGameContext'
 
 export const Lobby = () => {
 
-  const game = useGameContext()
+  const { game, localPlayer } = useGameContext()
 
   const navigation = useNavigate()
 
   useEffect(() => {
     if (game.status === GAME_STATES.SETUP_SHIPS) {
       navigation(`/game/${game.id}`)
+    }
+
+    if (localPlayer.name === null) {
+      console.log('no local player name: ')
+      navigation('/')
     }
   }, [game])
 

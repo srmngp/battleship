@@ -2,8 +2,6 @@ import React from 'react'
 import useGameContext from '../hooks/useGameContext'
 import { GAME_STATES } from '../../logic/utils'
 import Button from 'react-bootstrap/Button'
-import { NavLink } from 'react-bootstrap'
-
 export default function StatusInfo () {
 
   const { game, playerList, localPlayer } = useGameContext()

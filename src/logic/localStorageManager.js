@@ -1,6 +1,6 @@
 const PLAYER = 'player'
 
-export const savePlayerNameInLocalStorage = (value) => {
+export const savePlayerInLocalStorage = (value) => {
   saveLocalStorageKey(PLAYER, value)
 }
 
@@ -14,5 +14,7 @@ const saveLocalStorageKey = (key, value) => {
 
 const readLocalStorageKey = (key) => {
   const value = window.localStorage.getItem(key)
-  return JSON.parse(value)
+  const playerreaded = JSON.parse(value)
+  console.log('Reading from local storage: ', playerreaded)
+  return playerreaded
 }

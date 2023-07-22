@@ -22,11 +22,14 @@ export default function ContextProvider ({ children }) {
       {
         ...doc.data(),
         id: doc.id,
-        isLocalPlayer: doc.data().name === readPlayerFromLocalStorage().name
+        isLocalPlayer: doc.data().name === readPlayerFromLocalStorage()?.name
       }
     ))
 
-    const localPlayer = playerList?.find(player => player.isLocalPlayer)
+    const localPlayer = {
+      ...playerList?.find(player => player.isLocalPlayer),
+      joinedGames: readPlayerFromLocalStorage()?.joinedGames
+    }
 
     return {
       game,

@@ -2,15 +2,17 @@ import React from 'react'
 import { addPlayerToGame } from '../../logic/gameService'
 import PlayerCreator from '../player/PlayerCreator'
 import { useNavigate } from 'react-router-dom'
+import useGameContext from '../hooks/useGameContext'
 
-export const AddPlayer = ({ gameSnapshot }) => {
+export const AddPlayer = () => {
 
+  const { game } = useGameContext()
   const navigation = useNavigate()
 
   const addPlayer = (playerData) => {
     console.log('addPlayer', playerData)
-    addPlayerToGame(playerData, gameSnapshot)
-      .then(navigation(`/lobby/${gameSnapshot.id}`))
+    addPlayerToGame(playerData, game)
+      .then(navigation(`/lobby/${game.id}`))
   }
 
   return (

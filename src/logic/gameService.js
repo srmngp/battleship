@@ -15,10 +15,6 @@ export const createGame = async (playerData) => {
 }
 
 export const addPlayerToGame = async (playerData, gameSnapshot) => {
-  if (gameSnapshot.data().status !== GAME_STATES.LOBBY) {
-    console.log('Game is not at lobby, cannot add player')
-    return
-  }
   createPlayer(playerData, gameSnapshot)
 }
 

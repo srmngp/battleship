@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useGameContext from '../components/hooks/useGameContext'
 import { GAME_STATES } from '../logic/utils'
 import { SetupShips } from '../components/game/SetupShips'
 import Battle from '../components/game/Battle'
+import { useNavigate } from 'react-router-dom'
 
 export default function Game () {
 
-  const { game } = useGameContext()
+  const { game, localPlayer } = useGameContext()
+  const navigation = useNavigate()
+
+  useEffect(() => {
+    if (!localPlayer.name) {
+      navigation('/')
+    }
+  }, [])
 
   return (
     <>

@@ -18,7 +18,7 @@ const routesConfig = [{
     },
     {
       path: '/join/:gameId',
-      element: <Join />
+      element: <ContextProvider><Join /></ContextProvider>
     },
     {
       path: '/lobby/:gameId',

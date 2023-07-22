@@ -1,9 +1,13 @@
-import { savePlayerNameInLocalStorage } from './localStorageManager'
+import { readPlayerFromLocalStorage, savePlayerInLocalStorage } from './localStorageManager'
 import { savePlayer, updatePlayerFields } from './repository/playerRepository'
 
 export const createPlayer = async (playerData, gameSnapshot) => {
+  const joinedGames = readPlayerFromLocalStorage(playerData.name)?.joinedGames || []
+  joinedGames.push(gameSnapshot.id)
+  const localStorageData = { ...playerData, joinedGames }
+
   savePlayer(playerData, gameSnapshot)
-    .then(savePlayerNameInLocalStorage(playerData))
+    .then(savePlayerInLocalStorage(localStorageData))
 }
 
 export const updatePlayer = (player, newFields) => {
