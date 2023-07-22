@@ -3,7 +3,9 @@ import { useEffect } from 'react'
 export default function AvatarSelector ({ updateAvatarUrl, url }) {
 
   useEffect(() => {
-    handleAvatarClick()
+    if (!url) {
+      updateAvatarUrl(getRandomAvatarUrl())
+    }
   }, [])
 
   const handleAvatarClick = () => {

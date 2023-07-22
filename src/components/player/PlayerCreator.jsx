@@ -3,11 +3,14 @@ import AvatarSelector from './AvatarSelector'
 import InputPlayerName from './InputPlayerName'
 import '../../styles/playerCreator.css'
 import Button from 'react-bootstrap/Button'
+import { readPlayerFromLocalStorage } from '../../logic/localStorageManager'
 
 export default function PlayerCreator ({ createAction, buttonText }) {
 
-  const [name, setName] = useState('')
-  const [avatarUrl, setAvatarUrl] = useState()
+  const previousPlayer = readPlayerFromLocalStorage()
+
+  const [name, setName] = useState(previousPlayer?.name)
+  const [avatarUrl, setAvatarUrl] = useState(previousPlayer?.avatarUrl)
 
   const handleButtonClick = () => {
     createAction({ name, avatarUrl })

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { readPlayerNameFromLocalStorage } from '../../logic/localStorageManager'
+import { readPlayerFromLocalStorage } from '../../logic/localStorageManager'
 
 export default function InputPlayerName ({ updatePlayerName, name }) {
 
   useEffect(() => {
-    updatePlayerName(readPlayerNameFromLocalStorage())
+    updatePlayerName(readPlayerFromLocalStorage()?.name)
   }, [])
 
   return (

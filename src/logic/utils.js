@@ -6,9 +6,9 @@ export const GAME_STATES = {
 }
 
 export const boardSizeOptions = [
-  { size: 49, label: 'Small' },
-  { size: 100, label: 'Medium' },
-  { size: 225, label: 'Large' }
+  { size: 49, label: 'Small 7x7' },
+  { size: 100, label: 'Medium 10x10' },
+  { size: 225, label: 'Large 15x15' }
 ]
 
 export const fleetOptions = [

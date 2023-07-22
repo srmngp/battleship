@@ -1,7 +1,7 @@
 import React from 'react'
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
 import { useParams } from 'react-router-dom'
-import { readPlayerNameFromLocalStorage } from '../logic/localStorageManager'
+import { readPlayerFromLocalStorage } from '../logic/localStorageManager'
 import { getGameRef } from '../logic/repository/gameRepository'
 import { getPlayersCollectionRef } from '../logic/repository/playerRepository'
 import { GameNotFound } from './GameNotFound'
@@ -22,7 +22,7 @@ export default function ContextProvider ({ children }) {
       {
         ...doc.data(),
         id: doc.id,
-        isLocalPlayer: doc.data().name === readPlayerNameFromLocalStorage()
+        isLocalPlayer: doc.data().name === readPlayerFromLocalStorage().name
       }
     ))
 

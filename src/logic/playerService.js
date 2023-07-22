@@ -3,7 +3,7 @@ import { savePlayer, updatePlayerFields } from './repository/playerRepository'
 
 export const createPlayer = async (playerData, gameSnapshot) => {
   savePlayer(playerData, gameSnapshot)
-    .then(savePlayerNameInLocalStorage(playerData.name))
+    .then(savePlayerNameInLocalStorage(playerData))
 }
 
 export const updatePlayer = (player, newFields) => {
