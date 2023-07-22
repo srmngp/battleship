@@ -3,20 +3,35 @@ import useGameContext from '../hooks/useGameContext'
 import { Board } from './Board'
 import Fleet from './Fleet'
 import { DndContext, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core'
-import '../../styles/fleet.css'
-import '../../styles/board.css'
 import { updatePlayer } from '../../logic/playerService'
 import { updateGameStatus } from '../../logic/gameService'
 import { GAME_STATES } from '../../logic/utils'
 import { Button } from 'react-bootstrap'
+import '../../styles/fleet.css'
+import '../../styles/board.css'
 
 export const SetupShips = () => { // TODO: This component is too big, refactor it pls
 
   const { game, playerList, localPlayer } = useGameContext()
-  const [fleet, setFleet] = useState(game.fleet)
-  const [shipsGrid, setGrid] = useState(Array(game.boardSize).fill(null))
 
   useEffect(() => { startBattle() }, [playerList])
+
+  const getShipsGrid = () => {
+    if (!localPlayer.shipsGrid) {
+      return Array(game.boardSize).fill(null)
+    }
+    return localPlayer.shipsGrid
+  }
+  const [shipsGrid, setGrid] = useState(getShipsGrid())
+
+  const getPendingShips = () => {
+    if (!localPlayer.shipsGrid) {
+      return game.fleet
+    }
+    const fleet = game.fleet.filter(ship => !shipsGrid.some(cell => cell?.shipSize === ship.size))
+    return fleet
+  }
+  const [fleet, setFleet] = useState(getPendingShips())
 
   const handleDragOver = (event) => {
     if (!event.over || event.over.data.current.type !== 'cell') {
@@ -46,10 +61,10 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
 
   const addShip = (targetCellIndex, ship) => {
     if (!possitionAvaliable(targetCellIndex, ship)) {
-      console.log('Position not available')
+      console.log(`Possition ${targetCellIndex} not avaliable for ship ${ship}`)
       return
     }
-    console.log('Adding ship to grid', ship)
+    console.log('Adding ship to grid possition', targetCellIndex, ship)
 
     const newGrid = [...shipsGrid]
     removeShipFromPreviousPosition(ship, newGrid)
@@ -69,6 +84,10 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
     removeShipFromFleet(ship)
 
     setGrid(newGrid)
+  }
+
+  const setPlayerAsNotReady = () => {
+    updatePlayer(localPlayer, { shipsReady: false })
   }
 
   const getPartIndex = (targetCellIndex, partIndex, isHorizontal) => {
@@ -180,6 +199,30 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
     touchSensor
   )
 
+  const notReadyButton = (
+    <Button
+      className='button'
+      variant='light'
+      onClick={setPlayerAsNotReady}
+    >
+      Not ready yet
+    </Button>
+  )
+
+  const readyButton = (
+    <Button
+      className='button'
+      variant='light'
+      onClick={readyClick}
+      disabled={fleet.length !== 0}
+    >
+      <span className='icon material-symbols-rounded'>
+        select_check_box
+      </span>
+      I'm ready
+    </Button>
+  )
+
   return (
     <DndContext
       onDragEnd={handleDragEnd}
@@ -209,22 +252,15 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
         <p>{getNumberOfPlayersReady(playerList)}/{playerList.length} Players ready</p>
 
         <div className='col'>
-          <Button
-            className='button'
-            variant='light'
-            onClick={readyClick}
-            disabled={fleet.length !== 0}
-          >
-            <span className='icon material-symbols-rounded'>
-              select_check_box
-            </span>
-            Ready
-          </Button>
+          {!localPlayer.shipsReady
+            ? readyButton
+            : notReadyButton}
         </div>
       </div>
 
     </DndContext>
   )
+
 }
 
 const cleanAllCellsHover = () => {
