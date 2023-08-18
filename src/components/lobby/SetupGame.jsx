@@ -6,10 +6,11 @@ import { Settings } from './Settings'
 import StartButton from './StartButton'
 import useGameContext from '../hooks/useGameContext'
 import { useNavigate } from 'react-router-dom'
+import { Alert } from 'react-bootstrap'
 
 export const SetupGame = () => {
 
-  const { game } = useGameContext()
+  const { game, localPlayer } = useGameContext()
   const navigation = useNavigate()
 
   useEffect(() => {
@@ -18,8 +19,15 @@ export const SetupGame = () => {
     }
   }, [game])
 
+  const waitingInfo = (
+    <Alert variant='primary'>
+      Waiting for {game.owner} to start the game...
+    </Alert>
+  )
+
   return (
     <>
+      {game.owner !== localPlayer.name ? waitingInfo : undefined}
 
       <div className='setup-game row bg-blue'>
 
@@ -38,7 +46,9 @@ export const SetupGame = () => {
       <div className='row pt-2'>
         <div className='col'>
           <ToastButton text='🔗 Invite' clickAction={() => copyGameUrl(game.id)} toastText='Link copied!' />
-          <StartButton />
+          {game.owner === localPlayer.name
+            ? <StartButton />
+            : undefined}
         </div>
       </div>
 

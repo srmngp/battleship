@@ -21,6 +21,7 @@
   height: 100vh;
   text-align: center;
   color: #fff;
+  overflow: auto;
 }
 
 .flex-center {
@@ -67,8 +68,7 @@
 }
 
 .button-primary:hover {
-  background-color: #011c3fc4;
-  color: #fff;
+  border-color: #011c3fc4;
 }
 
 .button-secondary {

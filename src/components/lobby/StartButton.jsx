@@ -5,7 +5,7 @@ import useGameContext from '../hooks/useGameContext'
 
 export default function StartButton () {
 
-  const { game, playerList, localPlayer } = useGameContext()
+  const { game, playerList } = useGameContext()
 
   const [buttonDisabled, setButtonDisabled] = useState(true)
 
@@ -32,9 +32,7 @@ export default function StartButton () {
 
   return (
     <>
-      {game.owner === localPlayer.name
-        ? button
-        : ''}
+      {button}
     </>
   )
 

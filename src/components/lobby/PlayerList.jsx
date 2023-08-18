@@ -5,11 +5,13 @@ import '../../styles/playerList.css'
 
 export const PlayerList = () => {
 
-  const { playerList } = useGameContext()
+  const { playerList, game } = useGameContext()
 
-  const listedPlayers = playerList.map(player =>
-    <Player key={player.name} player={player} />
-  )
+  const listedPlayers = playerList
+    .sort((a, b) => game.owner === a.name ? -1 : 1)
+    .map(player =>
+      <Player key={player.name} player={player} />
+    )
 
   return (
     <div className='playerList'>

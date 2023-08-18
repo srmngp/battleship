@@ -85,12 +85,12 @@
     }
     
     .setup-game .player .localPlayerIcon-bg {
-        bottom: 25px;
+        bottom: 50px;
         left: 60px;
     }
 
     .setup-game .player .ownerIcon-bg {
-        bottom: 27px;
+        bottom: 50px;
         left: 22px;
     }
 

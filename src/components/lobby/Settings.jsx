@@ -1,5 +1,5 @@
 import React from 'react'
-import Select, { components } from 'react-select'
+import Select from 'react-select'
 import { updateGameBoardSize, updateGameFleet } from '../../logic/gameService'
 import useGameContext from '../hooks/useGameContext'
 import '../../styles/settings.css'
@@ -106,13 +106,12 @@ const customMultiValueLabel = ({ innerProps, data }) => (
 )
 
 const selectStyles = {
-  control: (provided) => ({
+  control: (provided, { isDisabled }) => ({
     ...provided,
-    backgroundColor: 'none',
-    borderRadius: '5px',
-    border: '1px solid #fff',
+    backgroundColor: undefined,
     fontWeight: 'bold',
-    color: '#fff'
+    color: '#fff',
+    opacity: isDisabled ? 0.7 : 1
   }),
   singleValue: (provided) => ({
     ...provided,

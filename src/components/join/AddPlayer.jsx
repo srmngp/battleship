@@ -3,6 +3,7 @@ import { addPlayerToGame } from '../../logic/gameService'
 import PlayerCreator from '../player/PlayerCreator'
 import { useNavigate } from 'react-router-dom'
 import useGameContext from '../hooks/useGameContext'
+import { Alert } from 'react-bootstrap'
 
 export const AddPlayer = () => {
 
@@ -16,8 +17,12 @@ export const AddPlayer = () => {
   }
 
   return (
-    <div>
-      <h2 className='flex-center'>You have been invited to join a game</h2>
+    <div className='justify-content-center'>
+      <div style={{ display: 'inline-block' }}>
+        <Alert variant='primary'>
+          You have been invited to join a game.
+        </Alert>
+      </div>
       <PlayerCreator createAction={addPlayer} buttonText='Join game' />
     </div>
   )
