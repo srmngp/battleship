@@ -4,17 +4,9 @@ import { Header } from './components/Header'
 
 function App () {
   return (
-    <div className='App container magicpattern'>
+    <div className='App magicpattern'>
       <Header />
-
-      <div className='row h-75'>
-        <div className='col-sm-1' />
-        <div className='col'>
-          <Outlet />
-        </div>
-        <div className='col-sm-1' />
-      </div>
-
+      <Outlet />
     </div>
   )
 }
