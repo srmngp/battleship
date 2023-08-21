@@ -85,9 +85,9 @@
     }
     
     .setup-game .player .player-icons {
-        position: relative;
+        position: absolute;
         bottom: 43px;
-        left: -39px;
+        left: 10px;
     }
 
 }
