@@ -33,7 +33,7 @@ export default function DraggableShipPart ({ part, addShip, index }) {
 
   return (
     <div
-      className={`ship-container ${part.isHorizontal ? 'horizontal' : 'vertical'}`}
+      className='ship-container'
       {...attributes}
       {...listeners}
       ref={setNodeRef}
