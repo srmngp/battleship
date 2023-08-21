@@ -5,7 +5,7 @@ import { GAME_STATES } from '../../logic/utils'
 
 export const Player = ({ player }) => {
 
-  const { localPlayer, game } = useGameContext()
+  const { game } = useGameContext()
 
   const playerAvatar = (<img className='avatar' src={player.avatarUrl} />)
   const skullGif = (
@@ -15,15 +15,13 @@ export const Player = ({ player }) => {
       width='120' height='120'
     />
   )
-  // FIXME fix icon position when user has 2 lines name on mobile screens
+
   return (
     <div key={player} className='player'>
 
       {player.shipsRemainAfloat ? playerAvatar : skullGif}
 
       {game.winner === player.name && <Confetti />}
-
-      {player.isLocalPlayer && localPLayerIcon()}
 
       <span className='name'>
         {player.name}
@@ -32,7 +30,10 @@ export const Player = ({ player }) => {
       {!player.hasSelectedTarget && game.status !== GAME_STATES.LOBBY &&
         <span className='💣'>💣</span>}
 
-      {game.owner === player.name && ownerIcon()}
+      <div className='player-icons'>
+        {player.isLocalPlayer && localPLayerIcon()}
+        {game.owner === player.name && ownerIcon()}
+      </div>
 
     </div>
   )

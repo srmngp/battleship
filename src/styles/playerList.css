@@ -34,7 +34,7 @@
     height: 20px;
     position: absolute;
     bottom: 10px;
-    left: 40px;
+    left: 50px;
     border-radius: 50%;
     background-color: #0e2e7fa8; 
 }
@@ -84,14 +84,10 @@
         margin: 0px;
     }
     
-    .setup-game .player .localPlayerIcon-bg {
-        bottom: 50px;
-        left: 60px;
-    }
-
-    .setup-game .player .ownerIcon-bg {
-        bottom: 50px;
-        left: 22px;
+    .setup-game .player .player-icons {
+        position: relative;
+        bottom: 43px;
+        left: -39px;
     }
 
 }
