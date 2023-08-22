@@ -3,7 +3,7 @@ import useGameContext from '../hooks/useGameContext'
 import { Player } from '../player/Player'
 import '../../styles/battle.css'
 import { BattleBoard } from './BattleBoard'
-import { resolveBombs, setBombTo } from '../../logic/playerService'
+import { resolveBombs, setBombTo, skipTurnFor } from '../../logic/playerService'
 import StatusInfo from './StatusInfo'
 import { checkIfGameHasEnded } from '../../logic/gameService'
 import { GAME_STATES } from '../../logic/utils'
@@ -32,10 +32,15 @@ export default function Battle () {
     }
   }
 
+  const skipTurn = () => {
+    console.log('Timeout exceeded, skipping turn')
+    skipTurnFor(localPlayer)
+  }
+
   return (
     <div className='row bg-blue'>
 
-      <StatusInfo />
+      <StatusInfo onTimeUp={skipTurn} />
 
       <div className='board-list row'>
 

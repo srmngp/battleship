@@ -30,10 +30,7 @@ export const setBombTo = (localPlayer, targetPlayer, cellIndex) => {
   }
   updatePlayerFields(targetPlayer, targetPlayerUpdatedFields)
 
-  const localPlayerUpdatedFields = {
-    hasSelectedTarget: true
-  }
-  updatePlayerFields(localPlayer, localPlayerUpdatedFields)
+  playerHasSelectedTarget(localPlayer)
 }
 
 export const resolveBombs = (playerList) => {
@@ -50,6 +47,18 @@ export const resolveBombs = (playerList) => {
 
     updatePlayerFields(player, newFields)
   })
+}
+
+export const skipTurnFor = (player) => {
+  console.log(`Skipping turn for ${player.name}`)
+  playerHasSelectedTarget(player)
+}
+
+const playerHasSelectedTarget = (player) => {
+  console.log(`${player.name} has selected target`)
+
+  const newFields = { hasSelectedTarget: true }
+  updatePlayerFields(player, newFields)
 }
 
 const printBombOnGrid = (localPlayer, targetPlayer, cellIndex) => {
