@@ -54,6 +54,7 @@ export const Settings = () => {
             onChange={handleBoardSizeChange}
             isDisabled={playerIsNotGameOwner()}
             styles={selectStyles}
+            isSearchable={false}
           />
         </div>
 
@@ -86,6 +87,7 @@ export const Settings = () => {
             onChange={handleFleetChange}
             isDisabled={playerIsNotGameOwner()}
             styles={selectStyles}
+            isSearchable={false}
           />
 
         </div>
