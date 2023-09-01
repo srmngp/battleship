@@ -21,7 +21,7 @@ export const SetupGame = () => {
 
   const waitingInfo = (
     <Alert variant='primary'>
-      Waiting for {game.owner} to start the game...
+      {game.owner} is setting up the game.
     </Alert>
   )
 

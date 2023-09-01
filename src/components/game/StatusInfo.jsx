@@ -26,7 +26,7 @@ export default function StatusInfo ({ onTimeUp }) {
     </>
   )
 
-  const chooseTargegInfo = (
+  const chooseTargetInfo = (
     <>
       <h2>Choose the target cell</h2>
       <CountdownBar onTimeUp={onTimeUp} />
@@ -36,7 +36,7 @@ export default function StatusInfo ({ onTimeUp }) {
   const getGameInfo = () => {
     if (game.status === GAME_STATES.FINISHED) return gameEndedInfo
 
-    if (!localPlayer.hasSelectedTarget) return chooseTargegInfo
+    if (!localPlayer.hasSelectedTarget) return chooseTargetInfo
 
     if (allPlayersChoosedTarget()) return <h2>Processing results...</h2>
 
@@ -44,7 +44,10 @@ export default function StatusInfo ({ onTimeUp }) {
   }
 
   return (
-    <div className='row justify-content-center p-2'>
+    <div
+      className='row justify-content-center p-2'
+      style={{ minHeight: '110px' }}
+    >
 
       {getGameInfo()}
     </div>

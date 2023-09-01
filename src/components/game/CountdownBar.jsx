@@ -20,7 +20,7 @@ export default function CountdownBar ({ onTimeUp }) {
 
   const progressBar = (
     <>
-      <h2>{`${progress} seconds left`}</h2>
+      <h4>{`${progress} seconds left`}</h4>
       <ProgressBar
         animated
         now={progress}
@@ -33,7 +33,7 @@ export default function CountdownBar ({ onTimeUp }) {
 
   return (
     <div className='col-md-4'>
-      {progress <= 0 && <h2>Time's up!</h2>}
+      {progress <= 0 && <h4>Time's up!</h4>}
       {progress > 0 && progressBar}
     </div>
   )
