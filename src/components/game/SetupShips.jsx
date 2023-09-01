@@ -204,7 +204,7 @@ export const SetupShips = () => { // TODO: This component is too big, refactor i
       variant='light'
       onClick={setPlayerAsNotReady}
     >
-      Not ready yet
+      Not ready
     </Button>
   )
 

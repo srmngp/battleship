@@ -16,9 +16,10 @@ export const Lobby = () => {
     }
 
     if (localPlayer.name === null) {
-      console.log('no local player name: ')
+      console.log('no local player name')
       navigation('/')
     }
+
   }, [game])
 
   return (
