@@ -1,7 +1,6 @@
 # The Battleship
 
-## Try it here! (thebattleship.xyz)[https://thebattleship.xyz/]
-
+## Try it here! [thebattleship.xyz](https://thebattleship.xyz/)
 
 The Battleship is a online game based on the classic board game Battleship. *Supports more than 2 players*
 
@@ -22,4 +21,3 @@ Im using this as a training project to learn React.js
 - [x] Show the result of the game
 - [x] Show winner and losers
 - [X] Restart the game
-
