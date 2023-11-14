@@ -1,15 +1,21 @@
 import { useEffect } from 'react'
+import { getRandomMixUrl } from '../../logic/EmojiMixApiClient.js'
 
 export default function AvatarSelector ({ updateAvatarUrl, url }) {
 
   useEffect(() => {
-    if (!url) {
-      updateAvatarUrl(getRandomAvatarUrl())
+    const fetchAvatarUrl = async () => {
+      if (!url) {
+        const avatarUrl = await getRandomAvatarUrl()
+        updateAvatarUrl(avatarUrl)
+      }
     }
+    fetchAvatarUrl()
   }, [])
 
-  const handleAvatarClick = () => {
-    updateAvatarUrl(getRandomAvatarUrl())
+  const handleAvatarClick = async () => {
+    const avatarUrl = await getRandomAvatarUrl()
+    updateAvatarUrl(avatarUrl)
   }
 
   return (
@@ -20,6 +26,8 @@ export default function AvatarSelector ({ updateAvatarUrl, url }) {
   )
 }
 
-const getRandomAvatarUrl = () => `https://garticphone.com/images/avatar/${getRandomAvatarId()}.svg`
-
-const getRandomAvatarId = () => Math.ceil(Math.random() * 45)
+// const getRandomAvatarUrl = () => `https://garticphone.com/images/avatar/${getRandomAvatarId()}.svg`
+// const getRandomAvatarId = () => Math.ceil(Math.random() * 45)
+const getRandomAvatarUrl = () => {
+  return getRandomMixUrl()
+}
